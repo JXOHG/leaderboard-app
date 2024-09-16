@@ -1,12 +1,12 @@
-import ListGroup from "./components/ListGroup";
+import Navbar from "./components/navbar";
+import Footer from "./components/Footer";
 
 function App() {
-  let items = ["New York", "SA", "Seoul"];
   return (
     
-    <div>
-      <ListGroup items ={items} heading="Cities"/>
-    </div>
+    <>
+      <Footer/>
+    </>
   );
 }
 export default App;
