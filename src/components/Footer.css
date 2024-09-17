@@ -16,11 +16,13 @@ footer {
     display: block;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    height: 125px;
+    height: 30%;
     gap: 2rem;
+    margin-bottom:0rem;
+
 }
 
 .social-logo {
@@ -39,6 +41,8 @@ footer {
     justify-content: center;
     align-items: center;
     gap:5rem;
+    margin-top:30px;
+
 }
 
 .kanit-semibold {
