@@ -1,18 +1,4 @@
-.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: red;
-    color: white;
-    min-height: 100vh;
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    overflow: hidden;
-    padding-bottom: 200px; /* Add padding to prevent overlap with footer */
-  }
-  
+
   .fixed-right {
     align-self: flex-end; /* Align it to the right side */
     margin-right: 2rem; /* Add a margin to move it away from the edge */
@@ -27,19 +13,34 @@
       margin-top: 1rem;
     }
   }
-  .footer {
-    background-color: white;
-    color: white;
-    display: block;
-    justify-content: center;
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items at the start */
     align-items: center;
-    position: fixed;
-    bottom: 0;
+    background-color: red; /* Match footer color */
+    color: white;
+    min-height: 100vh; /* Keep this to ensure it takes the full height */
     width: 100%;
-    height: auto; /* Adjust footer height to avoid it becoming too large */
     padding: 1rem;
-    gap: 2rem;
-  }
+    text-align: center;
+    padding-bottom: 0; /* Remove bottom padding to avoid gap */
+}
+/* Other existing styles remain unchanged */
+
+.footer {
+    background-color: white;
+    color: black; /* Set text color for visibility */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100vw; /* Ensure footer spans full width of viewport */
+    height: auto; /* Adjust height to auto */
+    padding: 1rem;
+    margin-bottom: 0; /* Remove margin to avoid gaps */
+   
+    bottom:0;
+}
   .button{
     display:inline-block;
   }
@@ -48,6 +49,8 @@
     footer {
       padding: 0.5rem; /* Reduce padding in smaller screens */
       height: auto;
+      bottom:0;
+
     }
   }
   @media (max-width: 600px) {
@@ -58,4 +61,9 @@
       transform: none; /* No need for translation on smaller screens */
     }
   }
-
+  .percentage-container {
+    position: absolute; /* Allows positioning relative to the nearest positioned ancestor */
+    right: 2rem; /* Adjust the right margin as needed */
+    top: 1rem; /* Adjust to position it above the footer */
+    z-index: 10; /* Ensure it appears above other elements */
+}
