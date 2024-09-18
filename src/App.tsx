@@ -6,6 +6,7 @@ import Leaderboard from './components/LeaderBoard';
 import Percentage from './components/Percentage';
 import Footer from './components/Footer';
 import './App.css';
+import Button from "./components/Button";
 
 interface UserSteps {
   id: number;
@@ -38,7 +39,9 @@ const App: React.FC = () => {
       <div className="main">
         <StepDisplay currentSteps={currentSteps} />
         <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} />
+        <Button />
         <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} />
+      
         <div className="percentage-container">
           <Percentage value={currentSteps} goal={currentGoals} />
         </div >
