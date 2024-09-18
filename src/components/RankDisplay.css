@@ -1,0 +1,27 @@
+.rank-display-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  .rank-display-heading {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .rank-display-number {
+    font-size: 3rem;
+    color: #f75658;
+    font-weight: bold;
+  }
+  

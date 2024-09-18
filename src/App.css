@@ -1,28 +1,61 @@
-.footer{
-    background-color:white;
-    bottom:0;
-    width:100%;
-    position:fixed;
-    margin:100px;
-}
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 200px; /* Add padding to prevent overlap with footer */
+  }
+  
+  .fixed-right {
+    align-self: flex-end; /* Align it to the right side */
+    margin-right: 2rem; /* Add a margin to move it away from the edge */
+    position: absolute; /* Absolute within the flex container */
+    top: 30%; /* Vertically center within the available space (excluding footer) */
+    transform: translateY(-50%);
+  }
+  
+  @media (max-width: 600px) {
+    .fixed-right {
+      position: static;
+      margin-top: 1rem;
+    }
+  }
+  .footer {
+    background-color: white;
+    color: white;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto; /* Adjust footer height to avoid it becoming too large */
+    padding: 1rem;
+    gap: 2rem;
+  }
+  .button{
+    display:inline-block;
+  }
+  
+  @media (max-width: 600px) {
+    footer {
+      padding: 0.5rem; /* Reduce padding in smaller screens */
+      height: auto;
+    }
+  }
+  @media (max-width: 600px) {
+    .fixed-right {
+      right: 5%; /* On smaller screens, move it a little inwards */
+      top: auto; /* Reset the vertical centering */
+      bottom: 20%; /* Place it above the footer */
+      transform: none; /* No need for translation on smaller screens */
+    }
+  }
 
-.main{
-    background-color:red;
-    color:red;
-    height:100vh;
-    width:100%;
-    margin:0;
-    box-sizing:border-box;
-}
-
-.leaderboard{
-    background-color:red;
-    color:red;
-    position:absolute;
-    height:70px;
-}
-.header{
-    position:fixed;
-    height:30%;
-    width:100px;
-}
