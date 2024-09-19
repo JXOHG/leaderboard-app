@@ -1,54 +1,19 @@
-// App.tsx
-import React, { useEffect, useState } from 'react';
-import StepDisplay from './components/StepDisplay';
-import RankDisplay from './components/RankDisplay';
-import Leaderboard from './components/LeaderBoard';
-import Percentage from './components/Percentage';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/dashboard';
+import Submit from './pages/Submit';  // Import Submit page
 import Footer from './components/Footer';
-import './App.css';
-import Button from "./components/Button";
-
-interface UserSteps {
-  id: number;
-  name: string;
-  steps: number;
-}
-
+import "./App.css";
 const App: React.FC = () => {
-  const [currentSteps, setCurrentSteps] = useState(8500); // Example current steps
-  const [currentGoals, setCurrentGoals] = useState(10000); // Example current goals
-  const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
-
-  // Fetch user step data
-  useEffect(() => {
-    const fetchUserSteps = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/users'); // Use the JSON server URL
-        const data: UserSteps[] = await response.json();
-        setOtherUsersSteps(data);
-      } catch (error) {
-        console.error("Error fetching user steps:", error);
-      }
-    };
-
-    fetchUserSteps();
-  }, []);
-
   return (
     <>
-      <div className="main">
-        <StepDisplay currentSteps={currentSteps} />
-        <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} />
-        <Button />
-        <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} />
-      
-        <div className="percentage-container">
-          <Percentage value={currentSteps} goal={currentGoals} />
-        </div >
-        <div className="footer"><Footer /></div>
-        
-      </div>
-      
+    <Router>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/submit" element={<Submit />} />  {/* Add route for Submit */}
+      </Routes>
+    </Router>
+    <div className="footer"><Footer /></div>
     </>
   );
 };

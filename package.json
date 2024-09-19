@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-     "start": "react-scripts start",
-  "json-server": "json-server --watch db.json --port 5000",
+    "start": "react-scripts start",
+    "json-server": "json-server --watch db.json --port 5000",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -16,7 +16,8 @@
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-circular-progressbar": "^2.1.0",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

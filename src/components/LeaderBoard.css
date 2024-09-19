@@ -1,13 +1,16 @@
 /* Leaderboard.css */
 .leaderboard {
     width: 100%;
-    max-width: 100vh; /* Adjust width as needed */
+    max-width:100vh;
+    /* Adjust width as needed */
     margin: 1rem auto;
     text-align: center;
+    align-self:auto;
     background-color: #f9f9f9; /* Background for the leaderboard container */
     padding: 1rem;
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display:inline-block;
 }
 
 .leaderboard h3 {
