@@ -1,15 +1,17 @@
-import react from "react"
 import tsi from "../assets/image/tsi.png"
 import uwem from "../assets/image/uwem.png"
 import uwo from "../assets/image/western.png"
 import "./Footer.css"
-export default function Footer(){
 
+interface FooterProps{
+    className?: string;
+}
+    const Footer: React.FC<FooterProps> = ({className})=>{
     return(
         <>
         <footer>
             
-           
+            
             {/*insert logo here */}
             <div className="social-wrapper">
             <a href="https://unitedwayem.ca/" target="_blank">
@@ -33,4 +35,6 @@ export default function Footer(){
     )
     
 
+
 }
+export default Footer;
