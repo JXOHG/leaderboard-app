@@ -1,9 +1,10 @@
 .step-display-card {
-  position: absolute;       /* Use absolute positioning */
-  top: 70px;               /* Adjust based on the header height */
+        /* Use absolute positioning */
+  top:20px;             /* Adjust based on the header height */
   left: 20px;              /* Distance from the left of the viewport */
   display: flex;
   justify-content: center;
+  flex-direction:column;
   align-items: center;
   background-color: #ffffff;
   border: 2px solid #e0e0e0;
