@@ -1,12 +1,24 @@
-import ListGroup from "./components/ListGroup";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Submit from './pages/Submit';
+import Settings from './pages/Settings'; // Import the settings page
+import Footer from './components/Footer';
+import './App.css';
+import Header from './components/Header'
 
-function App() {
-  let items = ["New York", "SA", "Seoul"];
+const App: React.FC = () => {
   return (
-    
-    <div>
-      <ListGroup items ={items} heading="Cities"/>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/submit" element={<Submit />} />
+        <Route path="/settings" element={<Settings/>} /> {/* Define settings route */}
+      </Routes>
+      <Footer />
+    </Router>
   );
-}
+};
+
 export default App;

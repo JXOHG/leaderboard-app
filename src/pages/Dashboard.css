@@ -1,5 +1,5 @@
 
-  .fixed-right {
+.fixed-right {
     align-self: flex-end; /* Align it to the right side */
     margin-right: 2rem; /* Add a margin to move it away from the edge */
     position: absolute; /* Absolute within the flex container */
@@ -13,11 +13,12 @@
       margin-top: 1rem;
     }
   }
+
   .main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Align items at the start */
-    align-items:flex-start;
+    align-items: center;
     background-color: red; /* Match footer color */
     color: white;
     min-height: 100vh; /* Keep this to ensure it takes the full height */
@@ -25,6 +26,7 @@
     padding: 1rem;
     text-align: center;
     padding-bottom: 0; /* Remove bottom padding to avoid gap */
+    
 }
 /* Other existing styles remain unchanged */
 
@@ -38,7 +40,6 @@
     height: auto; /* Adjust height to auto */
     padding: 1rem;
     margin-bottom: 0; /* Remove margin to avoid gaps */
-    text-align:center;
    
     bottom:0;
 }
@@ -67,4 +68,16 @@
     right: 2rem; /* Adjust the right margin as needed */
     top: 1rem; /* Adjust to position it above the footer */
     z-index: 10; /* Ensure it appears above other elements */
+}
+.leaderboard {
+    align-self: flex-start; /* Align the leaderboard to the left */
+    max-width: 80rem;; /* Optional: Set a max-width for the leaderboard */
+    width: 100%; /* Ensure the leaderboard takes the full width of its container */
+    margin-right: auto; /* Pushes the leaderboard to the left */
+    margin-left:0;
+  }
+.dashboard-progress{
+  right:30vw;
+  top:10vh;
+  position:absolute;
 }

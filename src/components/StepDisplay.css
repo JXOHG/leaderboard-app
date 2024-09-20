@@ -1,0 +1,42 @@
+.step-display-card {
+  position: absolute;       /* Use absolute positioning */
+  top: 70px;               /* Adjust based on the header height */
+  left: 20px;              /* Distance from the left of the viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  text-align: center;
+  z-index: 100;            /* Make sure it stays on top of other elements */
+}
+  .step-display-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .step-display-heading {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 10px;
+    font-weight:bold;
+  }
+  
+  .step-display-number {
+    font-size: 3rem;
+    color: #f75658;
+    font-weight: bold;
+  }
+  
+  .step-display-text {
+    font-size: 1.5rem;
+    color: #333;
+    margin-left: 5px;
+  }
