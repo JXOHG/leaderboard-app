@@ -13,8 +13,8 @@ interface UserSteps {
 }
 
 const Dashboard: React.FC = () => {
-  const [currentSteps, setCurrentSteps] = useState(8500);
-  const [currentGoals, setCurrentGoals] = useState(10000);
+  const [currentSteps, setCurrentSteps] = useState(10000);
+  const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
 
   useEffect(() => {

@@ -50,7 +50,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users, currentUserSteps }) =>
               <span className="leaderboard-rank">{sortedUsers.indexOf(currentUser) + 1}</span>
               <span className="current-user">(You)</span>
             </div>
-          </div>
+          </div> 
         )}
         
         {sortedUsers.length === 0 && <div>No users available</div>}
