@@ -1,0 +1,51 @@
+.settings-container {
+    padding: 20px;
+    background-color: red;
+    min-height: 100vh;
+  }
+  
+  .settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color:white;
+  }
+  
+  .settings-header h2 {
+    margin-left: 10px;
+    color:white;
+  }
+  
+  .settings-options {
+    margin-top: 20px;
+  }
+  
+  .settings-option {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
+    background-color: #f00;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .settings-option:hover {
+    background-color: #d00;
+  }
+  
+  .settings-content {
+    padding: 20px;
+    color:white;
+  }
+  
+  .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    margin-bottom: 20px;
+  }

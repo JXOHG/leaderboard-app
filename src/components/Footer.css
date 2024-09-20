@@ -1,37 +1,13 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-}
-
-h2 {
-    color: white;
-}
-
 footer {
     background-color: white;
-    color: black; /* Change this to black for better visibility */
-    display: block;
+    color: black;
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: auto; /* Allow height to adjust based on content */
     padding: 1rem;
-    gap: 2rem;
-    margin-top: 20px; /* Add margin to create space above footer */
-}
-
-.social-logo {
-    opacity: 1.0;
-    filter: alpha(opacity=100);
-    transition: opacity 0.5s ease;
-}
-
-.social-logo:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=40);
+    margin-top: 20px;
 }
 
 .social-wrapper {
@@ -43,14 +19,9 @@ footer {
 }
 
 .kanit-semibold {
-    white-space: pre-line;
-    display: inline-block;
+    margin-top: 20px; /* Adjust space between the logos and the text */
     font-size: small;
-    align-items: center;
     font-family: "Kanit", sans-serif;
     font-weight: 600;
-    font-style: normal;
-    color: black;
-    margin-top: 2rem;
-    text-align: center;
+    text-align: center; /* Center the text */
 }

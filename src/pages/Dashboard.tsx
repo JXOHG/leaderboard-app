@@ -1,10 +1,8 @@
-// App.tsx
 import React, { useEffect, useState } from 'react';
 import StepDisplay from '../components/StepDisplay';
 import RankDisplay from '../components/RankDisplay';
 import Leaderboard from '../components/LeaderBoard';
 import Percentage from '../components/Percentage';
-
 import './Dashboard.css';
 import Button from "../components/Button";
 
@@ -15,15 +13,14 @@ interface UserSteps {
 }
 
 const Dashboard: React.FC = () => {
-  const [currentSteps, setCurrentSteps] = useState(8500); // Example current steps
-  const [currentGoals, setCurrentGoals] = useState(10000); // Example current goals
+  const [currentSteps, setCurrentSteps] = useState(8500);
+  const [currentGoals, setCurrentGoals] = useState(10000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
 
-  // Fetch user step data
   useEffect(() => {
     const fetchUserSteps = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users'); // Use the JSON server URL
+        const response = await fetch('http://localhost:5000/users');
         const data: UserSteps[] = await response.json();
         setOtherUsersSteps(data);
       } catch (error) {
@@ -34,24 +31,26 @@ const Dashboard: React.FC = () => {
     fetchUserSteps();
   }, []);
 
+  const handleSettingsClick = () => {
+    // Implement navigation to settings page or open settings modal
+    console.log('Navigate to settings');
+  };
+
   return (
     <>
       <div className="main">
-      
         <StepDisplay currentSteps={currentSteps} />
         <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} />
         <Button />
-        
-       
         <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} />
-      
-        <div className="percentage-container">
-          <Percentage value={currentSteps} goal={currentGoals} />
-        </div >
-        
-        
+        <div className="dashboard-progress">
+            <Percentage 
+              value={currentSteps} 
+              goal={currentGoals} 
+              onSettingsClick={handleSettingsClick}
+            />
+          </div>
       </div>
-      
     </>
   );
 };

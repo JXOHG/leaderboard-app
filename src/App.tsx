@@ -1,20 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/dashboard';
-import Submit from './pages/Submit';  // Import Submit page
+import Dashboard from './pages/Dashboard';
+import Submit from './pages/Submit';
+import Settings from './pages/Settings'; // Import the settings page
 import Footer from './components/Footer';
-import "./App.css";
+import './App.css';
+import Header from './components/Header'
+
 const App: React.FC = () => {
   return (
-    <>
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/submit" element={<Submit />} />  {/* Add route for Submit */}
+        <Route path="/submit" element={<Submit />} />
+        <Route path="/settings" element={<Settings/>} /> {/* Define settings route */}
       </Routes>
+      <Footer />
     </Router>
-    <div className="footer"><Footer /></div>
-    </>
   );
 };
 

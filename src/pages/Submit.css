@@ -1,0 +1,83 @@
+.submit-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #FF0000;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.submit-page {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.backbutton {
+    display: flex;
+    justify-content: flex-end; /* Move the button to the right */
+    padding-right: 20px;
+    margin-top: 10px;
+    position: absolute; /* Position relative to the parent */
+    top: 10px;
+    right: 10px; /* Adjust position */
+}
+
+.button {
+    background-color: #808080;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.or {
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+footer img {
+    height: 40px;
+    object-fit: contain;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 32px; /* Increase icon size */
+}
+
+.back-button svg {
+    width: 40px;  /* Make the arrow larger */
+    height: 40px;
+}
