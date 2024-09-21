@@ -19,7 +19,7 @@
   .settings-options {
     margin-top: 20px;
   }
-  
+
   .settings-option {
     display: block;
     width: 100%;
@@ -48,4 +48,34 @@
     cursor: pointer;
     color: #666;
     margin-bottom: 20px;
+  }
+
+  .navtriangle {
+    position: absolute;
+    top: 176px;
+    right: 55px;
+    background-color: white;
+  }
+  .navtriangle:before,
+  .navtriangle:after {
+    content: '';
+    position: absolute;
+    background-color: inherit;
+  }
+  .navtriangle,
+  .navtriangle:before,
+  .navtriangle:after {
+    width:  18px;
+    height: 18px;
+    border-top-right-radius: 30%;
+  }
+  
+  .navtriangle {
+    transform: skewX(-30deg) scale(1,.866);
+  }
+  .navtriangle:before {
+    transform: rotate(-135deg) skewX(-45deg) scale(1.414,.707) translate(0,-50%);
+  }
+  .navtriangle:after {
+    transform: rotate(135deg) skewY(-45deg) scale(.707,1.414) translate(50%);
   }

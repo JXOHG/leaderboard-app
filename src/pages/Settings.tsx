@@ -32,7 +32,8 @@ const SettingsPage: React.FC = () => {
         <button className="settings-option" onClick={() => setActiveTab('legal')}>
           Legal
         </button>
-      </div>
+        <div className="navtriangle"></div>
+        </div>
     </div>
   );
 
