@@ -38,11 +38,20 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+    <div>
+    </div>
       <div className="main">
-        <StepDisplay currentSteps={currentSteps} />
+        <div className="stepdisplay"><StepDisplay currentSteps={currentSteps} />
         <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} />
         <Button />
-        <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} />
+        </div>
+        
+        
+        
+      
+       
+        <div className="leaderboad"><Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} /></div>
+        
         <div className="dashboard-progress">
             <Percentage 
               value={currentSteps} 

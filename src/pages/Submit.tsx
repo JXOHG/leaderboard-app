@@ -83,7 +83,7 @@ const Submit: React.FC = () => {
           className="backbutton back-button" 
           onClick={() => currentPage === 'main' ? navigate('/') : setCurrentPage('main')}
         >
-          <ArrowLeft size={24} />
+          <ArrowLeft color="#ffffff" absoluteStrokeWidth />
         </button>
 
         <div className="submit-page">
