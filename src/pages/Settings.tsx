@@ -3,6 +3,9 @@ import { ArrowLeft, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import './Settings.css'; // Assuming your CSS file for the page styling
 import LegalDisclaimer from '../components/LegalDisclaimer'; // Import the LegalDisclaimer component
+import triangle from "../assets/image/triangle.png";
+
+
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'userInfo' | 'goal' | 'legal'>('main');
@@ -22,10 +25,12 @@ const SettingsPage: React.FC = () => {
         </button>
       </div>
 
-      <div className="settings-options">
+      <div>
         <button className="settings-option" onClick={() => setActiveTab('userInfo')}>
           User Info
+        <img src={triangle} className = "triangle" />
         </button>
+        
         <button className="settings-option" onClick={() => setActiveTab('goal')}>
           Goal
         </button>

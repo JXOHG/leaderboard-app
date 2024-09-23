@@ -21,7 +21,7 @@
   }
   
   .settings-option {
-    display: block;
+    display: flex;
     width: 100%;
     padding: 15px;
     margin-bottom: 10px;
@@ -29,14 +29,19 @@
     border: 1px solid #ccc;
     background-color: #f00;
     color: #fff;
-    text-align: left;
+    text-align:left;
     cursor: pointer;
+
+    justify-content:space-between;
+
   }
   
   .settings-option:hover {
     background-color: #d00;
   }
   
+
+
   .settings-content {
     padding: 20px;
     color:white;
@@ -48,4 +53,15 @@
     cursor: pointer;
     color: #666;
     margin-bottom: 20px;
+  }
+
+  .triangle{
+    width:40px;
+    height:40px;
+    right:0;
+    align-self:right;
+    justify-content:right;
+    align-content:right;
+    display:inline-flex;
+
   }
