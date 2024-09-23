@@ -31,6 +31,8 @@
     color: #fff;
     text-align: left;
     cursor: pointer;
+    justify-content: center;
+    flex-direction: row;
   }
   
   .settings-option:hover {
@@ -50,32 +52,16 @@
     margin-bottom: 20px;
   }
 
-  .navtriangle {
-    position: absolute;
-    top: 176px;
-    right: 55px;
-    background-color: white;
+  .triangle {
+    right: 2rem;
+    width: 30px;
+    height: 30px;
+    gap: 200px;
   }
-  .navtriangle:before,
-  .navtriangle:after {
-    content: '';
-    position: absolute;
-    background-color: inherit;
-  }
-  .navtriangle,
-  .navtriangle:before,
-  .navtriangle:after {
-    width:  18px;
-    height: 18px;
-    border-top-right-radius: 30%;
+
+  .right{
+    display:inline-flex;
+    justify-content: flex-end;
+    flex-direction:column;
   }
   
-  .navtriangle {
-    transform: skewX(-30deg) scale(1,.866);
-  }
-  .navtriangle:before {
-    transform: rotate(-135deg) skewX(-45deg) scale(1.414,.707) translate(0,-50%);
-  }
-  .navtriangle:after {
-    transform: rotate(135deg) skewY(-45deg) scale(.707,1.414) translate(50%);
-  }
