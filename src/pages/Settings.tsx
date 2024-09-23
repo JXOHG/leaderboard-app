@@ -23,23 +23,21 @@ const SettingsPage: React.FC = () => {
         </button>
       </div>
 
-      <div className="settings-options">
+      <div>
           <button className="settings-option" onClick={() => setActiveTab('userInfo')}>
-            <div className="left">
-              <p>User Info</p>        
-            </div>
-            <div className="right">
+              User Info      
               <img src={triangle} className="triangle"/>
-            </div>
           </button>
         <div>
         <button className="settings-option" onClick={() => setActiveTab('goal')}>
           Goal
+          <img src={triangle} className="triangle"/>
         </button>
 
         <div>
         <button className="settings-option" onClick={() => setActiveTab('legal')}>
           Legal
+          <img src={triangle} className="triangle"/>
         </button>
         </div>
         </div>

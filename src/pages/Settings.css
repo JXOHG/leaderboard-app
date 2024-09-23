@@ -21,7 +21,7 @@
   }
 
   .settings-option {
-    display: block;
+    display: flex;
     width: 100%;
     padding: 15px;
     margin-bottom: 10px;
@@ -31,8 +31,7 @@
     color: #fff;
     text-align: left;
     cursor: pointer;
-    justify-content: center;
-    flex-direction: row;
+    justify-content: space-between;
   }
   
   .settings-option:hover {
@@ -53,15 +52,7 @@
   }
 
   .triangle {
-    right: 2rem;
     width: 30px;
     height: 30px;
-    gap: 200px;
+    margin-left: 80vw;
   }
-
-  .right{
-    display:inline-flex;
-    justify-content: flex-end;
-    flex-direction:column;
-  }
-  
