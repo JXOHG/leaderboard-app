@@ -1,9 +1,24 @@
-.settings-container {
+.changeUsername-container {
     padding: 20px;
     background-color: red;
     min-height: 100vh;
   }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items at the start */
+    align-items: center;
+    background-color: red; /* Match footer color */
+    color: white;
+    min-height: 100vh; /* Keep this to ensure it takes the full height */
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    padding-bottom: 0; /* Remove bottom padding to avoid gap */
+  }
   
+  /* EVERYTHING BELOW I TOOK FROM SETTINGS PAGE -- keep changing names/adjusting to needs on this page*/
   .settings-header {
     display: flex;
     align-items: center;

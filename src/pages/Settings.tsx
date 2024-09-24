@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import './Settings.css'; // Assuming your CSS file for the page styling
 import LegalDisclaimer from '../components/LegalDisclaimer'; // Import the LegalDisclaimer component
 import triangle from "../assets/image/triangle2.png"
+import ButtonChangeUser from "../components/ButtonChangeUser";
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'userInfo' | 'goal' | 'legal'>('main');
@@ -51,8 +52,13 @@ const SettingsPage: React.FC = () => {
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
+      <div className="settings-onpage"> {/* rectangular border that encompasses user info section */}
       <h2>User Info</h2>
+      <p>User ID:</p>
+      <p>Username:</p>
+      <ButtonChangeUser />
       {/* Add the User Info content here */}
+      </div>
     </div>
   );
 
@@ -62,8 +68,10 @@ const SettingsPage: React.FC = () => {
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
-      <h2>Goal</h2>
-      {/* Add the Goal content here */}
+      <div className="settings-onpage"> {/* rectangular border that encompasses user info section */}
+        <h2>Goal</h2>
+        {/* Add the Goal content here */}
+      </div>
     </div>
   );
 
@@ -73,7 +81,9 @@ const SettingsPage: React.FC = () => {
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
-      <LegalDisclaimer /> {/* Render the LegalDisclaimer component here */}
+      <div className="settings-onpage"> {/* rectangular border that encompasses user info section */}
+        <LegalDisclaimer /> {/* Render the LegalDisclaimer component here */}
+      </div>
     </div>
   );
 
