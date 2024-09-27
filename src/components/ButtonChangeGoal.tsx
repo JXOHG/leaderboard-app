@@ -7,14 +7,14 @@ function SizesExample() {
 
   // Handle click event
   const handleSubmitClick = () => {
-     //  PUT SOME PAGE TO NAVIGATE TO HERE -- page for changing username
+     //  PUT SOME PAGE TO NAVIGATE TO HERE -- page for editing goal
   };
 
   return (
     <>
       <div className="mb-2">
         <Button variant="secondary" size="lg" onClick={handleSubmitClick}>
-          Change Username
+          Change Goal
         </Button>
       </div>
     </>
