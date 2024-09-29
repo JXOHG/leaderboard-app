@@ -13,8 +13,8 @@ interface UserSteps {
 }
 
 const Dashboard: React.FC = () => {
-  const [currentSteps, setCurrentSteps] = useState(8500);
-  const [currentGoals, setCurrentGoals] = useState(10000);
+  const [currentSteps, setCurrentSteps] = useState(10000);
+  const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
 
   useEffect(() => {
@@ -38,10 +38,13 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+    <div>
+    </div>
       <div className="main">
-        <StepDisplay currentSteps={currentSteps} />
+        <div className="stepdisplay"><StepDisplay currentSteps={currentSteps} />
         <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} />
-        <Button /> 
+
+       <Button /> 
         <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} />
           <div className="percentage-container">
               <Percentage
@@ -50,6 +53,7 @@ const Dashboard: React.FC = () => {
                 onSettingsClick={handleSettingsClick}
               />
               </div>
+
       </div>
     </>
   );
