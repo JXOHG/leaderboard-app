@@ -25,8 +25,8 @@
     padding: 1rem;
     text-align: center;
     padding-bottom: 0; /* Remove bottom padding to avoid gap */
-    
 }
+
 /* Other existing styles remain unchanged */
 
 .footer {
@@ -64,6 +64,7 @@
   }
   .percentage-container {
     position: absolute; /* Allows positioning relative to the nearest positioned ancestor */
+    left: 60rem;
     right: 2rem; /* Adjust the right margin as needed */
     top: 2rem; /* Adjust to position it above the footer */
     z-index: 10; /* Ensure it appears above other elements */

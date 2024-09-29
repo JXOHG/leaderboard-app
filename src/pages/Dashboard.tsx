@@ -43,14 +43,13 @@ const Dashboard: React.FC = () => {
         <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} />
         <Button /> 
         <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} />
-        <div className="percentage-container">
-            <Percentage
-              value={currentSteps} 
-              goal={currentGoals} 
-              onSettingsClick={handleSettingsClick}
-            />
-            </div>
-
+          <div className="percentage-container">
+              <Percentage
+                value={currentSteps} 
+                goal={currentGoals} 
+                onSettingsClick={handleSettingsClick}
+              />
+              </div>
       </div>
     </>
   );

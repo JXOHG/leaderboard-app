@@ -63,7 +63,7 @@
     }
   }
   .percentage-container {
-    position: absolute; /* Allows positioning relative to the nearest positioned ancestor */
+    position: absolute;
     right: 2rem; /* Adjust the right margin as needed */
     top: 1rem; /* Adjust to position it above the footer */
     z-index: 10; /* Ensure it appears above other elements */
