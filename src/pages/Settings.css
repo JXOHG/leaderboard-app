@@ -19,20 +19,52 @@
   .settings-options {
     margin-top: 20px;
   }
-  
+
   .settings-option {
-    display: block;
+    display: flex;
     width: 100%;
     padding: 15px;
     margin-bottom: 10px;
     font-size: 1.2em;
-    border: 1px solid #ccc;
+    border: 1.5px solid #ccc;
     background-color: #f00;
     color: #fff;
     text-align: left;
     cursor: pointer;
+    justify-content: space-between;
+    border-radius: 25px;
+  }
+
+  .change-button-rectangle {
+    width:200px;
+    height:50px;
+    background: #f00;
+  }
+
+  .change-button {
+    display: flex;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    text-align: left;
+    cursor: pointer;
   }
   
+  .settings-onpage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border: 1.5px solid #ccc;
+    background-color: #f00;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 25px;
+  }
+
   .settings-option:hover {
     background-color: #d00;
   }
@@ -48,4 +80,13 @@
     cursor: pointer;
     color: #666;
     margin-bottom: 20px;
+  }
+
+  .triangle {
+    width: 30px;
+    height: 30px;
+    margin-left: 80vw;
+    rotate: 180deg;
+    color: white;
+    filter: invert(100%);
   }
