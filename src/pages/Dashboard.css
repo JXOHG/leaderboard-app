@@ -1,98 +1,76 @@
-
-.fixed-right {
-    align-self: flex-end; /* Align it to the right side */
-    margin-right: 2rem; /* Add a margin to move it away from the edge */
-    position: absolute; /* Absolute within the flex container */
-    top: 30%; /* Vertically center within the available space (excluding footer) */
-    transform: translateY(-50%);
-  }
-  
-  @media (max-width: 600px) {
-    .fixed-right {
-      position: static;
-      margin-top: 1rem;
-    }
-  }
-
-  .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align items at the start */
-    align-items: center;
-    background-color: red; /* Match footer color */
-    color: white;
-    min-height: 110vh; /* Keep this to ensure it takes the full height */
-    max-height:110vh;
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    padding-bottom: 0; /* Remove bottom padding to avoid gap */
+.main {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next row */
+  justify-content: space-between; /* Distribute items evenly */
+  padding: 20px;
+  max-width: 100vw;
+  margin: 0 auto;
+  background-color: red;
+  min-height: fit-content;
+  flex-direction:row;
 }
 
-/* Other existing styles remain unchanged */
-
-.footer {
-    background-color: white;
-    color: black; /* Set text color for visibility */
-    display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    width: 100vw; /* Ensure footer spans full width of viewport */
-    height: auto; /* Adjust height to auto */
-    padding: 1rem;
-    margin-bottom: 0; /* Remove margin to avoid gaps */
-   
-    bottom:0;
+.stepdisplay, 
+.rankDisplay, 
+.button {
+  flex: 1 1; /* Items will take up roughly 45% of the container width */
+  margin: 10px;  /* Add margin for spacing between elements */
+  min-height: fit-content;
+  max-width:fit-content;
 }
-  .button{
-    display:inline-block;
-  }
-  
-  @media (max-width: 600px) {
-    footer {
-      padding: 0.5rem; /* Reduce padding in smaller screens */
-      height: auto;
-      bottom:0;
 
-    }
-  }
-  @media (max-width: 600px) {
-    .fixed-right {
-      right: 5%; /* On smaller screens, move it a little inwards */
-      top: auto; /* Reset the vertical centering */
-      bottom: 20%; /* Place it above the footer */
-      transform: none; /* No need for translation on smaller screens */
-    }
-  }
-  .percentage-container {
-    position: absolute; /* Allows positioning relative to the nearest positioned ancestor */
-    left: 60rem;
-    right: 2rem; /* Adjust the right margin as needed */
-    top: 2rem; /* Adjust to position it above the footer */
-    z-index: 10; /* Ensure it appears above other elements */
-
+.percentage-container {
+  flex: 0 1 15%; /* Further shrink the percentage container */
+  margin: 10px;
+  max-height: fit-content;
 }
+
+/* Ensure leaderboard aligns to the left */
 .leaderboard {
-    align-self: flex-start; /* Align the leaderboard to the left */
-    max-width: 60vw; /* Optional: Set a max-width for the leaderboard */
-    width: 60vw; /* Ensure the leaderboard takes the full width of its container */
-    margin-right: auto; /* Pushes the leaderboard to the left */
-    margin-left:0;
-  }
-.dashboard-progress{
-  right:30vw;
-  top:10vh;
-  position:absolute;
+  flex: 1 1 70%; /* Adjust leaderboard to take most of the space */
+  margin-left: 0; /* Align to the left side of the screen */
+  min-height:fit-content;
 }
-.rankdisplay{
-  display:inline-flex;
 
+/* Button styling */
+.button {
+  align-self: flex-start; /* Align button to the start of the row */
+  max-width: 200px; /* Limit button width */
+  max-height:fit-content;
+  }
+
+/* For smaller screens (like tablets) */
+@media screen and (max-width: 768px) {
+  .main {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+  }
+
+  .stepdisplay, 
+  .rankDisplay, 
+  .percentage-container, 
+  .leaderboard, 
+  button {
+    flex: 1 1 100%; /* Each item takes full width */
+    text-align: center; /* Center text content on small screens */
+  }
+
+  button {
+    max-width: 100%; /* Full width button */
+  }
 }
-.stepdisplay{
-  display:inline-flex;
-  gap:20px;
-  margin-bottom:20px;
-  justify-content:center;
-  align-items:center;
-  
+
+/* For mobile devices */
+@media screen and (max-width: 480px) {
+  .main {
+    padding: 10px;
+  }
+
+  .stepdisplay, 
+  .rankDisplay, 
+  .percentage-container, 
+  .leaderboard, 
+  button {
+    flex: 1 1 100%; /* Keep items full width */
+  }
 }

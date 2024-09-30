@@ -5,14 +5,13 @@
     max-height:80vh;
     height:100%;
     /* Adjust width as needed */
-    margin: 1rem auto;
-    text-align: center;
+    text-align: left;
     align-self:auto;
     background-color: #f9f9f9; /* Background for the leaderboard container */
     padding: 1rem;
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    display:inline-block;
+   
 }
 
 .leaderboard h3 {
@@ -28,6 +27,7 @@
     background-color: #e0e0e0; /* Background for header */
     font-weight: bold; /* Optional: Make header text bold */
     color:#8B0000;
+    
 }
 
 .leaderboard-header-item {

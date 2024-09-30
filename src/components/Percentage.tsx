@@ -8,7 +8,7 @@ interface CircularProgressProps{
 const CircularProgress: React.FC<CircularProgressProps> = ({
   value,
   goal,
-  size = 300,
+  size = 250,
   strokeWidth = 50,
 }) => {
   const percentage = Math.min(100, (value / goal) * 100);
@@ -30,9 +30,8 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
   return (
     <div style={{
-      position: 'absolute',   // Use absolute positioning
+         // Use absolute positioning
       top: 70,                // Adjust based on header height (e.g., 70px)
-     
       display: 'inline-flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -107,7 +106,8 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         fontSize: '1.2em',
         color: '#8B0000',
         fontWeight: 'bold',
-        fontSize:'30px'
+        textAlign:"center",
+        fontSize:'20px'
       }}>
         {goalReached ? 'Goal Reached!' : `Remaining: ${remainingSteps} steps`}
       </div>
