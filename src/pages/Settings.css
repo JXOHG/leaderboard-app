@@ -29,24 +29,7 @@
     border: 1.5px solid #ccc;
     background-color: #f00;
     color: #fff;
-    text-align: left;
-    cursor: pointer;
-    justify-content: space-between;
-    border-radius: 25px;
-  }
-
-  .change-button-rectangle {
-    width:200px;
-    height:50px;
-    background: #f00;
-  }
-
-  .change-button {
-    display: flex;
-    padding: 15px;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    text-align: left;
+    text-align:left;
     cursor: pointer;
   }
   
@@ -69,6 +52,8 @@
     background-color: #d00;
   }
   
+
+
   .settings-content {
     padding: 20px;
     color:white;
@@ -82,6 +67,7 @@
     margin-bottom: 20px;
   }
 
+
   .triangle {
     width: 30px;
     height: 30px;
@@ -89,4 +75,5 @@
     rotate: 180deg;
     color: white;
     filter: invert(100%);
+
   }
