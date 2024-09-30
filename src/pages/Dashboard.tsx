@@ -41,11 +41,10 @@ const Dashboard: React.FC = () => {
     <div>
     </div>
       <div className="main">
-        <div className="stepdisplay"><StepDisplay currentSteps={currentSteps} />
-        <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} />
-
+        <div className="stepdisplay"><StepDisplay currentSteps={currentSteps} /></div>
+        <div className="rankDisplay"> <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} /></div>
        <Button /> 
-        <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} />
+       <div className="leaderboard"> <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} /></div>
           <div className="percentage-container">
               <Percentage
                 value={currentSteps} 
@@ -53,6 +52,7 @@ const Dashboard: React.FC = () => {
                 onSettingsClick={handleSettingsClick}
               />
               </div>
+              
 
       </div>
     </>
