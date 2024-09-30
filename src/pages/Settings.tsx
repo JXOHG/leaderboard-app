@@ -3,12 +3,12 @@ import { ArrowLeft, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import './Settings.css'; // Assuming your CSS file for the page styling
 import LegalDisclaimer from '../components/LegalDisclaimer'; // Import the LegalDisclaimer component
-import triangle from "../assets/image/triangle.png";
 
-
+import triangle from "../assets/image/triangle2.png"
+import { render } from 'react-dom';
 
 const SettingsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'main' | 'userInfo' | 'goal' | 'legal'>('main');
+  const [activeTab, setActiveTab] = useState<'main' | 'userInfo' | 'goal' | 'changeUser' | 'changeGoal' | 'legal'>('main');
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   // Function to render the main page
@@ -26,18 +26,26 @@ const SettingsPage: React.FC = () => {
       </div>
 
       <div>
-        <button className="settings-option" onClick={() => setActiveTab('userInfo')}>
-          User Info
-        <img src={triangle} className = "triangle" />
-        </button>
-        
+
+          <button className="settings-option" onClick={() => setActiveTab('userInfo')}>
+              User Info      
+              <img src={triangle} className="triangle"/>
+          </button>
+        <div>
+
         <button className="settings-option" onClick={() => setActiveTab('goal')}>
           Goal
+          <img src={triangle} className="triangle"/>
         </button>
+
+        <div>
         <button className="settings-option" onClick={() => setActiveTab('legal')}>
           Legal
+          <img src={triangle} className="triangle"/>
         </button>
-      </div>
+        </div>
+        </div>
+        </div>
     </div>
   );
 
@@ -47,8 +55,28 @@ const SettingsPage: React.FC = () => {
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
+      <div className="settings-onpage"> {/* rectangular border that encompasses user info section */}
       <h2>User Info</h2>
-      {/* Add the User Info content here */}
+      <p>User ID: 123456 </p>
+      <p>Username: cadencem </p>
+      <div className="change-button-rectangle">
+        <button className='change-option' onClick={() => setActiveTab("changeUser")}>
+            Change Username
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderChangeUser = () => (
+    <div className="settings-content">
+      <button className="back-button" onClick={() => setActiveTab('userInfo')}>
+        <ArrowLeft size={24} />
+      </button>
+      <div className="settings-onpage"> {/* rectangular border that encompasses change user info section */}
+        <h2>Change Username</h2>
+        <p>Enter new username: </p>
+      </div>
     </div>
   );
 
@@ -58,8 +86,27 @@ const SettingsPage: React.FC = () => {
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
-      <h2>Goal</h2>
-      {/* Add the Goal content here */}
+      <div className="settings-onpage"> {/* rectangular border that encompasses goal section */}
+        <h2>Goal</h2>
+        <p>Current Goal: 1000 Steps </p>
+        <div className="change-button-rectangle">
+        <button className='change-option' onClick={() => setActiveTab("changeGoal")}>
+            Change Goal
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderChangeGoal = () => (
+    <div className="settings-content">
+      <button className="back-button" onClick={() => setActiveTab('goal')}>
+        <ArrowLeft size={24} />
+      </button>
+      <div className="settings-onpage"> {/* rectangular border that encompasses change goal section */}
+        <h2>Change Goal</h2>
+        <p>Enter new goal: </p>
+      </div>
     </div>
   );
 
@@ -69,7 +116,9 @@ const SettingsPage: React.FC = () => {
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
-      <LegalDisclaimer /> {/* Render the LegalDisclaimer component here */}
+      <div className="settings-onpage"> {/* rectangular border that encompasses legal section */}
+        <LegalDisclaimer /> {/* Render the LegalDisclaimer component here */}
+      </div>
     </div>
   );
 
@@ -80,6 +129,8 @@ const SettingsPage: React.FC = () => {
       {activeTab === 'userInfo' && renderUserInfo()}
       {activeTab === 'goal' && renderGoal()}
       {activeTab === 'legal' && renderLegal()}
+      {activeTab === 'changeGoal' && renderChangeGoal()}
+      {activeTab === 'changeUser' && renderChangeUser()}
     </div>
   );
 };

@@ -13,19 +13,7 @@
       margin-top: 1rem;
     }
   }
-  .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align items at the start */
-    align-items:flex-start;
-    background-color: red; /* Match footer color */
-    color: white;
-    min-height: 100vh; /* Keep this to ensure it takes the full height */
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    padding-bottom: 0; /* Remove bottom padding to avoid gap */
-}
+  
 /* Other existing styles remain unchanged */
 
 .footer {
@@ -39,7 +27,7 @@
     padding: 1rem;
     margin-bottom: 0; /* Remove margin to avoid gaps */
     text-align:center;
-   
+    display:flex;
     bottom:0;
 }
   .button{
@@ -62,9 +50,4 @@
       transform: none; /* No need for translation on smaller screens */
     }
   }
-  .percentage-container {
-    position: absolute; /* Allows positioning relative to the nearest positioned ancestor */
-    right: 2rem; /* Adjust the right margin as needed */
-    top: 1rem; /* Adjust to position it above the footer */
-    z-index: 10; /* Ensure it appears above other elements */
-}
+ 
