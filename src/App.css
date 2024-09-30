@@ -1,0 +1,53 @@
+
+  .fixed-right {
+    align-self: flex-end; /* Align it to the right side */
+    margin-right: 2rem; /* Add a margin to move it away from the edge */
+    position: absolute; /* Absolute within the flex container */
+    top: 30%; /* Vertically center within the available space (excluding footer) */
+    transform: translateY(-50%);
+  }
+  
+  @media (max-width: 600px) {
+    .fixed-right {
+      position: static;
+      margin-top: 1rem;
+    }
+  }
+  
+/* Other existing styles remain unchanged */
+
+.footer {
+    background-color: white;
+    color: black; /* Set text color for visibility */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100vw; /* Ensure footer spans full width of viewport */
+    height: auto; /* Adjust height to auto */
+    padding: 1rem;
+    margin-bottom: 0; /* Remove margin to avoid gaps */
+    text-align:center;
+    display:flex;
+    bottom:0;
+}
+  .button{
+    display:inline-block;
+  }
+  
+  @media (max-width: 600px) {
+    footer {
+      padding: 0.5rem; /* Reduce padding in smaller screens */
+      height: auto;
+      bottom:0;
+
+    }
+  }
+  @media (max-width: 600px) {
+    .fixed-right {
+      right: 5%; /* On smaller screens, move it a little inwards */
+      top: auto; /* Reset the vertical centering */
+      bottom: 20%; /* Place it above the footer */
+      transform: none; /* No need for translation on smaller screens */
+    }
+  }
+ 
