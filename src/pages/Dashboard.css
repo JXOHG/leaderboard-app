@@ -17,6 +17,8 @@
   margin: 10px;  /* Add margin for spacing between elements */
   min-height: fit-content;
   max-width:fit-content;
+  
+  
 }
 
 .percentage-container {
@@ -37,6 +39,7 @@
   align-self: flex-start; /* Align button to the start of the row */
   max-width: 200px; /* Limit button width */
   max-height:fit-content;
+  
   }
 
 /* For smaller screens (like tablets) */

@@ -48,9 +48,14 @@ const Submit: React.FC = () => {
 
   const ScreenshotPage = () => (
     <div className="submit-page">
+      
+      <div className="button-container">
       <h2>2. Submit a Screenshot containing your Steps</h2>
       <button className="button" onClick={() => console.log('Upload screenshot')}>Upload</button>
       <p>Please ensure the image clearly shows your step count.</p>
+      <p>Accepted files: .pdf, .png, .jpg, .gif, .webp</p>
+      </div>
+      
     </div>
   );
 
