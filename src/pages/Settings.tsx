@@ -7,7 +7,7 @@ import triangle from "../assets/image/triangle2.png"
 import { render } from 'react-dom';
 
 const SettingsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'main' | 'userInfo' | 'goal' | 'changeUser' | 'changeGoal' | 'legal'>('main');
+  const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'legal'>('main');
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   // Function to render the main page
@@ -25,8 +25,8 @@ const SettingsPage: React.FC = () => {
       </div>
 
       <div>
-          <button className="settings-option" onClick={() => setActiveTab('userInfo')}>
-              User Info      
+          <button className="settings-option" onClick={() => setActiveTab('siteInfo')}>
+              Website Info      
               <img src={triangle} className="triangle"/>
           </button>
         <div>
@@ -47,32 +47,34 @@ const SettingsPage: React.FC = () => {
   );
 
   // Function to render the User Info tab content
-  const renderUserInfo = () => (
+  const renderSiteInfo = () => (
     <div className="settings-content">
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage"> {/* rectangular border that encompasses user info section */}
-      <h2>User Info</h2>
+      <h2>Website Info</h2>
       <p>User ID: 123456 </p>
-      <p>Username: cadencem </p>
+      <p>Current Website Password: 11111 </p>
       <div className="change-button-rectangle">
-        <button className='change-option' onClick={() => setActiveTab("changeUser")}>
-            Change Username
+        <button className='change-option' onClick={() => setActiveTab("changeSitePass")}>
+            Change Password
           </button>
         </div>
       </div>
     </div>
   );
 
-  const renderChangeUser = () => (
+  const renderChangeSitePass = () => (
     <div className="settings-content">
-      <button className="back-button" onClick={() => setActiveTab('userInfo')}>
+      <button className="back-button" onClick={() => setActiveTab('siteInfo')}>
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage"> {/* rectangular border that encompasses change user info section */}
-        <h2>Change Username</h2>
-        <p>Enter new username: </p>
+        <h2>Change Website Password</h2>
+        <p></p> {/* this one just for spacing */}
+        <p>Enter old password: </p>
+        <p>Enter new password: </p>
       </div>
     </div>
   );
@@ -123,11 +125,11 @@ const SettingsPage: React.FC = () => {
   return (
     <div className="settings-container">
       {activeTab === 'main' && renderMainPage()}
-      {activeTab === 'userInfo' && renderUserInfo()}
+      {activeTab === 'siteInfo' && renderSiteInfo()}
       {activeTab === 'goal' && renderGoal()}
       {activeTab === 'legal' && renderLegal()}
       {activeTab === 'changeGoal' && renderChangeGoal()}
-      {activeTab === 'changeUser' && renderChangeUser()}
+      {activeTab === 'changeSitePass' && renderChangeSitePass()}
     </div>
   );
 };
