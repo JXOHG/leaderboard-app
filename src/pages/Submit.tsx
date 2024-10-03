@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { QrReader } from 'react-qr-reader';  // Import QR Reader
 import './Submit.css';
 
 const Submit: React.FC = () => {
