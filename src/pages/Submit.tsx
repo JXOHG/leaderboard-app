@@ -29,9 +29,9 @@ const Submit: React.FC = () => {
 
   const MainPage = () => (
     <div className="submit-page">
-      <h1>Hello {username},<br />Ready to Submit Your Steps?</h1>
+      <h1>Hello Admin,<br />Ready to Submit Steps?</h1>
       <div className="button-container">
-        <button className="button" onClick={() => setCurrentPage('qr')}>Scan QR Code</button> {/* QR Page */}
+        <button className="button" onClick={() => setCurrentPage('qr')}>Upload CSV</button> {/* QR Page */}
         <span className="or">OR</span>
         <button className="button" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
       </div>
@@ -40,7 +40,7 @@ const Submit: React.FC = () => {
 
   const ManualPage = () => (
     <div className="submit-page">
-      <h2>1. Enter your steps:</h2>
+      <h2>1. Enter steps:</h2>
       <input type="number" placeholder="Enter steps" />
       <button className="button" onClick={() => setCurrentPage('screenshot')}>Next</button>
     </div>
@@ -83,7 +83,7 @@ const Submit: React.FC = () => {
           className="backbutton back-button" 
           onClick={() => currentPage === 'main' ? navigate('/') : setCurrentPage('main')}
         >
-          <ArrowLeft color="#ffffff" absoluteStrokeWidth />
+          <ArrowLeft color="#666" absoluteStrokeWidth />
         </button>
 
         <div className="submit-page">

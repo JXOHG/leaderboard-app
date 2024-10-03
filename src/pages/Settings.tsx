@@ -34,7 +34,6 @@ const SettingsPage: React.FC = () => {
           Goal
           <img src={triangle} className="triangle"/>
         </button>
-
         <div>
         <button className="settings-option" onClick={() => setActiveTab('legal')}>
           Legal
@@ -54,7 +53,6 @@ const SettingsPage: React.FC = () => {
       </button>
       <div className="settings-onpage"> {/* rectangular border that encompasses user info section */}
       <h2>Website Info</h2>
-      <p>User ID: 123456 </p>
       <p>Current Website Password: 11111 </p>
       <div className="change-button-rectangle">
         <button className='change-option' onClick={() => setActiveTab("changeSitePass")}>
@@ -86,8 +84,8 @@ const SettingsPage: React.FC = () => {
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage"> {/* rectangular border that encompasses goal section */}
-        <h2>Goal</h2>
-        <p>Current Goal: 1000 Steps </p>
+        <h2>Fundraising Goal</h2>
+        <p>Current Goal: $1000 </p>
         <div className="change-button-rectangle">
         <button className='change-option' onClick={() => setActiveTab("changeGoal")}>
             Change Goal
