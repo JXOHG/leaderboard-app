@@ -45,6 +45,7 @@ h1 {
 }
 
 .button {
+    align-self: center;
     background-color: #808080;
     color: white;
     border: none;
