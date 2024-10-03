@@ -40,7 +40,7 @@ const Submit: React.FC = () => {
 
   const ManualPage = () => (
     <div className="submit-page">
-      <h2>1. Enter your steps:</h2>
+      <h2>1. Enter steps:</h2>
       <input type="number" placeholder="Enter steps" />
       <button className="button" onClick={() => setCurrentPage('screenshot')}>Next</button>
     </div>
