@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 // Mock CSV data
 const mockCSVData = [
-  { id: 1, name: 'John Doe', age: 30, city: 'New York' },
-  { id: 2, name: 'Jane Smith', age: 25, city: 'Los Angeles' },
-  { id: 3, name: 'Bob Johnson', age: 35, city: 'Chicago' },
+  { id: 1, name: 'John Doe', steps: 30},
+  { id: 2, name: 'Jane Smith', steps: 25},
+  { id: 3, name: 'Bob Johnson', steps: 35},
 ];
 
 const CSVUploader = () => {
   const [csvData, setCsvData] = useState(mockCSVData);
-  const [newRow, setNewRow] = useState({ name: '', age: '', city: '' });
+  const [newRow, setNewRow] = useState({ name: '', steps: ''});
   const [editingId, setEditingId] = useState(null);
 
   const handleFileUpload = (event) => {
@@ -22,7 +22,7 @@ const CSVUploader = () => {
 
   const handleAddRow = () => {
     setCsvData([...csvData, { id: csvData.length + 1, ...newRow }]);
-    setNewRow({ name: '', age: '', city: '' });
+    setNewRow({ name: '', steps: ''});
   };
 
   const handleEditRow = (id) => {
@@ -32,7 +32,7 @@ const CSVUploader = () => {
   const handleUpdateRow = (id) => {
     setCsvData(csvData.map(row => row.id === id ? { ...row, ...newRow } : row));
     setEditingId(null);
-    setNewRow({ name: '', age: '', city: '' });
+    setNewRow({ name: '', steps: ''});
   };
 
   const handleDeleteRow = (id) => {
@@ -58,8 +58,7 @@ const CSVUploader = () => {
           <tr className="bg-gray-100">
             <th className="border border-gray-300 p-2">ID</th>
             <th className="border border-gray-300 p-2">Name</th>
-            <th className="border border-gray-300 p-2">Age</th>
-            <th className="border border-gray-300 p-2">City</th>
+            <th className="border border-gray-300 p-2">Steps</th>
             <th className="border border-gray-300 p-2">Actions</th>
           </tr>
         </thead>
@@ -84,26 +83,13 @@ const CSVUploader = () => {
                 {editingId === row.id ? (
                   <input
                     type="number"
-                    name="age"
-                    value={newRow.age || row.age}
+                    name="steps"
+                    value={newRow.steps || row.steps}
                     onChange={handleInputChange}
                     className="w-full"
                   />
                 ) : (
-                  row.age
-                )}
-              </td>
-              <td className="border border-gray-300 p-2">
-                {editingId === row.id ? (
-                  <input
-                    type="text"
-                    name="city"
-                    value={newRow.city || row.city}
-                    onChange={handleInputChange}
-                    className="w-full"
-                  />
-                ) : (
-                  row.city
+                  row.steps
                 )}
               </td>
               <td className="border border-gray-300 p-2">
@@ -145,18 +131,10 @@ const CSVUploader = () => {
         />
         <input
           type="number"
-          name="age"
-          value={newRow.age}
+          name="steps"
+          value={newRow.steps}
           onChange={handleInputChange}
-          placeholder="Age"
-          className="border p-2 mr-2"
-        />
-        <input
-          type="text"
-          name="city"
-          value={newRow.city}
-          onChange={handleInputChange}
-          placeholder="City"
+          placeholder="Steps"
           className="border p-2 mr-2"
         />
         <button
