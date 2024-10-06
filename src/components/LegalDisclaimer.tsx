@@ -10,8 +10,8 @@ const LegalDisclaimer: React.FC = () => {
       <p>
         Welcome to the StairClimb fundraising event web application,
         developed by Tech for Social Impact for United Elgin-Way Middlesex.
-        As an administrator, by accessing or using this Application for inputting participant data,
-        you agree to the terms outlined below. If you do not agree, please refrain from using this Application.
+        As an administrator, by accessing or using this application for inputting participant data,
+        you agree to the terms outlined below. If you do not agree, please refrain from using this application.
       </p>
 
       <h3>2. Role of Administrators</h3>

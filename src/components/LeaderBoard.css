@@ -103,3 +103,24 @@
     border-radius: 8px;
     background-color: #8B0000
 }
+
+
+/* added elements for scrollable leaderboard */
+.leaderboard-container {
+    scrollbar-width: thin;
+    scrollbar-color: #8B0000 #f9f9f9;
+  }
+  
+  .leaderboard-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .leaderboard-container::-webkit-scrollbar-track {
+    background: #f9f9f9;
+  }
+  
+  .leaderboard-container::-webkit-scrollbar-thumb {
+    background-color: #8B0000;
+    border-radius: 4px;
+    border: 2px solid #f9f9f9;
+  }

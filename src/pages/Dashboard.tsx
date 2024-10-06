@@ -5,7 +5,6 @@ import Leaderboard from '../components/LeaderBoard';
 import Percentage from '../components/Percentage';
 import './Dashboard.css';
 import Button from "../components/Button";
-import Csvuploader from "../components/csvupload";
 
 interface UserSteps {
   id: number;
@@ -43,10 +42,7 @@ const Dashboard: React.FC = () => {
     </div>
       <div className="main">
        <Button />
-       <div className="leaderboard"> <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} /></div>
-      </div>
-      <div>
-        <Csvuploader/>
+       <div className="leaderboard"> <Leaderboard users={otherUsersSteps} /></div>
       </div>
     </>
   );
