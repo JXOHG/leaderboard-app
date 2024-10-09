@@ -31,7 +31,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             />
           </a>
 
-          <a href="https://www.uwo.ca/index.html/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.uwo.ca/" target="_blank" rel="noopener noreferrer">
             <img
               className="social-logo"
               style={{ width: "130px", height: "130px" }}
