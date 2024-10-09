@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './Submit.css';
 import Csvuploader from "../components/csvupload";
-import ManualCsvEntry from "../components/manualcsventry";
+import ManualCsvEntry from "../components/ManualCsvEntry";
 import CsvUploadEntry from '../components/CsvUploadEntry';
 
 const Submit: React.FC = () => {
