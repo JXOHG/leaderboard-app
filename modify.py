@@ -21,17 +21,17 @@ df = df[["Name", "Total Steps"]]
 
 #if adding data, create a new data frame to concat with main 
 if add:
-    if manualName != 0:
+    if manualName[0] != -1:
         data = {
             'Name': manualName,
             'Total Steps': manualSteps
         }
         
         df2 = pd.DataFrame(data)
-        df2 = pd.concat([df, df2])
+        df = pd.concat([df, df2])
         
 #sort
-df2 = df2.sort_values(by="Total Steps", axis=0, ascending=False)
+df = df.sort_values(by="Total Steps", axis=0, ascending=False)
 
 #overwite main.csv with new updated csv
-df2.to_csv("main.csv", index=False)
+df.to_csv("main.csv", index=False)
