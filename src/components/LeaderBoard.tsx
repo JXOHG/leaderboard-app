@@ -77,14 +77,14 @@ export default function Leaderboard({ csvFilePath }: LeaderboardProps) {
 
   return (
     <div className="leaderboard">
-      <h3>Leaderboard</h3>
+      <h3 className="mulish-bold">Leaderboard</h3>
       
       {/* Header Row */}
       <div className="leaderboard-header">
-        <span className="leaderboard-header-item name">Name</span>
-        <span className="leaderboard-header-item steps">Steps</span>
-        <span className="leaderboard-header-item distance">Distance (km)</span>
-        <span className="leaderboard-header-item rank">Rank</span>
+        <span className="leaderboard-header-item name mulish-bold">Name</span>
+        <span className="leaderboard-header-item steps mulish-bold">Steps</span>
+        <span className="leaderboard-header-item distance mulish-bold">Distance (km)</span>
+        <span className="leaderboard-header-item rank mulish-bold">Rank</span>
       </div>
 
       <div className="leaderboard-container" style={{ maxHeight: 'calc(80vh - 150px)', overflowY: 'auto' }}>
@@ -94,10 +94,10 @@ export default function Leaderboard({ csvFilePath }: LeaderboardProps) {
               key={user.id} 
               className={`leaderboard-item ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}`}
             >
-              <span className="leaderboard-name">{user.name}</span>
-              <span className="leaderboard-steps">{user.steps.toLocaleString()} steps</span>
-              <span className="leaderboard-distance">{user.distance.toFixed(2)} km</span>
-              <span className="leaderboard-rank">{index + 1}</span>
+              <span className="leaderboard-name mulish-bold">{user.name}</span>
+              <span className="leaderboard-steps mulish-bold">{user.steps.toLocaleString()} steps</span>
+              <span className="leaderboard-distance mulish-bold">{user.distance.toFixed(2)} km</span>
+              <span className="leaderboard-rank mulish-bold">{index + 1}</span>
             </div>
           ))
         ) : (

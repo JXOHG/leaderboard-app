@@ -15,7 +15,7 @@ function SizesExample() {
     <>
       <div className="mb-2">
         <Button variant="secondary" size="lg" onClick={handleSubmitClick}>
-          Submit Steps
+          Submit
         </Button>
       </div>
     </>

@@ -49,6 +49,21 @@
     border-radius: 25px;
   }
 
+  .settings-onpage-goal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border: 1.5px solid #ccc;
+    background-color: #c72614;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 25px;
+  }
+
   .settings-option:hover {
     background-color: #d00;
   }
@@ -57,6 +72,21 @@
     padding: 20px;
     color:white;
   }
+
+  .text-group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 150px;
+  }
+  
+
+  .percentage-container {
+    display: flex;
+    flex: 0 1 15%; /* Further shrink the percentage container */
+    margin: 10px;
+    max-height: fit-content;
+  }
+
   
   .back-button {
     background: none;
