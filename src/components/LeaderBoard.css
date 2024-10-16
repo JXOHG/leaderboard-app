@@ -26,7 +26,7 @@
     border-bottom: 2px solid #ddd; /* Optional: Add a border to separate header */
     background-color: #e0e0e0; /* Background for header */
     font-weight: bold; /* Optional: Make header text bold */
-    color:#8B0000;
+    color:#c72614;
     
 }
 
@@ -67,11 +67,11 @@
 }
 
 .leaderboard-item.gold {
-    background-color: gold; /* Gold color for 1st place */
+    background-color: #EAAA00; /* Gold color for 1st place */
 }
 
 .leaderboard-item.silver {
-    background-color: silver; /* Silver color for 2nd place */
+    background-color: #DE7C00; /* Silver color for 2nd place */
 }
 
 .leaderboard-item.bronze {
@@ -96,19 +96,11 @@
     text-align: right;
 }
 
-.current-user-info {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: 1px solid #ddd; /* Border to separate current user info */
-    border-radius: 8px;
-    background-color: #8B0000
-}
-
 
 /* added elements for scrollable leaderboard */
 .leaderboard-container {
     scrollbar-width: thin;
-    scrollbar-color: #8B0000 #f9f9f9;
+    scrollbar-color: #c72614 #f9f9f9;
   }
   
   .leaderboard-container::-webkit-scrollbar {
@@ -120,7 +112,7 @@
   }
   
   .leaderboard-container::-webkit-scrollbar-thumb {
-    background-color: #8B0000;
+    background-color: #c72614;
     border-radius: 4px;
     border: 2px solid #f9f9f9;
   }

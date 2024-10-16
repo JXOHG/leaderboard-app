@@ -1,6 +1,6 @@
 .settings-container {
     padding: 20px;
-    background-color: red;
+    background-color: #c72614;
     min-height: 100vh;
   }
   
@@ -27,7 +27,7 @@
     margin-bottom: 10px;
     font-size: 1.2em;
     border: 1.5px solid #ccc;
-    background-color: #f00;
+    background-color: #c72614;
     color: #fff;
     text-align:left;
     cursor: pointer;
@@ -42,7 +42,7 @@
     margin-bottom: 10px;
     font-size: 1.2em;
     border: 1.5px solid #ccc;
-    background-color: #f00;
+    background-color: #c72614;
     color: #fff;
     text-align: left;
     cursor: pointer;
@@ -53,8 +53,6 @@
     background-color: #d00;
   }
   
-
-
   .settings-content {
     padding: 20px;
     color:white;

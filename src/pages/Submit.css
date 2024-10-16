@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #FF0000;
+    background-color: #c72614;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -33,7 +33,6 @@ h1 {
     height:60vh;
     width:60vw;
  
-
 }
 
 .backbutton {
