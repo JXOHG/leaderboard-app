@@ -28,22 +28,18 @@ export default function CSVUploadEntry() {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const text = e.target?.result as string
-        const rows = text.split('\n')
-        const headers = rows[0].split(',')
-        const data = rows.slice(1).map((row, index) => {
-          const values = row.split(',')
-          return {
-            id: index + 1,
-            name: values[headers.indexOf('name')],
-            steps: parseInt(values[headers.indexOf('steps')], 10) || 0
-          }
-        })
-        setCsvData(data)
-      }
-      reader.readAsText(file)
+      const formData = new FormData()
+      formData.append('file', file)
+      fetch('http://localhost:5000/csv', {
+        method: "POST",
+        body: formData,
+      })
+      .then(response => {
+        if (!response.ok){
+          console.log('bad')
+        }
+      })
+
     }
   }
 
