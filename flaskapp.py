@@ -26,16 +26,23 @@ def csv():
       
       f.save(file_path)
       os.rename(file_path, os.path.join(app.config['UPLOAD_FOLDER'], 'temp.csv'))
+      try:
+        df = pd.read_csv("public/temp.csv")
+        if set(['Group Name', 'Total Steps', 'Distance covered']).issubset(df.columns):
+          df = df[["Group Name", "Total Steps", "Distance covered"]]
+          df = df.sort_values(by="Total Steps", axis=0, ascending=False)
+          df.to_csv("public/main.csv", index=False)
+          os.remove("public/temp.csv")
+        else:
+          os.remove("public/temp.csv")
+          return jsonify({"message": "wrong csv file"}), 200
+      except:
+        os.remove("public/temp.csv")
       
-      df = pd.read_csv("public/temp.csv")
-      df = df[["Group Name", "Total Steps", "Distance covered"]]
-      df = df.sort_values(by="Total Steps", axis=0, ascending=False)
-      df.to_csv("public/main.csv", index=False)
       
-      os.remove("public/temp.csv")
 
-      return jsonify({"message": 'lfg'}), 200
-  return jsonify({"message": 'file fucked'}), 400
+      return jsonify({"message": 'works'}), 200
+  return jsonify({"message": 'doesnt work'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True) 
