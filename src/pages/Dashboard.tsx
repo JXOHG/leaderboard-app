@@ -16,6 +16,7 @@ const Dashboard: React.FC = () => {
   const [currentSteps, setCurrentSteps] = useState(10000);
   const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
+  const csvFilePath = '/test_csv.csv';
 
   useEffect(() => {
     const fetchUserSteps = async () => {
@@ -41,19 +42,8 @@ const Dashboard: React.FC = () => {
     <div>
     </div>
       <div className="main">
-        <div className="stepdisplay"><StepDisplay currentSteps={currentSteps} /></div>
-        <div className="rankDisplay"> <RankDisplay currentSteps={currentSteps} otherUsersSteps={otherUsersSteps.map(user => user.steps)} /></div>
-       <Button /> 
-       <div className="leaderboard"> <Leaderboard users={otherUsersSteps} currentUserSteps={currentSteps} /></div>
-          <div className="percentage-container">
-              <Percentage
-                value={currentSteps} 
-                goal={currentGoals} 
-                onSettingsClick={handleSettingsClick}
-              />
-              </div>
-              
-
+       <Button />
+       <div className="leaderboard"> <Leaderboard csvFilePath={csvFilePath} /></div>
       </div>
     </>
   );

@@ -8,8 +8,8 @@ interface CircularProgressProps{
 const CircularProgress: React.FC<CircularProgressProps> = ({
   value,
   goal,
-  size = 250,
-  strokeWidth = 50,
+  size = 220,
+  strokeWidth = 30,
 }) => {
   const percentage = Math.min(100, (value / goal) * 100);
   const radius = (size - strokeWidth) / 2;

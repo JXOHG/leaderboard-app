@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { QrReader } from 'react-qr-reader';  // Import QR Reader
 import './Submit.css';
+import Csvuploader from "../components/csvupload";
+import ManualCsvEntry from "../components/ManualCsvEntry";
+import CsvUploadEntry from '../components/CsvUploadEntry';
 
 const Submit: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'main' | 'manual' | 'screenshot' | 'qr'>('main');
+  const [currentPage, setCurrentPage] = useState<'main' | 'manual' | 'csv'>('main');
   const [username, setUsername] = useState<string>('');
-  const [qrResult, setQrResult] = useState<string | null>(null); // State to hold the QR code result
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,50 +30,36 @@ const Submit: React.FC = () => {
 
   const MainPage = () => (
     <div className="submit-page">
-      <h1>Hello {username},<br />Ready to Submit Your Steps?</h1>
+      <h1>Hello Admin,<br />Ready to Submit Steps?</h1>
       <div className="button-container">
-        <button className="button" onClick={() => setCurrentPage('qr')}>Scan QR Code</button> {/* QR Page */}
+        <button className="button" onClick={() => setCurrentPage('csv')}>Upload CSV</button> {/* CSV Page */}
         <span className="or">OR</span>
         <button className="button" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
       </div>
     </div>
   );
 
+  // Page for manually inputting participant data
   const ManualPage = () => (
     <div className="submit-page">
-      <h2>1. Enter your steps:</h2>
-      <input type="number" placeholder="Enter steps" />
-      <button className="button" onClick={() => setCurrentPage('screenshot')}>Next</button>
+      <h2>Enter steps:</h2>
+      <div>
+        <ManualCsvEntry/>
+      </div>
+      <button className="button">Next</button>
     </div>
   );
 
-  const ScreenshotPage = () => (
-    <div className="submit-page">
-      <h2>2. Submit a Screenshot containing your Steps</h2>
-      <button className="button" onClick={() => console.log('Upload screenshot')}>Upload</button>
-      <p>Please ensure the image clearly shows your step count.</p>
-    </div>
-  );
 
-  // New QR Code Page
-  const QRPage = () => (
-    <div className="submit-page">
-      <h2>Scan QR Code</h2>
-      <QrReader
-        onResult={(result, error) => {
-          if (!!result) {
-            setQrResult(result.getText()); // Get the QR code result
-            console.log(result.getText()); // You can handle the result here
-            setCurrentPage('main'); // Go back to main after scanning
-          }
 
-          if (!!error) {
-            console.error(error);
-          }
-        }}
-        style={{ width: '100%' }}
-      />
-      <p>{qrResult ? `Scanned Result: ${qrResult}` : 'No result yet'}</p> {/* Display the scanned result */}
+
+  // Page for uploading CSV files containing user steps
+  const CSVPage = () => (
+    <div className="submit-page">
+      <h2>Upload CSV File</h2>
+      <div>
+        <CsvUploadEntry/>
+      </div>
     </div>
   );
 
@@ -83,14 +70,13 @@ const Submit: React.FC = () => {
           className="backbutton back-button" 
           onClick={() => currentPage === 'main' ? navigate('/') : setCurrentPage('main')}
         >
-          <ArrowLeft color="#ffffff" absoluteStrokeWidth />
+          <ArrowLeft color="#666" absoluteStrokeWidth />
         </button>
 
         <div className="submit-page">
           {currentPage === 'main' && <MainPage />}
           {currentPage === 'manual' && <ManualPage />}
-          {currentPage === 'screenshot' && <ScreenshotPage />}
-          {currentPage === 'qr' && <QRPage />} {/* Add QRPage */}
+          {currentPage === 'csv' && <CSVPage />} {/* Add CSVPage */}
         </div>
       </div>
     </div>
