@@ -32,6 +32,7 @@
     text-align:left;
     cursor: pointer;
     justify-content: space-between;
+    border-radius: 25px
   }
   
   .settings-onpage {
