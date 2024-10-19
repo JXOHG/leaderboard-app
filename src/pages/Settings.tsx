@@ -1,38 +1,65 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { ArrowLeft, Settings } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
-import './Settings.css'; // Assuming your CSS file for the page styling
-import LegalDisclaimer from '../components/LegalDisclaimer'; // Import the LegalDisclaimer component
+import { useNavigate } from 'react-router-dom'; 
+import './Settings.css'; 
+import LegalDisclaimer from '../components/LegalDisclaimer'; 
 import Percentage from '../components/Percentage';
-
 import triangle from "../assets/image/triangle2.png";
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'legal'>('main');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [goal, setGoal] = useState<number>(1000); // State to hold the current goal
+  const [newGoal, setNewGoal] = useState<number | string>(''); // State for new goal input
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate(); 
 
   // Mock API function to change the password
   const mockApiChangePassword = (oldPassword: string, newPassword: string) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (oldPassword === "11111") { // Simulate success if old password matches
+        if (oldPassword === "11111") {
           resolve("Password changed successfully.");
         } else {
           reject("Old password is incorrect.");
         }
-      }, 1000); // Simulate 1 second delay
+      }, 1000);
     });
   };
+
+  // Mock API function to fetch the goal
+  const mockApiFetchGoal = () => {
+    return new Promise<number>((resolve) => {
+      setTimeout(() => {
+        resolve(1000); // Simulate fetching the goal from the server
+      }, 1000);
+    });
+  };
+
+  // Mock API function to update the goal
+  const mockApiUpdateGoal = (goal: number) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Goal updated successfully.");
+      }, 1000);
+    });
+  };
+
+  // Fetch goal information on component mount
+  useEffect(() => {
+    const fetchGoal = async () => {
+      const fetchedGoal = await mockApiFetchGoal();
+      setGoal(fetchedGoal);
+    };
+    fetchGoal();
+  }, []);
 
   // Handle password change
   const handleChangePassword = async () => {
     try {
       const response = await mockApiChangePassword(oldPassword, newPassword);
       setMessage(response);
-      // Clear the input fields after successful change
       setOldPassword('');
       setNewPassword('');
     } catch (error) {
@@ -40,16 +67,26 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  // Function to render the main page
+  // Handle goal update
+  const handleUpdateGoal = async () => {
+    if (typeof newGoal === 'number') {
+      try {
+        const response = await mockApiUpdateGoal(newGoal);
+        setMessage(response);
+        setGoal(newGoal); // Update the goal state with the new goal
+        setNewGoal(''); // Clear the input field after successful update
+      } catch (error) {
+        setMessage("Failed to update the goal."); // Handle any error
+      }
+    }
+  };
+
   const renderMainPage = () => (
     <div className="settings-main-page">
       <div className="settings-header">
         <Settings size={24} />
         <h2 className="mulish-bold">Settings</h2>
-        <button
-          className="back-button"
-          onClick={() => navigate('/')} // Navigate to the dashboard when the back button is pressed
-        >
+        <button className="back-button" onClick={() => navigate('/')}>
           <ArrowLeft size={24} />
         </button>
       </div>
@@ -71,7 +108,6 @@ const SettingsPage: React.FC = () => {
     </div>
   );
 
-  // Function to render the Site Info tab content
   const renderSiteInfo = () => (
     <div className="settings-content">
       <button className="back-button" onClick={() => setActiveTab('main')}>
@@ -113,12 +149,11 @@ const SettingsPage: React.FC = () => {
         <button className="change-option mulish-regular" onClick={handleChangePassword}>
           Change Password
         </button>
-        {message && <p className="message">{message}</p>} {/* Display success or error message */}
+        {message && <p className="message">{message}</p>}
       </div>
     </div>
   );
 
-  // Function to render the Goal tab content
   const renderGoal = () => (
     <div className="settings-content">
       <button className="back-button" onClick={() => setActiveTab('main')}>
@@ -127,7 +162,7 @@ const SettingsPage: React.FC = () => {
       <div className="settings-onpage-goal">
         <div className="text-group">
           <h2 className="mulish-bold">Fundraising Goal</h2>
-          <p className="mulish-regular">Current Goal: $1000</p>
+          <p className="mulish-regular">Current Goal: ${goal}</p>
           <div className="change-button-rectangle">
             <button className='change-option mulish-regular' onClick={() => setActiveTab("changeGoal")}>
               Change Goal
@@ -151,27 +186,30 @@ const SettingsPage: React.FC = () => {
         <h2 className="mulish-bold">Change Goal</h2>
         <p className="mulish-regular">Enter new goal:</p>
         <input
-          type="text"
-          name="new goal" 
+          type="number" // Allow only numeric input for the goal
+          value={newGoal}
+          onChange={(e) => setNewGoal(Number(e.target.value) || '')} // Convert to number or clear input
           className="w-full p-1 border rounded"
         />
+        <button className="change-option mulish-regular" onClick={handleUpdateGoal}>
+          Update Goal
+        </button>
+        {message && <p className="message">{message}</p>} {/* Display message for goal update */}
       </div>
     </div>
   );
 
-  // Function to render the Legal tab content
   const renderLegal = () => (
     <div className="settings-content">
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage">
-        <LegalDisclaimer /> {/* Render the LegalDisclaimer component here */}
+        <LegalDisclaimer />
       </div>
     </div>
   );
 
-  // Main function to determine which content to display based on activeTab
   return (
     <div className="settings-container">
       {activeTab === 'main' && renderMainPage()}
