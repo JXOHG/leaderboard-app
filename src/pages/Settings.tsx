@@ -77,7 +77,17 @@ const SettingsPage: React.FC = () => {
         <h2 className="mulish-bold">Change Website Password</h2>
         <p></p> {/* this one just for spacing */}
         <p className="mulish-regular">Enter old password: </p>
+        <input
+                    type="text"
+                    name="old password"
+                    className="w-full p-1 border rounded"
+                  />
         <p className="mulish-regular">Enter new password: </p>
+        <input
+                    type="text"
+                    name="new password" 
+                    className="w-full p-1 border rounded"
+                  />
       </div>
     </div>
   );
@@ -114,6 +124,11 @@ const SettingsPage: React.FC = () => {
       <div className="settings-onpage"> {/* rectangular border that encompasses change goal section */}
         <h2 className="mulish-bold">Change Goal</h2>
         <p className="mulish-regular">Enter new goal: </p>
+        <input
+                    type="text"
+                    name="new password" 
+                    className="w-full p-1 border rounded"
+                  />
       </div>
     </div>
   );
