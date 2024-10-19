@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './Submit.css';
-import Csvuploader from "../components/csvupload";
-import ManualCsvEntry from "../components/manualcsventry";
+import ManualCsvEntry from "../components/CsvManualEntry";
 import CsvUploadEntry from '../components/CsvUploadEntry';
 
 const Submit: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'main' | 'manual' | 'csv'>('main');
+  const [currentPage, setCurrentPage] = useState<'main' | 'manual' |  'donate' | 'csv'>('main');
   const [username, setUsername] = useState<string>('');
   const navigate = useNavigate();
 
@@ -30,36 +29,42 @@ const Submit: React.FC = () => {
 
   const MainPage = () => (
     <div className="submit-page">
-      <h1>Hello Admin,<br />Ready to Submit Steps?</h1>
+      <h1 className="mulish-regular">Hello Admin,<br />Ready to Submit Steps?</h1>
       <div className="button-container">
-        <button className="button" onClick={() => setCurrentPage('csv')}>Upload CSV</button> {/* CSV Page */}
-        <span className="or">OR</span>
-        <button className="button" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
+        <button className="button mulish-regular" onClick={() => setCurrentPage('csv')}>Upload CSV</button> {/* CSV Page */}
+        <span className="or mulish-regular">OR</span>
+        <button className="button mulish-regular" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
       </div>
+      <h1 className="mulish-regular"><br />Want to Submit Donations Instead?</h1>
+      <button className="button mulish-regular" onClick={() => setCurrentPage('donate')}>Submit Donations</button>
     </div>
   );
 
   // Page for manually inputting participant data
   const ManualPage = () => (
     <div className="submit-page">
-      <h2>Enter steps:</h2>
+      <h2 className="mulish-bold">Enter steps:</h2>
       <div>
         <ManualCsvEntry/>
       </div>
-      <button className="button">Next</button>
+      <button className="button mulish-bold">Next</button>
     </div>
   );
-
-
-
 
   // Page for uploading CSV files containing user steps
   const CSVPage = () => (
     <div className="submit-page">
-      <h2>Upload CSV File</h2>
+      <h2 className="mulish-bold">Upload CSV File</h2>
       <div>
         <CsvUploadEntry/>
       </div>
+    </div>
+  );
+
+   // Page for manually inputting donations
+   const DonatePage = () => (
+    <div className="submit-page">
+      <h2 className="mulish-bold">Donations</h2>
     </div>
   );
 
@@ -76,6 +81,7 @@ const Submit: React.FC = () => {
         <div className="submit-page">
           {currentPage === 'main' && <MainPage />}
           {currentPage === 'manual' && <ManualPage />}
+          {currentPage == 'donate' && <DonatePage />}
           {currentPage === 'csv' && <CSVPage />} {/* Add CSVPage */}
         </div>
       </div>

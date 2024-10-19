@@ -3,6 +3,7 @@ import { ArrowLeft, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import './Settings.css'; // Assuming your CSS file for the page styling
 import LegalDisclaimer from '../components/LegalDisclaimer'; // Import the LegalDisclaimer component
+import Percentage from '../components/Percentage';
 
 import triangle from "../assets/image/triangle2.png"
 import { render } from 'react-dom';
@@ -16,7 +17,7 @@ const SettingsPage: React.FC = () => {
     <div className="settings-main-page">
       <div className="settings-header">
         <Settings size={24} />
-        <h2>Settings</h2>
+        <h2 className="mulish-bold">Settings</h2>
         <button
           className="back-button"
           onClick={() => navigate('/')} // Navigate to the dashboard when the back button is pressed
@@ -27,19 +28,19 @@ const SettingsPage: React.FC = () => {
 
       <div>
 
-          <button className="settings-option" onClick={() => setActiveTab('siteInfo')}>
+          <button className="settings-option mulish-regular" onClick={() => setActiveTab('siteInfo')}>
               Website Info      
 
               <img src={triangle} className="triangle"/>
           </button>
         <div>
 
-        <button className="settings-option" onClick={() => setActiveTab('goal')}>
+        <button className="settings-option mulish-regular" onClick={() => setActiveTab('goal')}>
           Goal
           <img src={triangle} className="triangle"/>
         </button>
         <div>
-        <button className="settings-option" onClick={() => setActiveTab('legal')}>
+        <button className="settings-option mulish-regular" onClick={() => setActiveTab('legal')}>
           Legal
           <img src={triangle} className="triangle"/>
         </button>
@@ -56,10 +57,10 @@ const SettingsPage: React.FC = () => {
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage"> {/* rectangular border that encompasses user info section */}
-      <h2>Website Info</h2>
-      <p>Current Website Password: 11111 </p>
+      <h2 className="mulish-bold">Website Info</h2>
+      <p className="mulish-regular">Current Website Password: 11111 </p>
       <div className="change-button-rectangle">
-        <button className='change-option' onClick={() => setActiveTab("changeSitePass")}>
+        <button className='change-option mulish-regular' onClick={() => setActiveTab("changeSitePass")}>
             Change Password
           </button>
         </div>
@@ -73,10 +74,10 @@ const SettingsPage: React.FC = () => {
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage"> {/* rectangular border that encompasses change user info section */}
-        <h2>Change Website Password</h2>
+        <h2 className="mulish-bold">Change Website Password</h2>
         <p></p> {/* this one just for spacing */}
-        <p>Enter old password: </p>
-        <p>Enter new password: </p>
+        <p className="mulish-regular">Enter old password: </p>
+        <p className="mulish-regular">Enter new password: </p>
       </div>
     </div>
   );
@@ -87,14 +88,20 @@ const SettingsPage: React.FC = () => {
       <button className="back-button" onClick={() => setActiveTab('main')}>
         <ArrowLeft size={24} />
       </button>
-      <div className="settings-onpage"> {/* rectangular border that encompasses goal section */}
-        <h2>Fundraising Goal</h2>
-        <p>Current Goal: $1000 </p>
+      <div className="settings-onpage-goal"> {/* rectangular border that encompasses goal section */}
+        <div className="text-group">
+        <h2 className="mulish-bold">Fundraising Goal</h2>
+        <p className="mulish-regular">Current Goal: $1000 </p>
         <div className="change-button-rectangle">
-        <button className='change-option' onClick={() => setActiveTab("changeGoal")}>
+        <button className='change-option mulish-regular' onClick={() => setActiveTab("changeGoal")}>
             Change Goal
           </button>
         </div>
+        </div>
+        
+        <div className="percentage-container">
+          <Percentage/>
+          </div>
       </div>
     </div>
   );
@@ -105,8 +112,8 @@ const SettingsPage: React.FC = () => {
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage"> {/* rectangular border that encompasses change goal section */}
-        <h2>Change Goal</h2>
-        <p>Enter new goal: </p>
+        <h2 className="mulish-bold">Change Goal</h2>
+        <p className="mulish-regular">Enter new goal: </p>
       </div>
     </div>
   );
