@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
+import Papa from 'papaparse'
 
 interface RowData {
   id: number
@@ -60,6 +61,28 @@ export default function ManualCSVEntry() {
       [name]: name === 'steps' ? Number(value) : value
     }))
   }
+  const handleSaveToCSV = async () => {
+    const csvData = Papa.unparse(data)
+    
+    try {
+      const response = await fetch('/api/save-csv', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ csvData }),
+      })
+      
+      if (response.ok) {
+        alert('Data saved successfully!')
+      } else {
+        alert('Failed to save data')
+      }
+    } catch (error) {
+      console.error('Error saving CSV:', error)
+      alert('An error occurred while saving the data')
+    }
+  }
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
@@ -107,21 +130,21 @@ export default function ManualCSVEntry() {
                 {editingId === row.id ? (
                   <button 
                     onClick={() => handleUpdateRow(row.id)} 
-                    className="bg-green-500 text-white px-2 py-1 rounded mr-2"
+                    className="bg-green-500 text-black px-2 py-1 rounded mr-2"
                   >
                     Save
                   </button>
                 ) : (
                   <button 
                     onClick={() => handleEditRow(row.id)} 
-                    className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                    className="bg-blue-500 text-black px-2 py-1 rounded mr-2"
                   >
                     Edit
                   </button>
                 )}
                 <button 
                   onClick={() => handleDeleteRow(row.id)} 
-                  className="bg-red-500 text-white px-2 py-1 rounded"
+                  className="bg-red-500 text-black px-2 py-1 rounded"
                 >
                   Delete
                 </button>
@@ -150,9 +173,15 @@ export default function ManualCSVEntry() {
         />
         <button 
           onClick={handleAddRow} 
-          className="bg-green-500 text-white px-4 py-2 rounded"
+          className="bg-green-500 text-black px-4 py-2 rounded"
         >
           Add Participant
+        </button>
+        <button 
+          onClick={handleSaveToCSV} 
+          className="bg-blue-500 text-black px-4 py-2 rounded"
+        >
+          Save to CSV
         </button>
       </div>
     </div>
