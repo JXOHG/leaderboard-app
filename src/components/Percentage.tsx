@@ -1,17 +1,51 @@
+import React, { useEffect, useState } from 'react';
 
-interface CircularProgressProps{
-  value?:number;
-  goal?:number;
-  size?:number;
-  strokeWidth?:number;
+interface CircularProgressProps {
+  value?: number;
+  goal?: number;
+  size?: number;
+  strokeWidth?: number;
 }
+
+// Mock API function to fetch the amount raised
+const mockApiFetchAmountRaised = () => {
+  return new Promise<number>((resolve) => {
+    setTimeout(() => {
+      resolve(12345); // Simulate fetching the current amount raised
+    }, 1000);
+  });
+};
+
+// Mock API function to fetch the fundraising goal
+const mockApiFetchGoal = () => {
+  return new Promise<number>((resolve) => {
+    setTimeout(() => {
+      resolve(123456); // Simulate fetching the goal from the server
+    }, 1000);
+  });
+};
+
 const CircularProgress: React.FC<CircularProgressProps> = ({
   value,
   goal,
   size = 220,
   strokeWidth = 30,
 }) => {
-  const percentage = Math.min(100, (value / goal) * 100);
+  const [currentValue, setCurrentValue] = useState<number>(0);
+  const [currentGoal, setCurrentGoal] = useState<number>(0);
+
+  // Fetch current amount raised and goal
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedValue = await mockApiFetchAmountRaised();
+      const fetchedGoal = await mockApiFetchGoal();
+      setCurrentValue(fetchedValue);
+      setCurrentGoal(fetchedGoal);
+    };
+    fetchData();
+  }, []);
+
+  const percentage = Math.min(100, (currentValue / currentGoal) * 100);
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeDasharray = circumference;
@@ -25,13 +59,12 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
     ${size / 2 - triangleWidth / 2},${size / 2} 
     ${size / 2 + triangleWidth / 2},${size / 2}
   `;
-  const remainingSteps = Math.max(0, goal - value);
-  const goalReached = value >= goal;
+  const remainingAmount = Math.max(0, currentGoal - currentValue);
+  const goalReached = currentValue >= currentGoal;
 
   return (
     <div style={{
-         // Use absolute positioning
-      top: 70,                // Adjust based on header height (e.g., 70px)
+      top: 70,
       display: 'inline-flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -41,7 +74,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       borderRadius: '12px',
       padding: '20px',
       width: 'fit-content',
-      zIndex: 99              // Make sure it stays below the StepDisplay
+      zIndex: 99
     }}>
       <div style={{
         fontSize: '1.5em',
@@ -49,7 +82,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         marginBottom: '20px',
         fontWeight: 'bold'
       }}>
-        {`Goal: ${goal} steps`}
+        {`Goal: $${currentGoal} raised`}
       </div>
 
       <div style={{
@@ -106,10 +139,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         fontSize: '1.2em',
         color: '#8B0000',
         fontWeight: 'bold',
-        textAlign:"center",
-        fontSize:'20px'
+        textAlign: "center",
+        fontSize: '20px'
       }}>
-        {goalReached ? 'Goal Reached!' : `Remaining: ${remainingSteps} steps`}
+        {goalReached ? 'Goal Reached!' : `Remaining: $${remainingAmount} to raise`}
       </div>
     </div>
   );
