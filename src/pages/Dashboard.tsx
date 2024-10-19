@@ -42,8 +42,10 @@ const Dashboard: React.FC = () => {
     <div>
     </div>
       <div className="main">
-       <Button />
        <div className="leaderboard"> <Leaderboard csvFilePath={csvFilePath} /></div>
+       <div className="submit-button mulish-bold">
+       <Button />
+       </div>
       </div>
     </>
   );

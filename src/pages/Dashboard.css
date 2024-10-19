@@ -7,7 +7,7 @@
   margin: 0 auto;
   background-color: #c72614;
   min-height: fit-content;
-  flex-direction:row;
+  flex-direction:column;
 }
 
 .stepdisplay, 
@@ -21,10 +21,9 @@
   
 }
 
-.percentage-container {
-  flex: 0 1 15%; /* Further shrink the percentage container */
-  margin: 10px;
-  max-height: fit-content;
+.submit-button {
+  margin-top: 20px;
+
 }
 
 /* Ensure leaderboard aligns to the left */
@@ -51,7 +50,6 @@
 
   .stepdisplay, 
   .rankDisplay, 
-  .percentage-container, 
   .leaderboard, 
   button {
     flex: 1 1 100%; /* Each item takes full width */
@@ -71,7 +69,6 @@
 
   .stepdisplay, 
   .rankDisplay, 
-  .percentage-container, 
   .leaderboard, 
   button {
     flex: 1 1 100%; /* Keep items full width */
