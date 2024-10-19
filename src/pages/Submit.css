@@ -46,9 +46,7 @@ h1 {
 }
 
 .button {
-
     align-self: center;
-
     background-color: #808080;
     color: white;
     border: none;
@@ -58,8 +56,6 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
     width: 200px;
-    
-    
 }
 
 .or {
