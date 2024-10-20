@@ -40,6 +40,10 @@ export default function CSVUploadEntry() {
 
     }
   }
+  const triggerFileInput = () => {
+    fileInputRef.current?.click()
+  }
+
 
   return (
     <div className="p-4 max-w-4xl mx-auto text-center">
