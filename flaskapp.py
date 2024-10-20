@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import pandas as pd
 import os
 from flask_cors import CORS
-import pandas as pd
+from io import StringIO
 
 app = Flask(__name__)
 CORS(app)
@@ -53,6 +53,50 @@ def csv():
           os.remove("public/temp.csv")
       return jsonify({"message": 'works'}), 200
   return jsonify({"message": 'doesnt work'}), 400
+
+@app.route("/manual", methods=['POST'])
+def manual():
+
+  if request.method == 'POST':
+    csvStr = request.data.decode('utf-8')
+    csvStr = StringIO(csvStr)
+      
+    #opens the csv into a dataframe to be modified by pandas
+    df = pd.read_csv(csvStr, sep=",", header=0)
+    #checks if csv has the correct columns
+    if set(['name', 'steps']).issubset(df.columns):
+      #extract neccessary columns
+      df = df[["name", "steps"]]
+      df.rename(columns={'steps': 'Total Steps', 'name': 'Name'},inplace=True)
+
+      print(df)
+      #lines 69 and 70 should be
+      #df = df[["name", "steps", "avg daily steps"]]
+      #df.rename(columns={'steps': 'Total Steps', 'name': 'Name', 'avg daily steps': 'Average Daily Steps},inplace=True)
+      #but it isnt for now until frontend is updated to include avg daily steps column
+      
+      
+      #sort by total steps
+      df = df.sort_values(by="Total Steps", axis=0, ascending=False)
+      
+      #write file to submit.csv so it can be combined with manual.csv later
+      df.to_csv("public/manual.csv", index=False)
+      
+      #insert code here to merge manual.csv with submit.csv
+      
+    else:
+      #incorrect csv file submitted (wrong columns)
+      return jsonify({"message": "wrong csv file"}), 400
+
+
+    return jsonify({"message": "CSV received and processed"}), 200
+  return jsonify({"message": "fail"}), 400
+      
+"""       df = pd.read_csv(csvStr, sep=',', header = None)
+      print(df) """
+      
+
+
 
 if __name__ == '__main__':
     app.run(debug=True) 

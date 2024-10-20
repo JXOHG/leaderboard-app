@@ -65,12 +65,9 @@ export default function ManualCSVEntry() {
     const csvData = Papa.unparse(data)
     
     try {
-      const response = await fetch('/api/save-csv', {
+      const response = await fetch('http://localhost:5000/manual', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ csvData }),
+        body: csvData,
       })
       
       if (response.ok) {
