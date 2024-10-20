@@ -11,6 +11,24 @@ CORS(app)
 UPLOAD_FOLDER = 'public'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# Helper function to merge manual and submit csv files
+def combine_and_replace_csv():
+    # Read relevant columns from both CSV files
+    if (os.path.isfile("public/manual.csv")):
+        submit_df = pd.read_csv("public/submit.csv", usecols=["Name", "Total Steps", "Avg Daily Steps"])
+        manual_df = pd.read_csv("public/manual.csv", usecols=["Name", "Total Steps", "Avg Daily Steps"])
+    else:
+        print("Manual.csv does not exist. No further operations")
+        return
+
+    # Combine the two DataFrames
+    combined_df = pd.concat([submit_df, manual_df], ignore_index=True)
+    combined_df = combined_df.sort_values(by="Total Steps", axis=0, ascending=False)
+    # Replace the existing 'main.csv' with the combined data
+    combined_df.to_csv("public/main.csv", index=False)
+
+    print("Files combined successfully, and 'main.csv' has been replaced.")
+
 # handles csv file upload
 @app.route("/csv", methods=['POST'])
 def csv():
@@ -38,7 +56,8 @@ def csv():
           #write file to submit.csv so it can be combined with manual.csv later
           df.to_csv("public/submit.csv", index=False)
           
-          #insert code here to merge manual.csv with submit.csv
+          # Merges manual.csv with submit.csv
+          combine_and_replace_csv()
           
           os.remove("public/temp.csv")
         else:
