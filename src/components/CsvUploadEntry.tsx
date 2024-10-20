@@ -26,31 +26,19 @@ export default function CSVUploadEntry() {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      setUploadStatus('Processing...')
-
-      Papa.parse<CSVData>(file, {
-        header: true,
-        complete: (results) => {
-          if (results.errors.length > 0) {
-            console.error('Error parsing CSV:', results.errors)
-            setUploadStatus('Error processing file. Please check the CSV format.')
-            return
-          }
-
-          setCsvData(results.data)
-          localStorage.setItem('test_csv_data', JSON.stringify(results.data))
-          setUploadStatus('File processed and data updated successfully')
-        },
-        error: (error: Error) => {
-          console.error('Error parsing CSV:', error)
-          setUploadStatus('Error processing file. Please try again.')
+      const formData = new FormData()
+      formData.append('file', file)
+      fetch('http://localhost:5000/csv', {
+        method: "POST",
+        body: formData,
+      })
+      .then(response => {
+        if (!response.ok){
+          console.log('bad')
         }
       })
-    }
-  }
 
-  const triggerFileInput = () => {
-    fileInputRef.current?.click()
+    }
   }
 
   return (
