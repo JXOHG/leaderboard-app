@@ -16,6 +16,7 @@ const Dashboard: React.FC = () => {
   const [currentSteps, setCurrentSteps] = useState(10000);
   const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
+  const csvFilePath = '/main.csv';
 
   useEffect(() => {
     const fetchUserSteps = async () => {
@@ -41,8 +42,10 @@ const Dashboard: React.FC = () => {
     <div>
     </div>
       <div className="main">
+       <div className="leaderboard"> <Leaderboard csvFilePath={csvFilePath} /></div>
+       <div className="submit-button mulish-bold">
        <Button />
-       <div className="leaderboard"> <Leaderboard users={otherUsersSteps} /></div>
+       </div>
       </div>
     </>
   );
