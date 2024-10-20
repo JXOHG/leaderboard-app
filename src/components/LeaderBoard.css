@@ -11,7 +11,6 @@
     padding: 1rem;
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-   
 }
 
 .leaderboard h3 {
@@ -25,8 +24,9 @@
     padding: 0.5rem 0;
     border-bottom: 2px solid #ddd; /* Optional: Add a border to separate header */
     background-color: #e0e0e0; /* Background for header */
-    font-weight: bold; /* Optional: Make header text bold */
-    color:#c72614;
+    font-weight: 800; /* Optional: Make header text bold */
+    color:#000;
+    margin-bottom: 1vh;
     
 }
 
@@ -67,15 +67,18 @@
 }
 
 .leaderboard-item.gold {
-    background-color: #EAAA00; /* Gold color for 1st place */
+    background-color: rgba(197,127,45,1); /* Gold color for 1st place */
+    color: white;
 }
 
 .leaderboard-item.silver {
-    background-color: #DE7C00; /* Silver color for 2nd place */
+    background-color: rgba(197,127,45,.90); /* Silver color for 2nd place */
+    color: white;
 }
 
 .leaderboard-item.bronze {
-    background-color: #cd7f32; /* Bronze color for 3rd place */
+    background-color: rgba(197,127,45,.80); /* Bronze color for 3rd place */
+    color: white;
 }
 
 .leaderboard-name,

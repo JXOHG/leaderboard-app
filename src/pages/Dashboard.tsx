@@ -5,6 +5,7 @@ import Leaderboard from '../components/LeaderBoard';
 import Percentage from '../components/Percentage';
 import './Dashboard.css';
 import Button from "../components/Button";
+import Admin from "../components/Admin"
 
 interface UserSteps {
   id: number;
@@ -44,7 +45,7 @@ const Dashboard: React.FC = () => {
       <div className="main">
        <div className="leaderboard"> <Leaderboard csvFilePath={csvFilePath} /></div>
        <div className="submit-button mulish-bold">
-       <Button />
+       <Admin />
        </div>
       </div>
     </>
