@@ -4,9 +4,6 @@ import RankDisplay from '../components/RankDisplay';
 import Leaderboard from '../components/LeaderBoard';
 import './Dashboard.css';
 import Button from "../components/Button";
-
-import Admin from "../components/Admin"
-
 import StepGoalDisplay from '../components/StepGoalDisplay';
 
 interface UserSteps {
@@ -47,13 +44,6 @@ const Dashboard: React.FC = () => {
     <>
     <div>
     </div>
-
-      <div className="main">
-       <div className="leaderboard"> <Leaderboard csvFilePath={csvFilePath} /></div>
-       <div className="submit-button mulish-bold">
-       <Admin />
-       </div>
-
     <div className="main">
     <div className="leaderboard">
       <Leaderboard csvFilePath={csvFilePath} />
@@ -64,7 +54,6 @@ const Dashboard: React.FC = () => {
       </div>
       <div className="step-goal-wrapper">
         <StepGoalDisplay currentSteps={totalSteps} goalSteps={goalSteps} />
-
       </div>
     </div>
     </div>
