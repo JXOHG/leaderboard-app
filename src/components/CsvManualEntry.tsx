@@ -58,9 +58,10 @@ export default function ManualCSVEntry() {
     const { name, value } = e.target
     setNewRow(prev => ({
       ...prev,
-      [name]: name === 'steps' ? Number(value) : value
+      [name]: name === 'steps' ? (value === '' ? '' : Number(value)) : value
     }))
   }
+
   const handleSaveToCSV = async () => {
     const csvData = Papa.unparse(data)
     
@@ -86,7 +87,6 @@ export default function ManualCSVEntry() {
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
-
       <table className="w-full border-collapse border border-gray-300 mb-4">
         <thead>
           <tr className="bg-gray-100">
@@ -166,7 +166,7 @@ export default function ManualCSVEntry() {
         <input
           type="number"
           name="steps"
-          value={newRow.steps}
+          value={newRow.steps === 0 ? '' : newRow.steps}
           onChange={handleInputChange}
           placeholder="Steps"
           className="p-2 border rounded"
