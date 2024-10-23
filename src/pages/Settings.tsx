@@ -115,7 +115,6 @@ const SettingsPage: React.FC = () => {
       </button>
       <div className="settings-onpage">
         <h2 className="mulish-bold">Website Info</h2>
-        <p className="mulish-regular">Current Website Password: 11111</p>
         <div className="change-button-rectangle">
           <button className='change-option mulish-regular' onClick={() => setActiveTab("changeSitePass")}>
             Change Password
@@ -169,7 +168,6 @@ const SettingsPage: React.FC = () => {
             </button>
           </div>
         </div>
-        
         <div className="percentage-container">
           <Percentage />
         </div>

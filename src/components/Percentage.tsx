@@ -69,7 +69,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: '#d9d9d9',
       border: '2px solid #ccc',
       borderRadius: '12px',
       padding: '20px',
@@ -87,13 +87,13 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
       <div style={{
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         border: '2px solid #ccc',
         borderRadius: '10px',
         padding: '20px',
-        backgroundColor: '#FFB6C1',
+        backgroundColor: '#fff',
       }}>
         <svg
           width={size}
@@ -105,7 +105,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke="#f75658"
+            stroke="#41B6E6"
             strokeWidth={strokeWidth}
             fill="none"
           />
@@ -113,7 +113,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke="#FE0004"
+            stroke="#0072CE"
             strokeWidth={strokeWidth}
             strokeDasharray={strokeDasharray}
             strokeDashoffset={strokeDashoffset}
@@ -140,7 +140,6 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         color: '#8B0000',
         fontWeight: 'bold',
         textAlign: "center",
-        fontSize: '20px'
       }}>
         {goalReached ? 'Goal Reached!' : `Remaining: $${remainingAmount} to raise`}
       </div>
