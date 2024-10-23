@@ -140,7 +140,6 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         color: '#8B0000',
         fontWeight: 'bold',
         textAlign: "center",
-        fontSize: '20px'
       }}>
         {goalReached ? 'Goal Reached!' : `Remaining: $${remainingAmount} to raise`}
       </div>
