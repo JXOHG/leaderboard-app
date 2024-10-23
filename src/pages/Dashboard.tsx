@@ -49,14 +49,13 @@ const Dashboard: React.FC = () => {
         <div className="leaderboard">
           <Leaderboard csvFilePath={csvFilePath} />
         </div>
+        <div className="side-by-side">
         <div className="submit-button mulish-bold">
           <Admin />
         </div>
-        <div className="side-by-side">
           <div className="submit-button-wrapper mulish-bold">
-            {/*<Button />*/}
           </div>
-          <div className="step-goal-wrapper">
+          <div className="step-goal-wrapper step-display-gap">
             <StepGoalDisplay currentSteps={totalSteps} goalSteps={goalSteps} />
           </div>
         </div>

@@ -1,9 +1,8 @@
 .card {
     background-color: #fff;
-    width: 32vw;
-    height: 10vh;
-    box-shadow: inset 0px 4px 8px 1px #A8A8A8;
-    border-radius: 40px;
+    width: 30vw;
+    height: 8vh;
+    border-radius: 50px;
 }
 
 .admin {

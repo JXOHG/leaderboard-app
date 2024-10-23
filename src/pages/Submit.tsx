@@ -29,14 +29,13 @@ const Submit: React.FC = () => {
 
   const MainPage = () => (
     <div className="submit-page">
-      
       <div className="button-container">
         <h1 className="mulish-bold admin">Hello Admin,</h1>
-        <h2 className="mulish-regular admin">Ready to Submit Steps?</h2>
+        <h2 className="mulish-regular admin text-separation">Ready to Submit Steps?</h2>
         <button className="button mulish-regular" onClick={() => setCurrentPage('csv')}>Upload CSV</button> {/* CSV Page */}
         <button className="button mulish-regular" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
       </div>
-      <h1 className="mulish-regular"><br />Want to Submit Donations Instead?</h1>
+      <h1 className="mulish-regular text-separation donation-separation">Want to Submit Donations Instead?</h1>
       <button className="button mulish-regular" onClick={() => setCurrentPage('donate')}>Submit Donations</button>
     </div>
   );
