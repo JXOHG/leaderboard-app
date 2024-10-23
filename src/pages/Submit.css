@@ -23,7 +23,7 @@
     align-items: center;
     border: 2px solid #fff;
     background-color: #fff;
-    padding: 20px;
+    padding: 5px;
     border-radius: 10px;
     height:60vh;
     width:35vw;
@@ -62,6 +62,10 @@
 
 .donation-separation {
     margin-top: 10px;
+}
+
+.donation-button-separation {
+    padding: 20px;
 }
 
 .or {

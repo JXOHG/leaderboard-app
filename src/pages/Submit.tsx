@@ -37,7 +37,7 @@ const Submit: React.FC = () => {
       </div>
       <h1 className="mulish-regular text-separation donation-separation">Want to Submit Donations Instead?</h1>
       <button className="button mulish-regular" onClick={() => setCurrentPage('donate')}>Submit Donations</button>
-    </div>
+      </div>
   );
 
   // Page for manually inputting participant data
