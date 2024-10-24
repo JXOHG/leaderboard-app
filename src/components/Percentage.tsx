@@ -8,22 +8,20 @@ interface CircularProgressProps {
 }
 
 // Mock API function to fetch the amount raised
-const mockApiFetchAmountRaised = () => {
-  return new Promise<number>((resolve) => {
-    setTimeout(() => {
-      resolve(12345); // Simulate fetching the current amount raised
-    }, 1000);
-  });
+const mockApiFetchAmountRaised = async () => {
+  const response = await fetch('http://localhost:5000/current_value');
+  const data = await response.json();
+  console.log('Fetched amount raised:', data.current_value); // Log the value
+  return parseInt(data.current_value, 10)
 };
 
-// Mock API function to fetch the fundraising goal
-const mockApiFetchGoal = () => {
-  return new Promise<number>((resolve) => {
-    setTimeout(() => {
-      resolve(123456); // Simulate fetching the goal from the server
-    }, 1000);
-  });
+const fetchGoalFromFile = async () => {
+  const response = await fetch('http://localhost:5000/goal');
+  const data = await response.json(); 
+  console.log('Fetched goal:', data.goal); // Log the goal
+  return parseInt(data.goal, 10);
 };
+
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
   value,
@@ -38,7 +36,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       const fetchedValue = await mockApiFetchAmountRaised();
-      const fetchedGoal = await mockApiFetchGoal();
+      const fetchedGoal = await fetchGoalFromFile(); // Fetch goal from goal.txt
       setCurrentValue(fetchedValue);
       setCurrentGoal(fetchedGoal);
     };

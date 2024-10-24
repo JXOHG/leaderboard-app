@@ -33,18 +33,24 @@ export default function CSVUploadEntry() {
         body: formData,
       })
       .then(response => {
-        if (!response.ok){
-          console.log('bad')
+        if (!response.ok) {
+          throw new Error('Network response was not ok'); // Throw an error if the response isn't OK
         }
+        return response.json(); // Parse the JSON response
       })
-
+      .then(data => {
+        alert(data.message); // Show the message from the JSON response
+      })
+      .catch(error => {
+        alert('File upload failed: ' + error.message); // Show error message if it fails
+      });
     }
   }
-  
   const triggerFileInput = () => {
     fileInputRef.current?.click()
   }
-  
+
+
   return (
     <div className="p-4 max-w-4xl mx-auto text-center">
       <div className="flex flex-col items-center">
