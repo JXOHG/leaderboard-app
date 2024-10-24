@@ -211,7 +211,7 @@ const handleUpdateCurrentValue = async () => {
           <p className="mulish-regular">Current amount raised: ${currentValue}</p> {/* Display the current goal */}
           <div className="change-button-rectangle">
             <button className='change-option mulish-regular' onClick={() => setActiveTab("changeGoal")}>
-              Change Goal
+              Change Values
             </button>
           </div>
         </div>
