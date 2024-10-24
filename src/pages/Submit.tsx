@@ -35,7 +35,7 @@ const Submit: React.FC = () => {
         <button className="button mulish-regular" onClick={() => setCurrentPage('csv')}>Upload CSV</button> {/* CSV Page */}
         <button className="button mulish-regular" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
       </div>
-      <h1 className="mulish-regular text-separation donation-separation">Want to Submit Donations Instead?</h1>
+      <h1 className="mulish-regular text-separation donation-separation"><br />Want to Submit Donations Instead?</h1>
       <button className="button mulish-regular" onClick={() => setCurrentPage('donate')}>Submit Donations</button>
       </div>
   );
