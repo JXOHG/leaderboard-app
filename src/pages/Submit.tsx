@@ -48,7 +48,6 @@ const Submit: React.FC = () => {
       <div>
         <ManualCsvEntry/>
       </div>
-      <button className="button mulish-bold">Next</button>
     </div>
   );
 
