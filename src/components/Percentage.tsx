@@ -8,22 +8,20 @@ interface CircularProgressProps {
 }
 
 // Mock API function to fetch the amount raised
-const mockApiFetchAmountRaised = () => {
-  return new Promise<number>((resolve) => {
-    setTimeout(() => {
-      resolve(12345); // Simulate fetching the current amount raised
-    }, 1000);
-  });
+const mockApiFetchAmountRaised = async () => {
+  const response = await fetch('http://localhost:5000/current_value');
+  const data = await response.json();
+  console.log('Fetched amount raised:', data.current_value); // Log the value
+  return parseInt(data.current_value, 10)
 };
 
-// Mock API function to fetch the fundraising goal
-const mockApiFetchGoal = () => {
-  return new Promise<number>((resolve) => {
-    setTimeout(() => {
-      resolve(123456); // Simulate fetching the goal from the server
-    }, 1000);
-  });
+const fetchGoalFromFile = async () => {
+  const response = await fetch('http://localhost:5000/goal');
+  const data = await response.json(); 
+  console.log('Fetched goal:', data.goal); // Log the goal
+  return parseInt(data.goal, 10);
 };
+
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
   value,
@@ -38,7 +36,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       const fetchedValue = await mockApiFetchAmountRaised();
-      const fetchedGoal = await mockApiFetchGoal();
+      const fetchedGoal = await fetchGoalFromFile(); // Fetch goal from goal.txt
       setCurrentValue(fetchedValue);
       setCurrentGoal(fetchedGoal);
     };
@@ -69,7 +67,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: '#d9d9d9',
       border: '2px solid #ccc',
       borderRadius: '12px',
       padding: '20px',
@@ -87,13 +85,13 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
       <div style={{
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         border: '2px solid #ccc',
         borderRadius: '10px',
         padding: '20px',
-        backgroundColor: '#FFB6C1',
+        backgroundColor: '#fff',
       }}>
         <svg
           width={size}
@@ -105,7 +103,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke="#f75658"
+            stroke="#41B6E6"
             strokeWidth={strokeWidth}
             fill="none"
           />
@@ -113,7 +111,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke="#FE0004"
+            stroke="#0072CE"
             strokeWidth={strokeWidth}
             strokeDasharray={strokeDasharray}
             strokeDashoffset={strokeDashoffset}
@@ -140,7 +138,6 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         color: '#8B0000',
         fontWeight: 'bold',
         textAlign: "center",
-        fontSize: '20px'
       }}>
         {goalReached ? 'Goal Reached!' : `Remaining: $${remainingAmount} to raise`}
       </div>

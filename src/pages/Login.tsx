@@ -9,6 +9,7 @@ interface LoginFormState {
     password: string;
 }
 
+
 const Login: React.FC = () => {
   const [form, setForm] = useState<LoginFormState>({
     username: '',
@@ -67,8 +68,8 @@ const Login: React.FC = () => {
               />
             </div>
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <div className = "log">
-              <button type="submit" className="button">Login</button>
+            <div>
+              <Button type="submit" className="button">Login</Button>
             </div>
           </form>
         </div>
