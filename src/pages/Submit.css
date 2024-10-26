@@ -6,9 +6,50 @@
     font-family: Arial, sans-serif;
 }
 
-.donations-text {
+.text-colour {
     color: white;
 }
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    border: 2px;
+    height: 200px;
+    width: 20vw;
+    background: #808080;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    padding: 12px; 
+    text-align: center; 
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #fff;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    height: 60vh;
+    width: 35vw;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+/* adjusts spacing between elements in the button container */
+.button-container > * {
+    margin-bottom: 20px;
+}
+/* removes margin from the last element to avoid extra space at the bottom */
+.button-container > *:last-child {
+    margin-bottom: 0;
+}
+
 
 .submit-page {
     flex-grow: 1;
@@ -20,20 +61,7 @@
     height: 50vh;
 }
 
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #fff;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    height:60vh;
-    width:35vw;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 40px;
-}
+
 
 .backbutton {
     display: flex;
@@ -54,7 +82,7 @@
     margin: 10px auto;
     font-size: 18px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
     width: 200px;
 }
 
