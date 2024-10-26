@@ -156,7 +156,7 @@ def login():
         
         #hash pw function here
         
-        if users[uname] == pw:
+        if uname in users and check_password_hash(users[uname], pw):
             #login function should be here
             return jsonify({'message': 'Successful login!'}), 200
         else:
@@ -175,9 +175,10 @@ def changepw():
         pw = userpass[1]
         
         #hash password here
+        hashed_pw = generate_password_hash(pw)
         
         try:
-            save_users(uname, pw)    
+            save_users(uname, hashed_pw)    
         except:    
             return jsonify({"message": "Failed to load users"}), 400
         return jsonify({"message": "Password updated!"}), 200
