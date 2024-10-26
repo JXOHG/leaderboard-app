@@ -183,8 +183,8 @@ const SettingsPage: React.FC = () => {
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage">
-        <h2 className="mulish-bold">Change Goal</h2>
-        <p className="mulish-regular">Enter new goal:</p>
+        <h2 className="mulish-bold">Change Donation Goal</h2>
+        <p className="mulish-regular">Enter New Goal:</p>
         <input
           type="number" // Allow only numeric input for the goal
           value={newGoal}

@@ -38,7 +38,7 @@ const LegalDisclaimer: React.FC = () => {
 
       <h3 className="mulish-bold">5. Contact Information</h3>
       <p className="mulish-regular">
-        For any questions or concerns regarding this disclaimer, please contact us at
+        For any questions or concerns regarding this disclaimer, please contact us at 
         <a href="mailto:uwotsi@outlook.com">uwotsi@outlook.com</a>.
       </p>
     </div>
