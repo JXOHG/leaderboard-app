@@ -5,7 +5,7 @@ interface StepGoalDisplayProps {
   goalSteps: number;
 }
 
-// Mock API function to fetch the current steps
+// mock API function to fetch the current steps
 const mockApiFetchSteps = async () => {
   try {
     const response = await fetch('http://localhost:5000/current_steps');
