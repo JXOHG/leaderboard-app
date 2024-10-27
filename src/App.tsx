@@ -16,13 +16,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/submit" element={<Submit />} />
-<<<<<<< HEAD
-        <Route path="/settings" element={<Settings/>} />
-        <Route path="/login" element={<Login />} /> {/* Define settings route */}
-=======
         <Route path="/settings" element={<Settings/>} /> 
         <Route path="/login" element={<Login/>} /> {/* Define settings route */}
->>>>>>> 7b2b8998361ad9038ec28bfac4656136a4cf2443
       </Routes>
       <Footer />
     </Router>
