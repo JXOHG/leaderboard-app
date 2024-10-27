@@ -17,11 +17,6 @@
   margin-top: 2vh; /* Adjust this value as needed */
 }
 
-.submit-button-wrapper {
-  flex: 0 0 auto; /* Don't grow or shrink, use auto basis */
-  margin-right: 80px; /* This creates the gap between the button and the step goal display */
-}
-
 .step-goal-wrapper {
   flex: 1; /* This allows the step goal display to take up remaining space */
 }
