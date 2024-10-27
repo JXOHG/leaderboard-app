@@ -1,7 +1,6 @@
 .main {
   display: flex;
   flex-wrap: wrap; /* Allows items to wrap to the next row */
-  justify-content: space-between; /* Distribute items evenly */
   padding: 20px;
   max-width: 100vw;
   margin: 0 auto;
@@ -12,9 +11,6 @@
 
 .side-by-side {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  
 }
 
 .step-display-gap {
@@ -23,7 +19,8 @@
 
 .submit-button-wrapper {
   flex: 0 0 auto; /* Don't grow or shrink, use auto basis */
-  margin-right: 80px; /* This creates the gap between the button and the step goal display */
+  background-color: white;
+  margin: auto;
 }
 
 .step-goal-wrapper {
