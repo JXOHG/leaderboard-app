@@ -15,12 +15,6 @@
     margin-left: 10px;
     color:white;
   }
-
-  
-.submit-button-wrapper {
-  flex: 0 0 auto; /* Don't grow or shrink, use auto basis */
-  margin-right: 80px; /* This creates the gap between the button and the step goal display */
-}
   
   .settings-options {
     margin-top: 20px;
