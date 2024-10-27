@@ -5,13 +5,14 @@ import './Settings.css';
 import LegalDisclaimer from '../components/LegalDisclaimer'; 
 import Percentage from '../components/Percentage';
 import triangle from "../assets/image/triangle2.png";
+import Button from "../components/Button";
 
 const SettingsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'legal'>('main');
+  const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeDonationGoal' | 'changeStepGoal' | 'legal'>('main');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [goal, setGoal] = useState<number>(0); // Initialize state to hold the current goal
-  const [newGoal, setNewGoal] = useState<number | string>(''); // State for new goal input
+  const [newDonationGoal, setNewDonationGoal] = useState<number | string>(''); // State for new donation goal input
   const [currentValue, setCurrentValue] = useState<number | string>(''); // State for new goal input
   const [newCurrentValue, setNewCurrentValue] = useState<number | string>(''); // State for new goal input
   const [message, setMessage] = useState('');
@@ -54,15 +55,16 @@ const SettingsPage: React.FC = () => {
   }, []);
 
 
+
   const handleUpdateGoal = async () => {
-    if (typeof newGoal === 'number') {
+    if (typeof newDonationGoal === 'number') {
         try {
             const response = await fetch('http://localhost:5000/goal', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ goal: newGoal }),
+                body: JSON.stringify({ goal: newDonationGoal }),
             });
 
             const data = await response.json();
@@ -148,6 +150,9 @@ const handleUpdateCurrentValue = async () => {
           Legal
           <img src={triangle} className="triangle" />
         </button>
+        <div className="submit-button-wrapper mulish-bold">
+        <Button />
+      </div>
       </div>
     </div>
   );
@@ -210,8 +215,14 @@ const handleUpdateCurrentValue = async () => {
           <h2 className="mulish-bold">Funds raised currently</h2>
           <p className="mulish-regular">Current amount raised: ${currentValue}</p> {/* Display the current goal */}
           <div className="change-button-rectangle">
-            <button className='change-option mulish-regular' onClick={() => setActiveTab("changeGoal")}>
+            <button className='change-option mulish-regular' onClick={() => setActiveTab("changeDonationGoal")}>
               Change Values
+            </button>
+          </div>
+          <br></br>
+          <div className="change-button-rectangle">
+            <button className='change-option mulish-regular' onClick={() => setActiveTab("changeStepGoal")}>
+              Change Step Goal
             </button>
           </div>
         </div>
@@ -222,7 +233,30 @@ const handleUpdateCurrentValue = async () => {
     </div>
   );
 
-  const renderChangeGoal = () => (
+  const renderChangeStepGoal = () => (
+    <div className="settings-content">
+      <button className="back-button" onClick={() => setActiveTab('goal')}>
+        <ArrowLeft size={24} />
+      </button>
+      <div className="settings-onpage">
+        <h2 className="mulish-bold">Change Step Goal</h2>
+        <p className="mulish-regular">Enter New Goal:</p>
+        <input
+          type="number" // Allow only numeric input for the goal
+          value={newDonationGoal}
+          onChange={(e) => setNewDonationGoal(Number(e.target.value) || '')} // Convert to number or clear input
+          className="w-full p-1 border rounded"
+        />
+        <br></br>
+        <button className="change-option mulish-regular" onClick={handleUpdateGoal}>
+          Update Goal
+        </button>
+        {message && <p className="message">{message}</p>} {/* Display message for goal update */}
+      </div>
+    </div>
+  );
+
+  const renderChangeDonationGoal = () => (
     <div className="settings-content">
       <button className="back-button" onClick={() => setActiveTab('goal')}>
         <ArrowLeft size={24} />
@@ -232,8 +266,8 @@ const handleUpdateCurrentValue = async () => {
         <p className="mulish-regular">Enter New Goal:</p>
         <input
           type="number" // Allow only numeric input for the goal
-          value={newGoal}
-          onChange={(e) => setNewGoal(Number(e.target.value) || '')} // Convert to number or clear input
+          value={newDonationGoal}
+          onChange={(e) => setNewDonationGoal(Number(e.target.value) || '')} // Convert to number or clear input
           className="w-full p-1 border rounded"
         />
         <br></br>
@@ -275,7 +309,8 @@ const handleUpdateCurrentValue = async () => {
       {activeTab === 'siteInfo' && renderSiteInfo()}
       {activeTab === 'goal' && renderGoal()}
       {activeTab === 'legal' && renderLegal()}
-      {activeTab === 'changeGoal' && renderChangeGoal()}
+      {activeTab === 'changeDonationGoal' && renderChangeDonationGoal()}
+      {activeTab === 'changeStepGoal' && renderChangeStepGoal()}
       {activeTab === 'changeSitePass' && renderChangeSitePass()}
     </div>
   );
