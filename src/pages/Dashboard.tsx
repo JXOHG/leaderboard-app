@@ -42,19 +42,21 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <div className="main">
-        <div className="leaderboard">
-          <Leaderboard csvFilePath={csvFilePath} />
-        </div>
-        <div className="side-by-side">
-          <div className="submit-button-wrapper mulish-bold">
-            <Button />
-          </div>
-          <div className="step-goal-wrapper">
-            <StepGoalDisplay currentSteps={totalSteps} goalSteps={goalSteps} />
-          </div>
-        </div>
+    <div>
+    </div>
+    <div className="main">
+    <div className="leaderboard">
+      <Leaderboard csvFilePath={csvFilePath} />
+    </div>
+    <div className="side-by-side">
+      <div className="submit-button-wrapper mulish-bold">
+        <Button />
       </div>
+      <div className="step-goal-wrapper">
+        <StepGoalDisplay currentSteps={totalSteps} goalSteps={goalSteps} />
+      </div>
+    </div>
+    </div>
     </>
   );
 };

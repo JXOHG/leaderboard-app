@@ -58,6 +58,17 @@ const Login: React.FC = () => {
           <form onSubmit={handleSubmit}>
             <div>
               <input
+                type="username"
+                name="username"
+                placeholder=' Username'
+                value={form.username}
+                onChange={handleChange}
+                required
+                className="textbox"
+              />
+            </div>
+            <div>
+              <input
                 type="password"
                 name="password"
                 placeholder=' Password'

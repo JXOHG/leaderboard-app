@@ -14,10 +14,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  
-}
-
-.step-display-gap {
   margin-top: 2vh; /* Adjust this value as needed */
 }
 
