@@ -147,14 +147,8 @@ def login():
             users = load_users()
         except:
             return jsonify({"message": "Failed to load user data"}), 400
-        userpass = request.data.decode('utf-8')
-        #username pw will be submitted as "username password"
-        #so split when there is space to separate username and pw
-        userpass = userpass.split()
-        
-        uname = userpass[0]
-        pw = userpass[1]
-        
+        uname = request.json["username"]
+        pw = request.json["password"]
         #hash pw function here
         
         if uname in users and check_password_hash(users[uname], pw):

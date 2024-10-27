@@ -5,7 +5,6 @@ import Leaderboard from '../components/LeaderBoard';
 import './Dashboard.css';
 import Button from "../components/Button";
 import StepGoalDisplay from '../components/StepGoalDisplay';
-import StepGoalDisplay from '../components/StepGoalDisplay';
 
 interface UserSteps {
   id: number;
