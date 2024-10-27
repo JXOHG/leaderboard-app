@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './Submit.css';
-import Csvuploader from "../components/csvupload";
-import ManualCsvEntry from "../components/ManualCsvEntry";
+import ManualCsvEntry from "../components/CsvManualEntry";
 import CsvUploadEntry from '../components/CsvUploadEntry';
 
 const Submit: React.FC = () => {
@@ -30,11 +29,12 @@ const Submit: React.FC = () => {
 
   const MainPage = () => (
     <div className="submit-page">
-      <h1>Hello Admin,<br />Ready to Submit Steps?</h1>
+      
       <div className="button-container">
-        <button className="button" onClick={() => setCurrentPage('csv')}>Upload CSV</button> {/* CSV Page */}
-        <span className="or">OR</span>
-        <button className="button" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
+        <h1 className="mulish-bold admin">Hello Admin,</h1>
+        <h2 className="mulish-regular admin">Ready to Submit Steps?</h2>
+        <button className="button mulish-regular" onClick={() => setCurrentPage('csv')}>Upload CSV</button> {/* CSV Page */}
+        <button className="button mulish-regular" onClick={() => setCurrentPage('manual')}>Enter Manually</button>
       </div>
     </div>
   );
@@ -42,21 +42,21 @@ const Submit: React.FC = () => {
   // Page for manually inputting participant data
   const ManualPage = () => (
     <div className="submit-page">
-      <h2>Enter steps:</h2>
+      <h2 className="mulish-bold text-colour">Enter steps:</h2>
       <div>
         <ManualCsvEntry/>
       </div>
-      <button className="button">Next</button>
+      <div className="text-container">
+        <h5 className="mulish-regular text-colour">Disclaimer:</h5>
+        <p className="mulish-regular text-colour">Please click "Add Participant" before clicking "Save to CSV!"</p>
+      </div>
     </div>
   );
-
-
-
 
   // Page for uploading CSV files containing user steps
   const CSVPage = () => (
     <div className="submit-page">
-      <h2>Upload CSV File</h2>
+      <h2 className="mulish-bold text-colour">Upload CSV File</h2>
       <div>
         <CsvUploadEntry/>
       </div>
@@ -70,7 +70,7 @@ const Submit: React.FC = () => {
           className="backbutton back-button" 
           onClick={() => currentPage === 'main' ? navigate('/') : setCurrentPage('main')}
         >
-          <ArrowLeft color="#666" absoluteStrokeWidth />
+          <ArrowLeft color="#666" absoluteStrokeWidth/>
         </button>
 
         <div className="submit-page">

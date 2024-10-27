@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button'
 import './Login.css'; // Assuming your CSS file for the page styling
+=======
+import './Login.css'; // Assuming your CSS file for the page styling
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Button from '../components/Button'
+import { useNavigate } from 'react-router-dom';
+>>>>>>> 7b2b8998361ad9038ec28bfac4656136a4cf2443
 
 interface LoginFormState {
     username: string;

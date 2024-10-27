@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import Papa from 'papaparse';
 import './Leaderboard.css';
 
@@ -6,7 +6,7 @@ interface User {
   id: number;
   name: string;
   steps: number;
-  distance: number;
+  distance: number; // This will represent Avg Daily Steps now
 }
 
 interface LeaderboardProps {
@@ -14,9 +14,9 @@ interface LeaderboardProps {
 }
 
 interface CSVRow {
-  'Group Name': string;
+  Name: string; // Updated to match your CSV header
   'Total Steps': string;
-  'Distance covered': string;
+  'Avg Daily Steps': string; // Updated to use this header
   [key: string]: string; // Allow for additional fields
 }
 
@@ -38,12 +38,12 @@ export default function Leaderboard({ csvFilePath }: LeaderboardProps) {
           header: true,
           complete: (results) => {
             const parsedUsers = (results.data as CSVRow[])
-              .filter((row) => row['Group Name'] && row['Total Steps']) // Filter out any incomplete rows
+              .filter((row) => row.Name && row['Total Steps']) // Filter out any incomplete rows
               .map((row, index) => ({
                 id: index,
-                name: row['Group Name'],
+                name: row.Name, // Use 'Name' here
                 steps: parseInt(row['Total Steps'].replace(/,/g, ''), 10) || 0,
-                distance: parseFloat(row['Distance covered']) || 0
+                distance: parseFloat(row['Avg Daily Steps']) || 0 // Use 'Avg Daily Steps' here
               }));
             setUsers(parsedUsers);
             setIsLoading(false);
@@ -77,14 +77,14 @@ export default function Leaderboard({ csvFilePath }: LeaderboardProps) {
 
   return (
     <div className="leaderboard">
-      <h3>Leaderboard</h3>
+      <h3 className="mulish-bold">Leaderboard</h3>
       
       {/* Header Row */}
       <div className="leaderboard-header">
-        <span className="leaderboard-header-item name">Name</span>
-        <span className="leaderboard-header-item steps">Steps</span>
-        <span className="leaderboard-header-item distance">Distance (km)</span>
-        <span className="leaderboard-header-item rank">Rank</span>
+        <span className="leaderboard-header-item name mulish-bold">Name</span>
+        <span className="leaderboard-header-item steps mulish-bold">Steps</span>
+        <span className="leaderboard-header-item distance mulish-bold">Avg Daily Steps</span>
+        <span className="leaderboard-header-item rank mulish-bold">Rank</span>
       </div>
 
       <div className="leaderboard-container" style={{ maxHeight: 'calc(80vh - 150px)', overflowY: 'auto' }}>
@@ -94,10 +94,10 @@ export default function Leaderboard({ csvFilePath }: LeaderboardProps) {
               key={user.id} 
               className={`leaderboard-item ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}`}
             >
-              <span className="leaderboard-name">{user.name}</span>
-              <span className="leaderboard-steps">{user.steps.toLocaleString()} steps</span>
-              <span className="leaderboard-distance">{user.distance.toFixed(2)} km</span>
-              <span className="leaderboard-rank">{index + 1}</span>
+              <span className="leaderboard-name mulish-bold">{user.name}</span>
+              <span className="leaderboard-steps mulish-bold">{user.steps.toLocaleString()} steps</span>
+              <span className="leaderboard-distance mulish-bold">{user.distance.toFixed(2)} steps</span> {/* Changed to steps */}
+              <span className="leaderboard-rank mulish-bold">{index + 1}</span>
             </div>
           ))
         ) : (
