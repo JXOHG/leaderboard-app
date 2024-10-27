@@ -32,7 +32,7 @@
     align-items: center;
     border: 2px solid #fff;
     background-color: #fff;
-    padding: 30px;
+    padding: 5px;
     border-radius: 10px;
     height: 60vh;
     width: 35vw;
@@ -84,6 +84,19 @@
     cursor: pointer;
     border-radius: 20px;
     width: 200px;
+}
+
+.text-separation {
+    padding-top: 5px;
+    margin-bottom: 0px;
+}
+
+.donation-separation {
+    margin-top: 10px;
+}
+
+.donation-button-separation {
+    padding: 20px;
 }
 
 .or {
