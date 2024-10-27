@@ -48,7 +48,7 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="side-by-side">
           <div className="submit-button-wrapper mulish-bold">
-            {/*<Button />*/}
+            <Button />
           </div>
           <div className="step-goal-wrapper">
             <StepGoalDisplay currentSteps={totalSteps} goalSteps={goalSteps} />
