@@ -121,6 +121,26 @@ def manual():
 """       df = pd.read_csv(csvStr, sep=',', header = None)
       print(df) """
       
+CURRENT_STEP_FILE = 'public/current_steps.txt'
+@app.route("/currentsteps", methods=['GET', 'POST'])
+def curSteps():
+    if request.method == 'GET':
+        # Read the current steps from the file if it exists
+        if os.path.isfile(CURRENT_STEP_FILE):
+            with open(CURRENT_STEP_FILE, 'r') as f:
+                current_steps = f.read().strip()
+                return jsonify({"steps": int(current_steps)}), 200
+        else:
+            return jsonify({"steps": 0}), 200  # Default goal if file doesn't exist
+    
+    if request.method == 'POST':
+        new_steps = request.json.get('steps')
+        if new_steps is not None:
+            # Save the new goal to the file
+            with open(CURRENT_STEP_FILE, 'w') as f:
+                f.write(str(new_steps))
+            return jsonify({"message": "Steps updated successfully."}), 200
+        return jsonify({"message": "Invalid steps value."}), 400
 
 GOAL_FILE = 'public/goal.txt'
 
