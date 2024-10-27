@@ -32,6 +32,10 @@ def combine_and_replace_csv():
     
     combined_df = combined_df.sort_values(by="Total Steps", axis=0, ascending=False)
     # Replace the existing 'main.csv' with the combined data
+    total_steps = combined_df['Total Steps'].sum()
+    with open('public/total_steps.txt', 'w') as f:
+        f.write(str(total_steps))
+    
     combined_df.to_csv("public/main.csv", index=False)
 
     print("Files combined successfully, and 'main.csv' has been replaced.")
