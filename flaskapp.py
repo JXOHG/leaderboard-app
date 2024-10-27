@@ -122,6 +122,8 @@ def manual():
       print(df) """
       
 CURRENT_STEP_FILE = 'public/current_steps.txt'
+
+# New route to get and set the current steps
 @app.route("/currentsteps", methods=['GET', 'POST'])
 def curSteps():
     if request.method == 'GET':
@@ -136,7 +138,7 @@ def curSteps():
     if request.method == 'POST':
         new_steps = request.json.get('steps')
         if new_steps is not None:
-            # Save the new goal to the file
+            # Save the new steps to the file
             with open(CURRENT_STEP_FILE, 'w') as f:
                 f.write(str(new_steps))
             return jsonify({"message": "Steps updated successfully."}), 200
