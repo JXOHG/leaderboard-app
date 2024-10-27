@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 import pandas as pd
 import os
 from flask_cors import CORS
 from io import StringIO
-from flask import Flask, request, jsonify
-import os
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -39,6 +39,27 @@ def combine_and_replace_csv():
     combined_df.to_csv("public/main.csv", index=False)
 
     print("Files combined successfully, and 'main.csv' has been replaced.")
+
+def load_users():
+    try:
+        with open('users.json') as f:
+            data = json.load(f)
+            return data
+    except:
+        print('Failed to open data')
+        
+def save_users(username, password):
+    try:
+        with open('users.json') as f:
+            data = json.load(f)
+            data[username] = password
+        with open('users.json', 'w') as f:
+            json.dump(data,f)
+            
+    except Exception as e:
+        print(e)
+        print('Failed to save data')
+            
 
 # handles csv file upload
 @app.route("/csv", methods=['POST'])
@@ -81,8 +102,8 @@ def csv():
         #the server will stop working
         if os.path.isfile('public/temp.csv'):
           os.remove("public/temp.csv")
-      return jsonify({"message": 'File uploaded successfully'}), 200
-  return jsonify({"message": 'File did not upload successfully'}), 400
+      return jsonify({"message": "File uploaded successfully"}), 200
+  return jsonify({"message": "File did not upload successfully"}), 400
 
 @app.route("/manual", methods=['POST'])
 def manual():
@@ -122,6 +143,45 @@ def manual():
     return jsonify({"message": "fail"}), 400
 
       
+@app.route("/login", methods=['POST'])
+def login():
+    if request.method == 'POST':
+        #get dictionary of {username:password}
+        try:
+            users = load_users()
+        except:
+            return jsonify({"message": "Failed to load user data"}), 400
+        uname = request.json["username"]
+        pw = request.json["password"]
+        #hash pw function here
+        
+        if uname in users and check_password_hash(users[uname], pw):
+            #login function should be here
+            return jsonify({'message': 'Successful login!'}), 200
+        else:
+            return jsonify({"message": 'Login failed!'}), 400
+
+@app.route("/changepw", methods=['POST'])
+def changepw():
+    if request.method == 'POST':
+        #get dictionary of {username:password}
+        users = load_users()
+        
+        userpass = request.data.decode('utf-8')
+        userpass = userpass.split()
+        
+        uname = userpass[0]
+        pw = userpass[1]
+        
+        #hash password here
+        hashed_pw = generate_password_hash(pw)
+        
+        try:
+            save_users(uname, hashed_pw)    
+        except:    
+            return jsonify({"message": "Failed to load users"}), 400
+        return jsonify({"message": "Password updated!"}), 200
+        
 """       df = pd.read_csv(csvStr, sep=',', header = None)
       print(df) """
       
