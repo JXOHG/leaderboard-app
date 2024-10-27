@@ -1,107 +1,122 @@
-/* Leaderboard.css */
-.leaderboard {
-    width: 100%;
-    max-width:100vw;
-    max-height:80vh;
-    height:100%;
-    /* Adjust width as needed */
-    text-align: left;
-    align-self:auto;
-    background-color: #f9f9f9; /* Background for the leaderboard container */
-    padding: 1rem;
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-   
-}
 
-.leaderboard h3 {
-    margin-bottom: 1rem; /* Space below the heading */
-    color: #333; /* Heading color */
-}
-
-.leaderboard-header {
+.leaderboard-header,
+.leaderboard-item {
     display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 2px solid #ddd; /* Optional: Add a border to separate header */
-    background-color: #e0e0e0; /* Background for header */
-    font-weight: bold; /* Optional: Make header text bold */
-    color:#c72614;
-    
+    align-items: center;
 }
 
-.leaderboard-header-item {
+.leaderboard-header-item,
+.leaderboard-name,
+.leaderboard-steps,
+.leaderboard-distance,
+.leaderboard-rank {
+    flex: 1; /* Set a base width for each column */
+    text-align: left;
+    font-weight: 800;
+}
+
+.leaderboard-header-item.name,
+.leaderboard-name {
+    flex: 2; /* Make the name column slightly wider */
+    text-align: left;
+    padding-left: 1vw;
+}
+
+.leaderboard-header-item.steps,
+.leaderboard-steps {
     flex: 1;
-    text-align: center;
+    padding-left: 1vw;
+    text-align: left;
+}
+
+.leaderboard-header-item.distance,
+.leaderboard-distance {
+    flex: 1;
+    text-align: left;
+}
+
+.leaderboard-header-item.rank,
+.leaderboard-rank {
+    flex: 1;
+    text-align: right;
+    padding-right: 1vw;
 }
 
 .leaderboard-header-item.name {
-    text-align: left; /* Align name to the left */
-    margin-left:1rem;
+    padding-left: 3vh;
 }
 
-.leaderboard-header-item.steps {
-    text-align: center; /* Center the steps */
-    margin-right:1rem;
+/* Adjusted gap and removed extra spacing */
+.leaderboard-header {
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #ddd;
+    background-color: #e0e0e0;
+    font-weight: bold;
+    color: #000;
+    border-radius: 8px;
+    margin-bottom: 1vh;
+    margin-right: 1vw;
 }
 
-.leaderboard-header-item.rank {
-    text-align: right; /* Align rank to the right */
+.leaderboard-item {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Leaderboard.css */
+.leaderboard {
+    width: 100%;
+    max-width: 100vw;
+    max-height: 80vh;
+    height: 100%;
+    /* Adjust width as needed */
+    text-align: left;
+    align-self: auto;
+    background-color: #f9f9f9; /* Background for the leaderboard container */
+    padding: 1rem;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */  
+}
+
+.leaderboard-header-item {
+    font-weight: bold;
 }
 
 .leaderboard-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem; /* Space between leaderboard items */
-}
-
-.leaderboard-item {
-    background-color: #e0e0e0; /* Default background color */
-    color: #333; /* Text color */
-    padding: 1rem;
-    border-radius: 8px; /* Rounded corners */
-    display: flex;
-    justify-content: space-between; /* Space out items in the box */
-    align-items: center;
-    font-weight: bold;
+    padding-right: 0.25vw;
+    scrollbar-width: thin;
+    scrollbar-color: #c72614 #f9f9f9;
 }
 
 .leaderboard-item.gold {
-    background-color: #EAAA00; /* Gold color for 1st place */
+    background-color: rgba(197, 127, 45, 1); /* Gold color for 1st place */
+    color: #fff;
 }
 
 .leaderboard-item.silver {
-    background-color: #DE7C00; /* Silver color for 2nd place */
+    background-color: rgba(197, 127, 45, 0.8); /* Silver color for 2nd place */
+    color: #fff;
 }
 
 .leaderboard-item.bronze {
-    background-color: #cd7f32; /* Bronze color for 3rd place */
-}
-
-.leaderboard-name,
-.leaderboard-steps,
-.leaderboard-rank {
-    flex: 1;
-}
-
-.leaderboard-name {
-    text-align: left;
-}
-
-.leaderboard-steps {
-    text-align: center;
+    background-color: rgba(197, 127, 45, 0.6); /* Bronze color for 3rd place */
+    color: #fff;
 }
 
 .leaderboard-rank {
     text-align: right;
+    padding-right: 1vw;
 }
 
-
 /* added elements for scrollable leaderboard */
-.leaderboard-container {
-    scrollbar-width: thin;
-    scrollbar-color: #c72614 #f9f9f9;
-  }
+
   
   .leaderboard-container::-webkit-scrollbar {
     width: 8px;
