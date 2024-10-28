@@ -1,0 +1,47 @@
+.step-goal-display {
+    background-color: #d9d9d9;
+    border-radius: 18px;
+    color: #54585A;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    max-width: 400px;
+    margin-top: 2vh;
+  }
+  
+  .step-count {
+    font-size: 25px;
+    margin-bottom: 5px;
+  }
+  
+  .step-goal {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .progress-bar {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    z-index: 1;
+  }
+  
+  .custom-progress {
+    background-color: #0072CE;
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+    position: relative;
+    z-index: 2;
+  }

@@ -6,7 +6,7 @@ import Login from './pages/Login';
 import Settings from './pages/Settings'; // Import the settings page
 import Footer from './components/Footer';
 import './App.css';
-import Header from './components/Header'
+import Header from './components/Header';
 
 const App: React.FC = () => {
   return (

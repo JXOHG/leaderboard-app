@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 import pandas as pd
 import os
 from flask_cors import CORS
@@ -38,6 +39,10 @@ def combine_and_replace_csv():
     
     
     # Replace the existing 'main.csv' with the combined data
+    total_steps = combined_df['Total Steps'].sum()
+    with open('public/total_steps.txt', 'w') as f:
+        f.write(str(total_steps))
+    
     combined_df.to_csv("public/main.csv", index=False)
 
     print("Files combined successfully, and 'main.csv' has been replaced.")
@@ -153,17 +158,11 @@ def login():
             users = load_users()
         except:
             return jsonify({"message": "Failed to load user data"}), 400
-        userpass = request.data.decode('utf-8')
-        #username pw will be submitted as "username password"
-        #so split when there is space to separate username and pw
-        userpass = userpass.split()
-        
-        uname = userpass[0]
-        pw = userpass[1]
-        
+        uname = request.json["username"]
+        pw = request.json["password"]
         #hash pw function here
         
-        if users[uname] == pw:
+        if uname in users and check_password_hash(users[uname], pw):
             #login function should be here
             return jsonify({'message': 'Successful login!'}), 200
         else:
@@ -182,9 +181,10 @@ def changepw():
         pw = userpass[1]
         
         #hash password here
+        hashed_pw = generate_password_hash(pw)
         
         try:
-            save_users(uname, pw)    
+            save_users(uname, hashed_pw)    
         except:    
             return jsonify({"message": "Failed to load users"}), 400
         return jsonify({"message": "Password updated!"}), 200
@@ -215,6 +215,51 @@ def curSteps():
             return jsonify({"message": "Steps updated successfully."}), 200
         return jsonify({"message": "Invalid steps value."}), 400
 
+GOAL_FILE = 'public/goal.txt'
 
+# New route to get and set the goal
+@app.route("/goal", methods=['GET', 'POST'])
+def goal():
+    if request.method == 'GET':
+        # Read the current goal from the file if it exists
+        if os.path.isfile(GOAL_FILE):
+            with open(GOAL_FILE, 'r') as f:
+                current_goal = f.read().strip()
+                return jsonify({"goal": int(current_goal)}), 200
+        else:
+            return jsonify({"goal": 1000}), 200  # Default goal if file doesn't exist
+
+    if request.method == 'POST':
+        new_goal = request.json.get('goal')
+        if new_goal is not None:
+            # Save the new goal to the file
+            with open(GOAL_FILE, 'w') as f:
+                f.write(str(new_goal))
+            return jsonify({"message": "Goal updated successfully."}), 200
+        return jsonify({"message": "Invalid goal value."}), 400
+
+# ... existing routes ...
+CURRENT_VALUE_FILE = 'public/current_value.txt'
+
+# New route to get and set the current value raised
+@app.route("/current_value", methods=['GET', 'POST'])
+def current_value():
+    if request.method == 'GET':
+        # Read the current value from the file if it exists
+        if os.path.isfile(CURRENT_VALUE_FILE):
+            with open(CURRENT_VALUE_FILE, 'r') as f:
+                current_value = f.read().strip()
+                return jsonify({"current_value": int(current_value)}), 200
+        else:
+            return jsonify({"current_value": 0}), 200  # Default value if file doesn't exist
+
+    if request.method == 'POST':
+        new_value = request.json.get('current_value')
+        if new_value is not None:
+            # Save the new value to the file
+            with open(CURRENT_VALUE_FILE, 'w') as f:
+                f.write(str(new_value))
+            return jsonify({"message": "Current value updated successfully."}), 200
+        return jsonify({"message": "Invalid value."}), 400
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)
