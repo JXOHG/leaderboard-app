@@ -38,11 +38,12 @@ def combine_and_replace_csv():
         f.write(str(total_steps))
     
     
-    # Replace the existing 'main.csv' with the combined data
+    # Record the total amount of steps into a total_steps.txt file
     total_steps = combined_df['Total Steps'].sum()
     with open('public/total_steps.txt', 'w') as f:
         f.write(str(total_steps))
-    
+        
+    # Replace the existing 'main.csv' with the combined data
     combined_df.to_csv("public/main.csv", index=False)
 
     print("Files combined successfully, and 'main.csv' has been replaced.")
@@ -195,14 +196,14 @@ def changepw():
 CURRENT_STEP_FILE = 'public/current_steps.txt'
 
 # New route to get and set the current steps
-@app.route("/currentsteps", methods=['GET', 'POST'])
+@app.route("/current_steps", methods=['GET', 'POST'])
 def curSteps():
     if request.method == 'GET':
         # Read the current steps from the file if it exists
         if os.path.isfile(CURRENT_STEP_FILE):
             with open(CURRENT_STEP_FILE, 'r') as f:
                 current_steps = f.read().strip()
-                return jsonify({"steps": int(current_steps)}), 200
+                return jsonify({"current_steps": int(current_steps)}), 200
         else:
             return jsonify({"steps": 0}), 200  # Default goal if file doesn't exist
     
