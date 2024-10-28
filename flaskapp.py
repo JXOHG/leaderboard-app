@@ -195,14 +195,15 @@ def changepw():
 CURRENT_STEP_FILE = 'public/current_steps.txt'
 
 # New route to get and set the current steps
-@app.route("/currentsteps", methods=['GET', 'POST'])
+@app.route("/current_steps", methods=['GET', 'POST'])
 def curSteps():
     if request.method == 'GET':
         # Read the current steps from the file if it exists
         if os.path.isfile(CURRENT_STEP_FILE):
             with open(CURRENT_STEP_FILE, 'r') as f:
                 current_steps = f.read().strip()
-                return jsonify({"steps": int(current_steps)}), 200
+                print(current_steps)
+                return jsonify({"current_steps": int(current_steps)}), 200
         else:
             return jsonify({"steps": 0}), 200  # Default goal if file doesn't exist
     
