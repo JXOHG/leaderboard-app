@@ -4,6 +4,7 @@ import RankDisplay from '../components/RankDisplay';
 import Leaderboard from '../components/LeaderBoard';
 import './Dashboard.css';
 import Button from "../components/Button";
+import AdminButton from "../components/AdminButton";
 import StepGoalDisplay from '../components/StepGoalDisplay';
 
 interface UserSteps {
@@ -52,6 +53,7 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="submit-button-wrapper mulish-bold">
             <Button />
+            <AdminButton/>
           </div>
         </div>
       </div>

@@ -19,7 +19,6 @@
 
 .submit-button-wrapper {
   flex: 0 0 auto; /* Don't grow or shrink, use auto basis */
-  background-color: white;
   margin: auto;
 }
 
