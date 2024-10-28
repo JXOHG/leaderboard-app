@@ -8,7 +8,7 @@ import triangle from "../assets/image/triangle2.png";
 import Button from "../components/Button";
 
 const SettingsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'legal'>('main');
+  const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'changeStepGoal' | 'legal'>('main');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [goal, setGoal] = useState<number>(0); // Initialize state to hold the current goal
@@ -216,6 +216,12 @@ const handleUpdateCurrentValue = async () => {
               Change Values
             </button>
           </div>
+          <br></br>
+          <div className="change-button-rectangle">
+            <button className='change-option mulish-regular' onClick={() => setActiveTab("changeStepGoal")}>
+              Change Step Goal
+            </button>
+          </div>
         </div>
         <div className="percentage-container">
           <Percentage />
@@ -259,6 +265,30 @@ const handleUpdateCurrentValue = async () => {
     </div>
   );
 
+  const renderChangeStepGoal = () => (
+    <div className="settings-content">
+      <button className="back-button" onClick={() => setActiveTab('goal')}>
+        <ArrowLeft size={24} />
+      </button>
+      <div className="settings-onpage">
+        <h2 className="mulish-bold">Change Step Goal</h2>
+        <p className="mulish-regular">Enter New Goal:</p>
+        <input
+          type="number" // Allow only numeric input for the goal
+          value={newGoal}
+          onChange={(e) => setNewGoal(Number(e.target.value) || '')} // Convert to number or clear input
+          className="w-full p-1 border rounded"
+        />
+        <br></br>
+        <button className="change-option mulish-regular" onClick={handleUpdateGoal}>
+          Update Goal
+        </button>
+      </div>
+    </div>
+  );
+
+  
+
   const renderLegal = () => (
     <div className="settings-content">
       <button className="back-button" onClick={() => setActiveTab('main')}>
@@ -278,6 +308,7 @@ const handleUpdateCurrentValue = async () => {
       {activeTab === 'goal' && renderGoal()}
       {activeTab === 'legal' && renderLegal()}
       {activeTab === 'changeGoal' && renderChangeGoal()}
+      {activeTab === 'changeStepGoal' && renderChangeStepGoal()}
       {activeTab === 'changeSitePass' && renderChangeSitePass()}
     </div>
   );

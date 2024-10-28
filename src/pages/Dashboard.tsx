@@ -17,9 +17,7 @@ const Dashboard: React.FC = () => {
   const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
   const csvFilePath = '/main.csv';
-  // BELOW ARE FOR STEP GOAL DISPLAY -- set static numbers just for testing
-  const totalSteps = 5000;
-  const goalSteps = 15000;
+
 
   useEffect(() => {
     const fetchUserSteps = async () => {
@@ -48,7 +46,7 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="side-by-side">
           <div className="step-goal-wrapper">
-            <StepGoalDisplay currentSteps={totalSteps} goalSteps={goalSteps} />
+            <StepGoalDisplay/>
           </div>
           <div className="submit-button-wrapper mulish-bold">
           </div>
