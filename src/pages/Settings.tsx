@@ -5,6 +5,7 @@ import './Settings.css';
 import LegalDisclaimer from '../components/LegalDisclaimer'; 
 import Percentage from '../components/Percentage';
 import triangle from "../assets/image/triangle2.png";
+import Button from "../components/Button";
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'legal'>('main');
@@ -128,7 +129,7 @@ const handleUpdateCurrentValue = async () => {
     <div className="settings-main-page">
       <div className="settings-header">
         <Settings size={24} />
-        <h2 className="mulish-bold">Settings</h2>
+        <h2 className="mulish-bold">Administrative Settings</h2>
         <button className="back-button" onClick={() => navigate('/')}>
           <ArrowLeft size={24} />
         </button>
@@ -148,6 +149,7 @@ const handleUpdateCurrentValue = async () => {
           Legal
           <img src={triangle} className="triangle" />
         </button>
+        <div className="submit-button"><Button/></div>
       </div>
     </div>
   );
