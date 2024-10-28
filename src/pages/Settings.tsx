@@ -10,50 +10,105 @@ const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'legal'>('main');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [goal, setGoal] = useState<number>(1000); // State to hold the current goal
+  const [goal, setGoal] = useState<number>(0); // Initialize state to hold the current goal
   const [newGoal, setNewGoal] = useState<number | string>(''); // State for new goal input
+  const [currentValue, setCurrentValue] = useState<number | string>(''); // State for new goal input
+  const [newCurrentValue, setNewCurrentValue] = useState<number | string>(''); // State for new goal input
   const [message, setMessage] = useState('');
   const navigate = useNavigate(); 
 
-  // Mock API function to change the password
-  const mockApiChangePassword = (oldPassword: string, newPassword: string) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (oldPassword === "11111") {
-          resolve("Password changed successfully.");
-        } else {
-          reject("Old password is incorrect.");
-        }
-      }, 1000);
-    });
-  };
-
-  // Mock API function to fetch the goal
-  const mockApiFetchGoal = () => {
-    return new Promise<number>((resolve) => {
-      setTimeout(() => {
-        resolve(1000); // Simulate fetching the goal from the server
-      }, 1000);
-    });
-  };
-
-  // Mock API function to update the goal
-  const mockApiUpdateGoal = (goal: number) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("Goal updated successfully.");
-      }, 1000);
-    });
-  };
-
-  // Fetch goal information on component mount
-  useEffect(() => {
+   // Fetch goal on component mount
+  
     const fetchGoal = async () => {
-      const fetchedGoal = await mockApiFetchGoal();
-      setGoal(fetchedGoal);
+      try {
+        const response = await fetch('http://localhost:5000/goal');
+        const data = await response.json();
+        if (response.ok) {
+          setGoal(data.goal);
+        } else {
+          setMessage(data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching goal:', error);
+        setMessage('Failed to fetch goal');
+      }
     };
+
+    const fetchCurrentValue = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/current_value');
+        const data = await response.json();
+        if (response.ok) {
+          setCurrentValue(data.current_value); // Set the current value
+        } else {
+          setMessage(data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching current value:', error);
+        setMessage('Failed to fetch current value');
+      }
+    };
+    useEffect(() => {
     fetchGoal();
+    fetchCurrentValue(); // Fetch current value on mount
   }, []);
+
+
+  const handleUpdateGoal = async () => {
+    if (typeof newGoal === 'number') {
+        try {
+            const response = await fetch('http://localhost:5000/goal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ goal: newGoal }),
+            });
+
+            const data = await response.json();
+
+            // Check if the response was successful
+            if (response.ok) {
+                setMessage(data.message); // This should indicate success
+                // Re-fetch the updated goal
+                await fetchGoal();
+            } else {
+                setMessage(data.message || 'Failed to update goal');
+            }
+        } catch (error) {
+            console.error('Error updating goal:', error);
+            setMessage('Failed to update goal');
+        }
+    } else {
+        setMessage('Please enter a valid number for the goal.');
+    }
+};
+const handleUpdateCurrentValue = async () => {
+  if (typeof newCurrentValue === 'number') {
+    try {
+      const response = await fetch('http://localhost:5000/current_value', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ current_value: newCurrentValue }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setMessage(data.message);
+        await fetchCurrentValue(); // Re-fetch the updated current value
+      } else {
+        setMessage(data.message || 'Failed to update current value');
+      }
+    } catch (error) {
+      console.error('Error updating current value:', error);
+      setMessage('Failed to update current value');
+    }
+  } else {
+    setMessage('Please enter a valid number for the current value.');
+  }
+};
 
   // Handle password change
   const handleChangePassword = async () => {
@@ -67,19 +122,7 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  // Handle goal update
-  const handleUpdateGoal = async () => {
-    if (typeof newGoal === 'number') {
-      try {
-        const response = await mockApiUpdateGoal(newGoal);
-        setMessage(response);
-        setGoal(newGoal); // Update the goal state with the new goal
-        setNewGoal(''); // Clear the input field after successful update
-      } catch (error) {
-        setMessage("Failed to update the goal."); // Handle any error
-      }
-    }
-  };
+
 
   const renderMainPage = () => (
     <div className="settings-main-page">
@@ -100,6 +143,7 @@ const SettingsPage: React.FC = () => {
           Goal
           <img src={triangle} className="triangle" />
         </button>
+        
         <button className="settings-option mulish-regular" onClick={() => setActiveTab('legal')}>
           Legal
           <img src={triangle} className="triangle" />
@@ -115,7 +159,6 @@ const SettingsPage: React.FC = () => {
       </button>
       <div className="settings-onpage">
         <h2 className="mulish-bold">Website Info</h2>
-        <p className="mulish-regular">Current Website Password: 11111</p>
         <div className="change-button-rectangle">
           <button className='change-option mulish-regular' onClick={() => setActiveTab("changeSitePass")}>
             Change Password
@@ -139,6 +182,7 @@ const SettingsPage: React.FC = () => {
           onChange={(e) => setOldPassword(e.target.value)}
           className="w-full p-1 border rounded"
         />
+        <br></br>
         <p className="mulish-regular">Enter new password:</p>
         <input
           type="password"
@@ -153,7 +197,7 @@ const SettingsPage: React.FC = () => {
       </div>
     </div>
   );
-
+ 
   const renderGoal = () => (
     <div className="settings-content">
       <button className="back-button" onClick={() => setActiveTab('main')}>
@@ -162,14 +206,15 @@ const SettingsPage: React.FC = () => {
       <div className="settings-onpage-goal">
         <div className="text-group">
           <h2 className="mulish-bold">Fundraising Goal</h2>
-          <p className="mulish-regular">Current Goal: ${goal}</p>
+          <p className="mulish-regular">Current Goal: ${goal}</p> {/* Display the current goal */}
+          <h2 className="mulish-bold">Funds raised currently</h2>
+          <p className="mulish-regular">Current amount raised: ${currentValue}</p> {/* Display the current goal */}
           <div className="change-button-rectangle">
             <button className='change-option mulish-regular' onClick={() => setActiveTab("changeGoal")}>
-              Change Goal
+              Change Values
             </button>
           </div>
         </div>
-        
         <div className="percentage-container">
           <Percentage />
         </div>
@@ -183,16 +228,29 @@ const SettingsPage: React.FC = () => {
         <ArrowLeft size={24} />
       </button>
       <div className="settings-onpage">
-        <h2 className="mulish-bold">Change Goal</h2>
-        <p className="mulish-regular">Enter new goal:</p>
+        <h2 className="mulish-bold">Change Donation Goal</h2>
+        <p className="mulish-regular">Enter New Goal:</p>
         <input
           type="number" // Allow only numeric input for the goal
           value={newGoal}
           onChange={(e) => setNewGoal(Number(e.target.value) || '')} // Convert to number or clear input
           className="w-full p-1 border rounded"
         />
+        <br></br>
         <button className="change-option mulish-regular" onClick={handleUpdateGoal}>
           Update Goal
+        </button>
+        <h2 className="mulish-bold">Change Amounts currently raised</h2>
+        <p className="mulish-regular">Enter Value:</p>
+        <input
+          type="number" // Allow only numeric input for the goal
+          value={newCurrentValue}
+          onChange={(e) => setNewCurrentValue(Number(e.target.value) || '')} // Convert to number or clear input
+          className="w-full p-1 border rounded"
+        />
+        <br></br>
+        <button className="change-option mulish-regular" onClick={handleUpdateCurrentValue}>
+          Update Value
         </button>
         {message && <p className="message">{message}</p>} {/* Display message for goal update */}
       </div>
@@ -209,6 +267,7 @@ const SettingsPage: React.FC = () => {
       </div>
     </div>
   );
+
 
   return (
     <div className="settings-container">
