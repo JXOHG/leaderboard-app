@@ -3,10 +3,11 @@
 import React, { useEffect, useState } from 'react'
 import './StepGoalDisplay.css'
 
-// Mock API function to fetch the current steps
-const mockApiFetchSteps = async () => {
+const API_BASE_URL = 'http://localhost:5000'
+
+const fetchCurrentSteps = async () => {
   try {
-    const response = await fetch('http://localhost:5000/current_steps')
+    const response = await fetch(`${API_BASE_URL}/current_steps`)
     if (!response.ok) {
       throw new Error('Failed to fetch current steps')
     }
@@ -19,11 +20,19 @@ const mockApiFetchSteps = async () => {
   }
 }
 
-const fetchStepGoalFromFile = async () => {
-  const response = await fetch('http://localhost:5000/step_goal')
-  const data = await response.json()
-  console.log('Fetched goal:', data.goal) // Log the goal
-  return parseInt(data.goal, 10)
+const fetchStepGoal = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/step_goal`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch step goal')
+    }
+    const data = await response.json()
+    console.log('Fetched step goal:', data.step_goal)
+    return parseInt(data.step_goal, 10)
+  } catch (error) {
+    console.error('Error fetching step goal:', error)
+    return 10000 // Default step goal
+  }
 }
 
 export default function StepGoalDisplay() {
@@ -33,8 +42,8 @@ export default function StepGoalDisplay() {
   useEffect(() => {
     const fetchData = async () => {
       const [fetchedSteps, fetchedGoal] = await Promise.all([
-        mockApiFetchSteps(),
-        fetchStepGoalFromFile()
+        fetchCurrentSteps(),
+        fetchStepGoal()
       ])
       setCurrentSteps(fetchedSteps)
       setGoalSteps(fetchedGoal)

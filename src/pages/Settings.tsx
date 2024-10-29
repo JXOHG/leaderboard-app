@@ -13,6 +13,7 @@ const SettingsPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [goal, setGoal] = useState<number>(0);
   const [newGoal, setNewGoal] = useState<number | string>('');
+  const [stepGoal, setStepGoal] = useState<number>(0);
   const [newStepGoal, setNewStepGoal] = useState<number | string>('');
   const [currentValue, setCurrentValue] = useState<number | string>('');
   const [newCurrentValue, setNewCurrentValue] = useState<number | string>('');
@@ -49,10 +50,25 @@ const SettingsPage: React.FC = () => {
     }
   };
 
+  const fetchStepGoal = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/current_steps');
+      const data = await response.json();
+      if (response.ok) {
+        setStepGoal(data.current_steps);
+      } else {
+        setMessage(data.message || 'Failed to fetch step goal');
+      }
+    } catch (error) {
+      console.error('Error fetching step goal:', error);
+      setMessage('Failed to fetch step goal');
+    }
+  };
 
   useEffect(() => {
     fetchGoal();
     fetchCurrentValue();
+    fetchStepGoal();
   }, []);
 
   const handleUpdateGoal = async () => {
@@ -124,7 +140,7 @@ const SettingsPage: React.FC = () => {
   const handleUpdateStepGoal = async () => {
     if (typeof newStepGoal === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/step_goal', {
+        const response = await fetch('http://localhost:5000/current_steps', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -136,16 +152,17 @@ const SettingsPage: React.FC = () => {
 
         if (response.ok) {
           setMessage(data.message);
-          await fetchGoal();
+          await fetchStepGoal();
+          setNewStepGoal('');
         } else {
-          setMessage(data.message || 'Failed to update goal');
+          setMessage(data.message || 'Failed to update step goal');
         }
       } catch (error) {
-        console.error('Error updating goal:', error);
-        setMessage('Failed to update goal');
+        console.error('Error updating step goal:', error);
+        setMessage('Failed to update step goal');
       }
     } else {
-      setMessage('Please enter a valid number for the goal.');
+      setMessage('Please enter a valid number for the step goal.');
     }
   };
 
@@ -171,15 +188,15 @@ const SettingsPage: React.FC = () => {
       <div>
         <button className="settings-option mulish-regular" onClick={() => setActiveTab('siteInfo')}>
           Website Info      
-          <img src={triangle} className="triangle" />
+          <img src={triangle} className="triangle" alt="triangle" />
         </button>
         <button className="settings-option mulish-regular" onClick={() => setActiveTab('goal')}>
           Goal
-          <img src={triangle} className="triangle" />
+          <img src={triangle} className="triangle" alt="triangle" />
         </button>
         <button className="settings-option mulish-regular" onClick={() => setActiveTab('legal')}>
           Legal
-          <img src={triangle} className="triangle" />
+          <img src={triangle} className="triangle" alt="triangle" />
         </button>
         <div className="submit-button">
           <div className="submit-button"><Button/></div>
@@ -299,6 +316,7 @@ const SettingsPage: React.FC = () => {
       {renderSubPageHeader("", () => setActiveTab('goal'))}
       <div className="settings-onpage">
         <h2 className="mulish-bold">Change Step Goal</h2>
+        <p className="mulish-regular">Current Step Goal: {stepGoal}</p>
         <p className="mulish-regular">Enter New Goal:</p>
         <input
           type="number"
@@ -310,6 +328,7 @@ const SettingsPage: React.FC = () => {
         <button className="change-option mulish-regular" onClick={handleUpdateStepGoal}>
           Update Goal
         </button>
+        {message && <p className="message">{message}</p>}
       </div>
     </div>
   );
