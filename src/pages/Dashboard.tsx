@@ -3,7 +3,7 @@ import StepDisplay from '../components/StepDisplay';
 import RankDisplay from '../components/RankDisplay';
 import Leaderboard from '../components/LeaderBoard';
 import './Dashboard.css';
-import Button from "../components/Button";
+import AdminButton from "../components/AdminButton";
 import StepGoalDisplay from '../components/StepGoalDisplay';
 
 interface UserSteps {
@@ -17,9 +17,7 @@ const Dashboard: React.FC = () => {
   const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
   const csvFilePath = '../main.csv';
-  // BELOW ARE FOR STEP GOAL DISPLAY -- set static numbers just for testing
-  const totalSteps = 5000;
-  const goalSteps = 15000;
+
 
   useEffect(() => {
     const fetchUserSteps = async () => {
@@ -42,22 +40,19 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-    <div>
-    </div>
-    <div className="main">
-    <div className="leaderboard">
-      <Leaderboard csvFilePath={csvFilePath} />
-    </div>
-    <div className="side-by-side">
-      <div className="submit-button-wrapper mulish-bold">
-        <Button />
+      <div className="main">
+        <div className="leaderboard">
+          <Leaderboard csvFilePath={csvFilePath} />
+        </div>
+        <div className="side-by-side">
+          <div className="step-goal-wrapper">
+            <StepGoalDisplay/>
+          </div>
+          <div className="submit-button-wrapper mulish-bold">
+          </div>
+        </div>
       </div>
-      <div className="step-goal-wrapper">
-        <StepGoalDisplay currentSteps={totalSteps} goalSteps={goalSteps} />
-      </div>
-    </div>
-    </div>
-    
+      <AdminButton/>
     </>
   );
 };

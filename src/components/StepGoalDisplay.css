@@ -4,7 +4,7 @@
     color: #54585A;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-    max-width: 400px;
+    max-width: 250vh;
     margin-top: 2vh;
   }
   
@@ -39,7 +39,7 @@
   }
   
   .custom-progress {
-    background-color: #0072CE;
+    background-color: rgba(197, 127, 45, 1);
     height: 100%;
     transition: width 0.5s ease-in-out;
     position: relative;
