@@ -13,6 +13,7 @@ const SettingsPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [goal, setGoal] = useState<number>(0);
   const [newGoal, setNewGoal] = useState<number | string>('');
+  const [newStepGoal, setNewStepGoal] = useState<number | string>('');
   const [currentValue, setCurrentValue] = useState<number | string>('');
   const [newCurrentValue, setNewCurrentValue] = useState<number | string>('');
   const [message, setMessage] = useState('');
@@ -47,6 +48,7 @@ const SettingsPage: React.FC = () => {
       setMessage('Failed to fetch current value');
     }
   };
+
 
   useEffect(() => {
     fetchGoal();
@@ -116,6 +118,34 @@ const SettingsPage: React.FC = () => {
       setNewPassword('');
     } catch (error) {
       setMessage(error);
+    }
+  };
+
+  const handleUpdateStepGoal = async () => {
+    if (typeof newStepGoal === 'number') {
+      try {
+        const response = await fetch('http://localhost:5000/step_goal', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ step_goal: newStepGoal }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setMessage(data.message);
+          await fetchGoal();
+        } else {
+          setMessage(data.message || 'Failed to update goal');
+        }
+      } catch (error) {
+        console.error('Error updating goal:', error);
+        setMessage('Failed to update goal');
+      }
+    } else {
+      setMessage('Please enter a valid number for the goal.');
     }
   };
 
@@ -272,12 +302,12 @@ const SettingsPage: React.FC = () => {
         <p className="mulish-regular">Enter New Goal:</p>
         <input
           type="number"
-          value={newGoal}
-          onChange={(e) => setNewGoal(Number(e.target.value) || '')}
+          value={newStepGoal}
+          onChange={(e) => setNewStepGoal(Number(e.target.value) || '')}
           className="w-full p-1 border rounded"
         />
         <br />
-        <button className="change-option mulish-regular" onClick={handleUpdateGoal}>
+        <button className="change-option mulish-regular" onClick={handleUpdateStepGoal}>
           Update Goal
         </button>
       </div>
