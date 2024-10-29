@@ -32,15 +32,9 @@ def combine_and_replace_csv():
     
     combined_df = combined_df.sort_values(by="Total Steps", axis=0, ascending=False)
     
-    # Record the total steps into a text file
+    # Record the total amount of steps into a current_steps.txt file
     total_steps = combined_df['Total Steps'].sum()
-    with open('public/total_steps.txt', 'w') as f:
-        f.write(str(total_steps))
-    
-    
-    # Record the total amount of steps into a total_steps.txt file
-    total_steps = combined_df['Total Steps'].sum()
-    with open('public/total_steps.txt', 'w') as f:
+    with open('public/current_steps.txt', 'w') as f:
         f.write(str(total_steps))
         
     # Replace the existing 'main.csv' with the combined data
@@ -194,6 +188,7 @@ def changepw():
       print(df) """
       
 CURRENT_STEP_FILE = 'public/current_steps.txt'
+STEP_GOAL_FILE = 'public/step_goal.txt'
 
 # New route to get and set the current steps
 @app.route("/current_steps", methods=['GET', 'POST'])
@@ -206,16 +201,16 @@ def curSteps():
                 return jsonify({"current_steps": int(current_steps)}), 200
         else:
             return jsonify({"steps": 0}), 200  # Default goal if file doesn't exist
-    
-    if request.method == 'POST':
-        new_steps = request.json.get('steps')
-        if new_steps is not None:
-            # Save the new steps to the file
-            with open(CURRENT_STEP_FILE, 'w') as f:
-                f.write(str(new_steps))
-            return jsonify({"message": "Steps updated successfully."}), 200
-        return jsonify({"message": "Invalid steps value."}), 400
 
+    if request.method == 'POST':
+            new_step_goal = request.json.get('step_goal')
+            if new_step_goal is not None:
+                # Save the new goal to the file
+                with open(STEP_GOAL_FILE, 'w') as f:
+                    f.write(str(new_step_goal))
+                return jsonify({"message": "Step goal updated successfully."}), 200
+            return jsonify({"message": "Invalid step goal value."}), 400
+        
 GOAL_FILE = 'public/goal.txt'
 
 # New route to get and set the goal
