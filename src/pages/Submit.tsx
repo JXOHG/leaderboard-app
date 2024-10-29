@@ -68,7 +68,7 @@ const Submit: React.FC = () => {
       <div className="content-wrapper">
         <button 
           className="backbutton back-button" 
-          onClick={() => currentPage === 'main' ? navigate('/') : setCurrentPage('main')}
+          onClick={() => currentPage === 'main' ? navigate('/settings') : setCurrentPage('main')}
         >
           <ArrowLeft color="#666" absoluteStrokeWidth/>
         </button>
