@@ -156,3 +156,16 @@ input[type="number"] {
 .settings-main-page .back-button {
   margin-left: auto;
 }
+
+.delete-participant-button {
+  width: 24vw;
+  height: 3vw;
+  background-color:#d9d9d9;
+  color: #54585A;
+  font-weight:500; 
+  border-radius: 18px;
+  border: #bbb;
+  margin-top: 2vh;
+  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25), 
+  
+}

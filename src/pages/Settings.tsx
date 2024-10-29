@@ -8,7 +8,7 @@ import triangle from "../assets/image/triangle2.png";
 import Button from "../components/Button";
 
 const SettingsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'changeStepGoal' | 'legal'>('main');
+  const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'changeStepGoal' | 'deleteParticipant' | 'legal'>('main');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [goal, setGoal] = useState<number>(0);
@@ -151,7 +151,12 @@ const SettingsPage: React.FC = () => {
           Legal
           <img src={triangle} className="triangle" />
         </button>
-        <div className="submit-button"><Button/></div>
+        <div className="submit-button">
+          <div className="submit-button"><Button/></div>
+          <div className="submit-button">
+            <button className="mulish-bold delete-participant-button" onClick={() => setActiveTab('deleteParticipant')}>Delete Participant</button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -279,6 +284,15 @@ const SettingsPage: React.FC = () => {
     </div>
   );
 
+  const renderDeleteParticipant = () => (
+    <div className="settings-content">
+      {renderSubPageHeader("", () => setActiveTab('main'))}
+      <div className="settings-onpage">
+        <h2 className="mulish-bold">Delete Participant</h2>
+      </div>
+    </div>
+  );
+
   const renderLegal = () => (
     <div className="settings-content">
       {renderSubPageHeader("", () => setActiveTab('main'))}
@@ -295,6 +309,7 @@ const SettingsPage: React.FC = () => {
       {activeTab === 'goal' && renderGoal()}
       {activeTab === 'legal' && renderLegal()}
       {activeTab === 'changeGoal' && renderChangeGoal()}
+      {activeTab === 'deleteParticipant' && renderDeleteParticipant()}
       {activeTab === 'changeStepGoal' && renderChangeStepGoal()}
       {activeTab === 'changeSitePass' && renderChangeSitePass()}
     </div>
