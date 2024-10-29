@@ -33,11 +33,6 @@ const Dashboard: React.FC = () => {
     fetchUserSteps();
   }, []);
 
-  const handleSettingsClick = () => {
-    // Implement navigation to settings page or open settings modal
-    console.log('Navigate to settings');
-  };
-
   return (
     <>
       <div className="main">

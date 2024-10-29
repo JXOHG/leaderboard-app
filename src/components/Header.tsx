@@ -6,10 +6,6 @@ import uwem from "../assets/image/uwem.svg";
 const Header: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleSettingsClick = () => {
-    navigate('/settings'); // This will navigate to the settings page when clicked
-  };
-
   const handleLogoClick = () => {
     navigate('/'); // This will navigate to the dashboard (home) page when clicked
   };
@@ -33,18 +29,6 @@ const Header: React.FC = () => {
       >
         <img src={uwem} alt="United Way Elgin Middlesex" /> {/* Add alt attribute for accessibility */}
       </div>
-      <button
-        onClick={handleSettingsClick}
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          color: '#666',
-        }}
-        aria-label="Go to settings"
-      >
-        <Settings size={24} />
-      </button>
     </header>
   );
 };
