@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Settings } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; 
-import './Settings.css'; 
-import LegalDisclaimer from '../components/LegalDisclaimer'; 
+import { useNavigate } from 'react-router-dom';
+import './Settings.css';
+import LegalDisclaimer from '../components/LegalDisclaimer';
 import Percentage from '../components/Percentage';
 import triangle from "../assets/image/triangle2.png";
 import Button from "../components/Button";
@@ -11,107 +11,103 @@ const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'changeStepGoal' | 'legal'>('main');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [goal, setGoal] = useState<number>(0); // Initialize state to hold the current goal
-  const [newGoal, setNewGoal] = useState<number | string>(''); // State for new goal input
-  const [currentValue, setCurrentValue] = useState<number | string>(''); // State for new goal input
-  const [newCurrentValue, setNewCurrentValue] = useState<number | string>(''); // State for new goal input
+  const [goal, setGoal] = useState<number>(0);
+  const [newGoal, setNewGoal] = useState<number | string>('');
+  const [currentValue, setCurrentValue] = useState<number | string>('');
+  const [newCurrentValue, setNewCurrentValue] = useState<number | string>('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-   // Fetch goal on component mount
-  
-    const fetchGoal = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/goal');
-        const data = await response.json();
-        if (response.ok) {
-          setGoal(data.goal);
-        } else {
-          setMessage(data.message);
-        }
-      } catch (error) {
-        console.error('Error fetching goal:', error);
-        setMessage('Failed to fetch goal');
+  const fetchGoal = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/goal');
+      const data = await response.json();
+      if (response.ok) {
+        setGoal(data.goal);
+      } else {
+        setMessage(data.message);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching goal:', error);
+      setMessage('Failed to fetch goal');
+    }
+  };
 
-    const fetchCurrentValue = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/current_value');
-        const data = await response.json();
-        if (response.ok) {
-          setCurrentValue(data.current_value); // Set the current value
-        } else {
-          setMessage(data.message);
-        }
-      } catch (error) {
-        console.error('Error fetching current value:', error);
-        setMessage('Failed to fetch current value');
+  const fetchCurrentValue = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/current_value');
+      const data = await response.json();
+      if (response.ok) {
+        setCurrentValue(data.current_value);
+      } else {
+        setMessage(data.message);
       }
-    };
-    useEffect(() => {
+    } catch (error) {
+      console.error('Error fetching current value:', error);
+      setMessage('Failed to fetch current value');
+    }
+  };
+
+  useEffect(() => {
     fetchGoal();
-    fetchCurrentValue(); // Fetch current value on mount
+    fetchCurrentValue();
   }, []);
-
 
   const handleUpdateGoal = async () => {
     if (typeof newGoal === 'number') {
-        try {
-            const response = await fetch('http://localhost:5000/goal', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ goal: newGoal }),
-            });
+      try {
+        const response = await fetch('http://localhost:5000/goal', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ goal: newGoal }),
+        });
 
-            const data = await response.json();
+        const data = await response.json();
 
-            // Check if the response was successful
-            if (response.ok) {
-                setMessage(data.message); // This should indicate success
-                // Re-fetch the updated goal
-                await fetchGoal();
-            } else {
-                setMessage(data.message || 'Failed to update goal');
-            }
-        } catch (error) {
-            console.error('Error updating goal:', error);
-            setMessage('Failed to update goal');
+        if (response.ok) {
+          setMessage(data.message);
+          await fetchGoal();
+        } else {
+          setMessage(data.message || 'Failed to update goal');
         }
-    } else {
-        setMessage('Please enter a valid number for the goal.');
-    }
-};
-const handleUpdateCurrentValue = async () => {
-  if (typeof newCurrentValue === 'number') {
-    try {
-      const response = await fetch('http://localhost:5000/current_value', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ current_value: newCurrentValue }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setMessage(data.message);
-        await fetchCurrentValue(); // Re-fetch the updated current value
-      } else {
-        setMessage(data.message || 'Failed to update current value');
+      } catch (error) {
+        console.error('Error updating goal:', error);
+        setMessage('Failed to update goal');
       }
-    } catch (error) {
-      console.error('Error updating current value:', error);
-      setMessage('Failed to update current value');
+    } else {
+      setMessage('Please enter a valid number for the goal.');
     }
-  } else {
-    setMessage('Please enter a valid number for the current value.');
-  }
-};
+  };
 
-  // Handle password change
+  const handleUpdateCurrentValue = async () => {
+    if (typeof newCurrentValue === 'number') {
+      try {
+        const response = await fetch('http://localhost:5000/current_value', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ current_value: newCurrentValue }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          setMessage(data.message);
+          await fetchCurrentValue();
+        } else {
+          setMessage(data.message || 'Failed to update current value');
+        }
+      } catch (error) {
+        console.error('Error updating current value:', error);
+        setMessage('Failed to update current value');
+      }
+    } else {
+      setMessage('Please enter a valid number for the current value.');
+    }
+  };
+
   const handleChangePassword = async () => {
     try {
       const response = await mockApiChangePassword(oldPassword, newPassword);
@@ -123,7 +119,14 @@ const handleUpdateCurrentValue = async () => {
     }
   };
 
-
+  const renderSubPageHeader = (title: string, onBack: () => void) => (
+    <div className="settings-header">
+      <h2 className="mulish-bold">{title}</h2>
+      <button className="back-button" onClick={onBack}>
+        <ArrowLeft size={24} />
+      </button>
+    </div>
+  );
 
   const renderMainPage = () => (
     <div className="settings-main-page">
@@ -144,7 +147,6 @@ const handleUpdateCurrentValue = async () => {
           Goal
           <img src={triangle} className="triangle" />
         </button>
-        
         <button className="settings-option mulish-regular" onClick={() => setActiveTab('legal')}>
           Legal
           <img src={triangle} className="triangle" />
@@ -156,9 +158,7 @@ const handleUpdateCurrentValue = async () => {
 
   const renderSiteInfo = () => (
     <div className="settings-content">
-      <button className="back-button" onClick={() => setActiveTab('main')}>
-        <ArrowLeft size={24} />
-      </button>
+      {renderSubPageHeader("", () => setActiveTab('main'))}
       <div className="settings-onpage">
         <h2 className="mulish-bold">Website Info</h2>
         <div className="change-button-rectangle">
@@ -172,9 +172,7 @@ const handleUpdateCurrentValue = async () => {
 
   const renderChangeSitePass = () => (
     <div className="settings-content">
-      <button className="back-button" onClick={() => setActiveTab('siteInfo')}>
-        <ArrowLeft size={24} />
-      </button>
+      {renderSubPageHeader("", () => setActiveTab('siteInfo'))}
       <div className="settings-onpage">
         <h2 className="mulish-bold">Change Website Password</h2>
         <p className="mulish-regular">Enter old password:</p>
@@ -184,7 +182,7 @@ const handleUpdateCurrentValue = async () => {
           onChange={(e) => setOldPassword(e.target.value)}
           className="w-full p-1 border rounded"
         />
-        <br></br>
+        <br />
         <p className="mulish-regular">Enter new password:</p>
         <input
           type="password"
@@ -199,24 +197,22 @@ const handleUpdateCurrentValue = async () => {
       </div>
     </div>
   );
- 
+
   const renderGoal = () => (
     <div className="settings-content">
-      <button className="back-button" onClick={() => setActiveTab('main')}>
-        <ArrowLeft size={24} />
-      </button>
+      {renderSubPageHeader("", () => setActiveTab('main'))}
       <div className="settings-onpage-goal">
         <div className="text-group">
           <h2 className="mulish-bold">Fundraising Goal</h2>
-          <p className="mulish-regular">Current Goal: ${goal}</p> {/* Display the current goal */}
+          <p className="mulish-regular">Current Goal: ${goal}</p>
           <h2 className="mulish-bold">Funds raised currently</h2>
-          <p className="mulish-regular">Current amount raised: ${currentValue}</p> {/* Display the current goal */}
+          <p className="mulish-regular">Current amount raised: ${currentValue}</p>
           <div className="change-button-rectangle">
             <button className='change-option mulish-regular' onClick={() => setActiveTab("changeGoal")}>
               Change Values
             </button>
           </div>
-          <br></br>
+          <br />
           <div className="change-button-rectangle">
             <button className='change-option mulish-regular' onClick={() => setActiveTab("changeStepGoal")}>
               Change Step Goal
@@ -232,54 +228,50 @@ const handleUpdateCurrentValue = async () => {
 
   const renderChangeGoal = () => (
     <div className="settings-content">
-      <button className="back-button" onClick={() => setActiveTab('goal')}>
-        <ArrowLeft size={24} />
-      </button>
+      {renderSubPageHeader("", () => setActiveTab('goal'))}
       <div className="settings-onpage">
         <h2 className="mulish-bold">Change Donation Goal</h2>
         <p className="mulish-regular">Enter New Goal:</p>
         <input
-          type="number" // Allow only numeric input for the goal
+          type="number"
           value={newGoal}
-          onChange={(e) => setNewGoal(Number(e.target.value) || '')} // Convert to number or clear input
+          onChange={(e) => setNewGoal(Number(e.target.value) || '')}
           className="w-full p-1 border rounded"
         />
-        <br></br>
+        <br />
         <button className="change-option mulish-regular" onClick={handleUpdateGoal}>
           Update Goal
         </button>
         <h2 className="mulish-bold">Change Amounts currently raised</h2>
         <p className="mulish-regular">Enter Value:</p>
         <input
-          type="number" // Allow only numeric input for the goal
+          type="number"
           value={newCurrentValue}
-          onChange={(e) => setNewCurrentValue(Number(e.target.value) || '')} // Convert to number or clear input
+          onChange={(e) => setNewCurrentValue(Number(e.target.value) || '')}
           className="w-full p-1 border rounded"
         />
-        <br></br>
+        <br />
         <button className="change-option mulish-regular" onClick={handleUpdateCurrentValue}>
           Update Value
         </button>
-        {message && <p className="message">{message}</p>} {/* Display message for goal update */}
+        {message && <p className="message">{message}</p>}
       </div>
     </div>
   );
 
   const renderChangeStepGoal = () => (
     <div className="settings-content">
-      <button className="back-button" onClick={() => setActiveTab('goal')}>
-        <ArrowLeft size={24} />
-      </button>
+      {renderSubPageHeader("", () => setActiveTab('goal'))}
       <div className="settings-onpage">
         <h2 className="mulish-bold">Change Step Goal</h2>
         <p className="mulish-regular">Enter New Goal:</p>
         <input
-          type="number" // Allow only numeric input for the goal
+          type="number"
           value={newGoal}
-          onChange={(e) => setNewGoal(Number(e.target.value) || '')} // Convert to number or clear input
+          onChange={(e) => setNewGoal(Number(e.target.value) || '')}
           className="w-full p-1 border rounded"
         />
-        <br></br>
+        <br />
         <button className="change-option mulish-regular" onClick={handleUpdateGoal}>
           Update Goal
         </button>
@@ -287,19 +279,14 @@ const handleUpdateCurrentValue = async () => {
     </div>
   );
 
-  
-
   const renderLegal = () => (
     <div className="settings-content">
-      <button className="back-button" onClick={() => setActiveTab('main')}>
-        <ArrowLeft size={24} />
-      </button>
+      {renderSubPageHeader("", () => setActiveTab('main'))}
       <div className="settings-onpage">
         <LegalDisclaimer />
       </div>
     </div>
   );
-
 
   return (
     <div className="settings-container">

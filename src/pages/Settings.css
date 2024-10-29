@@ -1,115 +1,158 @@
 .settings-container {
-    padding: 20px;
-    background-color: #c72614;
-    min-height: 100vh;
-  }
-  
-  .settings-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color:white;
-  }
-  
-  .settings-header h2 {
-    margin-left: 10px;
-    color:white;
-  }
-  
-  .settings-options {
-    margin-top: 20px;
-  }
+  padding: 20px;
+  background-color: #c72614;
+  min-height: 100vh;
+}
 
-  .settings-option {
-    display: flex;
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    border: 1.5px solid #ccc;
-    background-color: #c72614;
-    color: #fff;
-    text-align:left;
-    cursor: pointer;
-    justify-content: space-between;
-    border-radius: 25px
-  }
-  
-  .settings-onpage {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    border: 1.5px solid #ccc;
-    background-color: #c72614;
-    color: #fff;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 25px;
-  }
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  margin-bottom: 20px;
+}
 
-  .settings-onpage-goal {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    border: 1.5px solid #ccc;
-    background-color: #c72614;
-    color: #fff;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 25px;
-  }
+.settings-header h2 {
+  margin: 0;
+  color: white;
+}
 
-  .settings-option:hover {
-    background-color: #d00;
-  }
-  
-  .settings-content {
-    padding: 20px;
-    color:white;
-  }
+.settings-options {
+  margin-top: 20px;
+}
 
-  .text-group {
-    display: flex;
-    flex-direction: column;
-    margin-right: 150px;
-  }
-  
+.settings-option {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  border: 1.5px solid #ccc;
+  background-color: #c72614;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  justify-content: space-between;
+  border-radius: 25px;
+}
 
-  .percentage-container {
-    display: flex;
-    flex: 0 1 15%; /* Further shrink the percentage container */
-    margin: 10px;
-    max-height: fit-content;
-  }
+.settings-onpage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  border: 1.5px solid #ccc;
+  background-color: #c72614;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 25px;
+}
 
-  
-  .back-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #666;
-    margin-bottom: 20px;
-  }
+.settings-onpage-goal {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  border: 1.5px solid #ccc;
+  background-color: #c72614;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 25px;
+}
 
-  .submit-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.settings-option:hover {
+  background-color: #d00;
+}
 
+.settings-content {
+  padding: 20px;
+  color: white;
+}
 
-  .triangle {
-    width: 30px;
-    height: 30px;
-    margin-left: 80vw;
-    rotate: 180deg;
-    color: white;
-    filter: invert(100%);
+.text-group {
+  display: flex;
+  flex-direction: column;
+  margin-right: 150px;
+}
 
-  }
+.percentage-container {
+  display: flex;
+  flex: 0 1 15%;
+  margin: 10px;
+  max-height: fit-content;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.submit-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.triangle {
+  width: 30px;
+  height: 30px;
+  margin-left: 80vw;
+  rotate: 180deg;
+  color: white;
+  filter: invert(100%);
+}
+
+/* Additional styles for inputs and buttons */
+input[type="password"],
+input[type="number"] {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.change-option {
+  background-color: #a61e0f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+.change-option:hover {
+  background-color: #8a1a0d;
+}
+
+.message {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Styles for the main page */
+.settings-main-page .settings-header {
+  justify-content: flex-start;
+}
+
+.settings-main-page .settings-header h2 {
+  margin-left: 10px;
+}
+
+.settings-main-page .back-button {
+  margin-left: auto;
+}
