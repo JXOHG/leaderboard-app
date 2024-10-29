@@ -7,12 +7,13 @@ interface RowData {
   id: number
   name: string
   steps: number
+  averageSteps: number
   rank?: number
 }
 
 export default function ManualCSVEntry() {
   const [data, setData] = useState<RowData[]>([])
-  const [newRow, setNewRow] = useState<Omit<RowData, 'id' | 'rank'>>({ name: '', steps: 0 })
+  const [newRow, setNewRow] = useState<Omit<RowData, 'id' | 'rank'>>({ name: '', steps: 0, averageSteps: 0 })
   const [editingId, setEditingId] = useState<number | null>(null)
 
   useEffect(() => {
@@ -30,24 +31,24 @@ export default function ManualCSVEntry() {
 
   const handleAddRow = () => {
     const newId = Math.max(...data.map(row => row.id), 0) + 1
-    setData(prevData => [...prevData, { id: newId, ...newRow, steps: Number(newRow.steps) || 0 }])
-    setNewRow({ name: '', steps: 0 })
+    setData(prevData => [...prevData, { id: newId, ...newRow, steps: Number(newRow.steps) || 0, averageSteps: Number(newRow.averageSteps) || 0 }])
+    setNewRow({ name: '', steps: 0, averageSteps: 0 })
   }
 
   const handleEditRow = (id: number) => {
     setEditingId(id)
     const rowToEdit = data.find(row => row.id === id)
     if (rowToEdit) {
-      setNewRow({ name: rowToEdit.name, steps: rowToEdit.steps })
+      setNewRow({ name: rowToEdit.name, steps: rowToEdit.steps, averageSteps: rowToEdit.averageSteps })
     }
   }
 
   const handleUpdateRow = (id: number) => {
     setData(prevData => 
-      prevData.map(row => row.id === id ? { ...row, ...newRow, steps: Number(newRow.steps) || 0 } : row)
+      prevData.map(row => row.id === id ? { ...row, ...newRow, steps: Number(newRow.steps) || 0, averageSteps: Number(newRow.averageSteps) || 0 } : row)
     )
     setEditingId(null)
-    setNewRow({ name: '', steps: 0 })
+    setNewRow({ name: '', steps: 0, averageSteps: 0 })
   }
 
   const handleDeleteRow = (id: number) => {
@@ -58,7 +59,7 @@ export default function ManualCSVEntry() {
     const { name, value } = e.target
     setNewRow(prev => ({
       ...prev,
-      [name]: name === 'steps' ? (value === '' ? '' : Number(value)) : value
+      [name]: name === 'steps' || name === 'averageSteps' ? (value === '' ? '' : Number(value)) : value
     }))
   }
 
@@ -85,14 +86,6 @@ export default function ManualCSVEntry() {
   return (
     <div className="p-4 max-w-4xl mx-auto">
       <table className="w-full border-collapse border border-gray-300 mb-4">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border border-gray-300 p-2">Rank</th>
-            <th className="border border-gray-300 p-2">Name</th>
-            <th className="border border-gray-300 p-2">Steps</th>
-            <th className="border border-gray-300 p-2">Actions</th>
-          </tr>
-        </thead>
         <tbody>
           {data.map((row) => (
             <tr key={row.id}>
@@ -125,23 +118,36 @@ export default function ManualCSVEntry() {
               </td>
               <td className="border border-gray-300 p-2">
                 {editingId === row.id ? (
+                  <input
+                    type="number"
+                    name="averageSteps"
+                    value={newRow.averageSteps}
+                    onChange={handleInputChange}
+                    className="w-full p-1 border rounded"
+                  />
+                ) : (
+                  row.averageSteps
+                )}
+              </td>
+              <td className="border border-gray-300 p-2">
+                {editingId === row.id ? (
                   <button 
                     onClick={() => handleUpdateRow(row.id)} 
-                    className="bg-green-500 text-black px-2 py-1 rounded mr-2"
+                    className="bg-green-500 text-white px-2 py-1 rounded mr-2"
                   >
                     Save
                   </button>
                 ) : (
                   <button 
                     onClick={() => handleEditRow(row.id)} 
-                    className="bg-blue-500 text-black px-2 py-1 rounded mr-2"
+                    className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
                   >
                     Edit
                   </button>
                 )}
                 <button 
                   onClick={() => handleDeleteRow(row.id)} 
-                  className="bg-red-500 text-black px-2 py-1 rounded"
+                  className="bg-red-500 text-white px-2 py-1 rounded"
                 >
                   Delete
                 </button>
@@ -168,15 +174,23 @@ export default function ManualCSVEntry() {
           placeholder="Steps"
           className="p-2 border rounded"
         />
+        <input
+          type="number"
+          name="averageSteps"
+          value={newRow.averageSteps === 0 ? '' : newRow.averageSteps}
+          onChange={handleInputChange}
+          placeholder="Average Steps"
+          className="p-2 border rounded"
+        />
         <button 
           onClick={handleAddRow} 
-          className="bg-green-500 text-black px-4 py-2 rounded"
+          className="px-4 py-2 rounded"
         >
           Add Participant
         </button>
         <button 
           onClick={handleSaveToCSV} 
-          className="bg-blue-500 text-black px-4 py-2 rounded"
+          className="px-4 py-2 rounded"
         >
           Save to CSV
         </button>
