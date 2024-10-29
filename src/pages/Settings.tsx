@@ -6,6 +6,7 @@ import LegalDisclaimer from '../components/LegalDisclaimer';
 import Percentage from '../components/Percentage';
 import triangle from "../assets/image/triangle2.png";
 import Button from "../components/Button";
+import DeleteParticipant from './DeleteParticipant';
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'changeStepGoal' | 'deleteParticipant' | 'legal'>('main');
@@ -334,13 +335,14 @@ const SettingsPage: React.FC = () => {
   );
 
   const renderDeleteParticipant = () => (
-    <div className="settings-content">
-      {renderSubPageHeader("", () => setActiveTab('main'))}
-      <div className="settings-onpage">
-        <h2 className="mulish-bold">Delete Participant</h2>
-      </div>
+  <div className="settings-content">
+    {renderSubPageHeader("", () => setActiveTab('main'))}
+    <div className="settings-onpage flex align-items-center justify-center min-h-[calc(100vh-100px)]">
+    <h2 className="mulish-bold">Delete Participant</h2>
+      <DeleteParticipant />
     </div>
-  );
+  </div>
+);
 
   const renderLegal = () => (
     <div className="settings-content">
