@@ -5,6 +5,7 @@ import Leaderboard from '../components/LeaderBoard';
 import './Dashboard.css';
 import AdminButton from "../components/AdminButton";
 import StepGoalDisplay from '../components/StepGoalDisplay';
+import { Anchor } from 'lucide-react';
 
 interface UserSteps {
   id: number;
@@ -47,7 +48,6 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </div>
-      <AdminButton/>
     </>
   );
 };

@@ -45,6 +45,17 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         <h4 className="kanit-semibold">
           © 2024 UWO TSI ALL RIGHTS RESERVED
         </h4>
+        <div className="hyperlinks">
+          <span>
+            <a className="link" href="http://localhost:5173/">Home</a>
+          </span>
+          <span>
+            <a className="link"href="http://localhost:5173/login">Admin Login</a>
+          </span>
+          <span>
+            <a className="link" href="https://unitedwayem.ca/event/td-stairclimb-2024/">TD StairClimb</a>
+          </span>
+        </div>
       </footer>
     </>
   );

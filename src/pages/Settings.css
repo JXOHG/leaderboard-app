@@ -149,12 +149,16 @@ input[type="number"] {
   justify-content: flex-start;
 }
 
-.settings-main-page .settings-header h2 {
+.settings-main-page {
   margin-left: 10px;
 }
 
+.settings-header h2 {
+  margin: auto;
+}
+
 .settings-main-page .back-button {
-  margin-left: auto;
+  margin: left;
 }
 
 .delete-participant-button {
@@ -166,6 +170,6 @@ input[type="number"] {
   border-radius: 18px;
   border: #bbb;
   margin-top: 2vh;
-  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25), 
+  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)), 
   
 }

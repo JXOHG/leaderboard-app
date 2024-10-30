@@ -34,3 +34,23 @@ footer {
     opacity: 0.5;
     filter: alpha(opacity=40);
 }
+
+.hyperlinks {
+    margin: auto;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5vw;
+    padding-top: 2vh;
+}
+
+.link {
+    color: #555;
+    font-weight: 400;
+    transition-delay: 500ms;
+    transition: color 0.3s ease, transform 0.3s ease; 
+}
+
+.link:hover{
+    color: #888
+}

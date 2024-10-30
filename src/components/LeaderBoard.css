@@ -39,7 +39,7 @@
 .leaderboard-rank {
     flex: 1;
     text-align: right;
-    padding-right: 1vw;
+    padding-right: 0.5vw;
 }
 
 .leaderboard-header-item.name {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css'; // Assuming your CSS file for the page styling
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Button from '../components/Button'
+import LoginButton from '../components/LoginButton'
 import { useNavigate } from 'react-router-dom';
 
 interface LoginFormState {
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
                 value={form.username}
                 onChange={handleChange}
                 required
-                className="textbox"
+                className="username"
               />
             </div>
             <div>
@@ -75,12 +75,12 @@ const Login: React.FC = () => {
                 value={form.password}
                 onChange={handleChange}
                 required
-                className="textbox"
+                className="password"
               />
             </div>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <div>
-              <Button type="submit" className="button">Login</Button>
+              <LoginButton/>
             </div>
           </form>
         </div>

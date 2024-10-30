@@ -31,13 +31,22 @@
     color: #3B3B3B;
 }
 
-.textbox {
+.password {
     width: 24vw;
-    border-radius: 20px;
     margin-top: 1vh;
     margin-bottom: 1vh;
     padding-left: 1vw;
     height: 5vh;
+    border-radius: 20px;
+}
+
+.username {
+    width: 24vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    padding-left: 1vw;
+    height: 5vh;
+    border-radius: 20px;
 }
 
 .button {

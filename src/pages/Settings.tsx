@@ -169,21 +169,20 @@ const SettingsPage: React.FC = () => {
 
   const renderSubPageHeader = (title: string, onBack: () => void) => (
     <div className="settings-header">
-      <h2 className="mulish-bold">{title}</h2>
       <button className="back-button" onClick={onBack}>
         <ArrowLeft size={24} />
       </button>
+      <h2 className="mulish-bold">{title}</h2>
     </div>
   );
 
   const renderMainPage = () => (
     <div className="settings-main-page">
       <div className="settings-header">
-        <Settings size={24} />
-        <h2 className="mulish-bold">Administrative Settings</h2>
         <button className="back-button" onClick={() => navigate('/')}>
-          <ArrowLeft size={24} />
+            <ArrowLeft size={24} />
         </button>
+        <h2 className="mulish-bold">Administrative Settings</h2>
       </div>
 
       <div>
