@@ -10,6 +10,27 @@ import DeleteParticipant from './DeleteParticipant';
 
 const API_BASE_URL = 'http://localhost:5000';
 
+const fetchGoal = async () => {
+  const response = await fetch(`${API_BASE_URL}/goal`);
+  const data = await response.json();
+  console.log('Fetched goal:', data.goal);
+  return parseInt(data.goal, 10);
+};
+
+const fetchCurrentValue = async () => {
+  const response = await fetch(`${API_BASE_URL}/current_value`);
+  const data = await response.json();
+  console.log('Fetched current value:', data.current_value);
+  return parseInt(data.current_value, 10);
+};
+
+const fetchStepGoal = async () => {
+  const response = await fetch(`${API_BASE_URL}/step_goal`);
+  const data = await response.json();
+  console.log('Fetched step goal:', data.step_goal);
+  return parseInt(data.step_goal, 10);
+};
+
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'changeStepGoal' | 'deleteParticipant' | 'legal'>('main');
   const [oldPassword, setOldPassword] = useState('');
@@ -23,80 +44,36 @@ const SettingsPage: React.FC = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const fetchGoal = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/goal`);
-      const data = await response.json();
-      if (response.ok) {
-        setGoal(data.goal);
-      } else {
-        setMessage(data.message);
-      }
-    } catch (error) {
-      console.error('Error fetching goal:', error);
-      setMessage('Failed to fetch goal');
-    }
-  };
-
-  const fetchCurrentValue = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/current_value`);
-      const data = await response.json();
-      if (response.ok) {
-        setCurrentValue(data.current_value);
-      } else {
-        setMessage(data.message);
-      }
-    } catch (error) {
-      console.error('Error fetching current value:', error);
-      setMessage('Failed to fetch current value');
-    }
-  };
-
-  const fetchStepGoal = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/step_goal`);
-      const data = await response.json();
-      if (response.ok) {
-        setStepGoal(data.step_goal);
-      } else {
-        setMessage(data.message || 'Failed to fetch step goal');
-      }
-    } catch (error) {
-      console.error('Error fetching step goal:', error);
-      setMessage('Failed to fetch step goal');
-    }
-  };
-
   useEffect(() => {
-    fetchGoal();
-    fetchCurrentValue();
-    fetchStepGoal();
+    const fetchData = async () => {
+      const [fetchedGoal, fetchedCurrentValue, fetchedStepGoal] = await Promise.all([
+        fetchGoal(),
+        fetchCurrentValue(),
+        fetchStepGoal()
+      ]);
+      setGoal(fetchedGoal);
+      setCurrentValue(fetchedCurrentValue);
+      setStepGoal(fetchedStepGoal);
+    };
+    fetchData();
   }, []);
 
   const handleUpdateGoal = async () => {
     if (typeof newGoal === 'number') {
-      try {
-        const response = await fetch(`${API_BASE_URL}/goal`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ goal: newGoal }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          setMessage(data.message);
-          await fetchGoal();
-          setNewGoal('');
-        } else {
-          setMessage(data.message || 'Failed to update goal');
-        }
-      } catch (error) {
-        console.error('Error updating goal:', error);
-        setMessage('Failed to update goal');
+      const response = await fetch(`${API_BASE_URL}/goal`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ goal: newGoal }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMessage(data.message);
+        setGoal(await fetchGoal());
+        setNewGoal('');
+      } else {
+        setMessage(data.message || 'Failed to update goal');
       }
     } else {
       setMessage('Please enter a valid number for the goal.');
@@ -105,26 +82,20 @@ const SettingsPage: React.FC = () => {
 
   const handleUpdateCurrentValue = async () => {
     if (typeof newCurrentValue === 'number') {
-      try {
-        const response = await fetch(`${API_BASE_URL}/current_value`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ current_value: newCurrentValue }),
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          setMessage(data.message);
-          await fetchCurrentValue();
-          setNewCurrentValue('');
-        } else {
-          setMessage(data.message || 'Failed to update current value');
-        }
-      } catch (error) {
-        console.error('Error updating current value:', error);
-        setMessage('Failed to update current value');
+      const response = await fetch(`${API_BASE_URL}/current_value`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ current_value: newCurrentValue }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMessage(data.message);
+        setCurrentValue(await fetchCurrentValue());
+        setNewCurrentValue('');
+      } else {
+        setMessage(data.message || 'Failed to update current value');
       }
     } else {
       setMessage('Please enter a valid number for the current value.');
@@ -132,47 +103,35 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleChangePassword = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/changepw`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ oldPassword, newPassword }),
-      });
-      const data = await response.json();
-      setMessage(data.message);
-      setOldPassword('');
-      setNewPassword('');
-    } catch (error) {
-      console.error('Error changing password:', error);
-      setMessage('Failed to change password');
-    }
+    const response = await fetch(`${API_BASE_URL}/changepw`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
+    });
+    const data = await response.json();
+    setMessage(data.message);
+    setOldPassword('');
+    setNewPassword('');
   };
 
   const handleUpdateStepGoal = async () => {
     if (typeof newStepGoal === 'number') {
-      try {
-        const response = await fetch(`${API_BASE_URL}/step_goal`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ step_goal: newStepGoal }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          setMessage(data.message);
-          await fetchStepGoal();
-          setNewStepGoal('');
-        } else {
-          setMessage(data.message || 'Failed to update step goal');
-        }
-      } catch (error) {
-        console.error('Error updating step goal:', error);
-        setMessage('Failed to update step goal');
+      const response = await fetch(`${API_BASE_URL}/step_goal`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ step_goal: newStepGoal }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMessage(data.message);
+        setStepGoal(await fetchStepGoal());
+        setNewStepGoal('');
+      } else {
+        setMessage(data.message || 'Failed to update step goal');
       }
     } else {
       setMessage('Please enter a valid number for the step goal.');
