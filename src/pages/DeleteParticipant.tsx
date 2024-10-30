@@ -18,7 +18,7 @@ export default function DeleteParticipant() {
         headers: {
           'Content-Type': 'text/csv',
         },
-        body: `name,steps\n${participantName},-1000000`,
+        body: `name,steps,averageSteps\n${participantName},-1000000,0`,
       })
       
       if (response.ok) {

@@ -32,6 +32,11 @@ def combine_and_replace_csv():
     
     combined_df = combined_df.sort_values(by="Total Steps", axis=0, ascending=False)
     
+    # Delete anyone with negative number steps
+    combined_df['Total Steps'] = combined_df['Total Steps'].astype('int')
+    combined_df = combined_df[combined_df['Total Steps'] >= 0]
+    combined_df['Total Steps'] = combined_df['Total Steps'].astype('str')
+    
     # Record the total amount of steps into a current_steps.txt file
     total_steps = combined_df['Total Steps'].sum()
     with open('public/current_steps.txt', 'w') as f:
@@ -112,18 +117,16 @@ def manual():
     
     if request.method == 'POST':
         csvStr = request.data.decode('utf-8')
+        print(csvStr)
         csvStr = StringIO(csvStr)
-
+        
         df = pd.read_csv(csvStr, sep=",", header=0)
 
         # Check if CSV has the correct columns
         if set(['name', 'steps']).issubset(df.columns):
             # Extract necessary columns and rename them
-            df = df[["name", "steps"]]
-            df.rename(columns={'steps': 'Total Steps', 'name': 'Name'}, inplace=True)
-
-            # Add the Avg Daily Steps column and set it to 0
-            df['Avg Daily Steps'] = 0  # Default to 0 for manual entries
+            df = df[["name", "steps", "averageSteps"]]
+            df.rename(columns={'steps': 'Total Steps', 'name': 'Name', 'averageSteps': 'Avg Daily Steps'}, inplace=True)
 
             # Append new data to manual.csv instead of replacing it
             # If manual.csv exists, append; otherwise, create a new one
@@ -188,10 +191,9 @@ def changepw():
       print(df) """
       
 CURRENT_STEP_FILE = 'public/current_steps.txt'
-STEP_GOAL_FILE = 'public/step_goal.txt'
 
 # New route to get and set the current steps
-@app.route("/current_steps", methods=['GET', 'POST'])
+@app.route("/current_steps", methods=['GET'])
 def curSteps():
     if request.method == 'GET':
         # Read the current steps from the file if it exists
@@ -200,12 +202,24 @@ def curSteps():
                 current_steps = f.read().strip()
                 return jsonify({"current_steps": int(current_steps)}), 200
         else:
-            return jsonify({"steps": 0}), 200  # Default goal if file doesn't exist
+            return jsonify({"steps": 0}), 200  # Default steps if file doesn't exist
 
+STEP_GOAL_FILE = 'public/step_goal.txt'
+
+# New route to get and set the step goal
+@app.route("/step_goal", methods=['GET', 'POST'])
+def stepGoal():
+    if request.method == 'GET':
+        # Read the current step goal from the file if it exists
+        if os.path.isfile(STEP_GOAL_FILE):
+            with open(CURRENT_STEP_FILE, 'r') as f:
+                step_goal = f.read().strip()
+                return jsonify({"step_goal": int(step_goal)}), 200
+    
     if request.method == 'POST':
             new_step_goal = request.json.get('step_goal')
             if new_step_goal is not None:
-                # Save the new goal to the file
+                # Save the new step goal to the file
                 with open(STEP_GOAL_FILE, 'w') as f:
                     f.write(str(new_step_goal))
                 return jsonify({"message": "Step goal updated successfully."}), 200
