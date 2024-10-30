@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Settings } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './Settings.css';
 import LegalDisclaimer from '../components/LegalDisclaimer';
@@ -7,6 +7,8 @@ import Percentage from '../components/Percentage';
 import triangle from "../assets/image/triangle2.png";
 import Button from "../components/Button";
 import DeleteParticipant from './DeleteParticipant';
+
+const API_BASE_URL = 'http://localhost:5000';
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'main' | 'siteInfo' | 'goal' | 'changeSitePass' | 'changeGoal' | 'changeStepGoal' | 'deleteParticipant' | 'legal'>('main');
@@ -23,7 +25,7 @@ const SettingsPage: React.FC = () => {
 
   const fetchGoal = async () => {
     try {
-      const response = await fetch('http://localhost:5000/goal');
+      const response = await fetch(`${API_BASE_URL}/goal`);
       const data = await response.json();
       if (response.ok) {
         setGoal(data.goal);
@@ -38,7 +40,7 @@ const SettingsPage: React.FC = () => {
 
   const fetchCurrentValue = async () => {
     try {
-      const response = await fetch('http://localhost:5000/current_value');
+      const response = await fetch(`${API_BASE_URL}/current_value`);
       const data = await response.json();
       if (response.ok) {
         setCurrentValue(data.current_value);
@@ -53,10 +55,10 @@ const SettingsPage: React.FC = () => {
 
   const fetchStepGoal = async () => {
     try {
-      const response = await fetch('http://localhost:5000/current_steps');
+      const response = await fetch(`${API_BASE_URL}/step_goal`);
       const data = await response.json();
       if (response.ok) {
-        setStepGoal(data.current_steps);
+        setStepGoal(data.step_goal);
       } else {
         setMessage(data.message || 'Failed to fetch step goal');
       }
@@ -75,7 +77,7 @@ const SettingsPage: React.FC = () => {
   const handleUpdateGoal = async () => {
     if (typeof newGoal === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/goal', {
+        const response = await fetch(`${API_BASE_URL}/goal`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -88,6 +90,7 @@ const SettingsPage: React.FC = () => {
         if (response.ok) {
           setMessage(data.message);
           await fetchGoal();
+          setNewGoal('');
         } else {
           setMessage(data.message || 'Failed to update goal');
         }
@@ -103,7 +106,7 @@ const SettingsPage: React.FC = () => {
   const handleUpdateCurrentValue = async () => {
     if (typeof newCurrentValue === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/current_value', {
+        const response = await fetch(`${API_BASE_URL}/current_value`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -115,6 +118,7 @@ const SettingsPage: React.FC = () => {
         if (response.ok) {
           setMessage(data.message);
           await fetchCurrentValue();
+          setNewCurrentValue('');
         } else {
           setMessage(data.message || 'Failed to update current value');
         }
@@ -129,19 +133,27 @@ const SettingsPage: React.FC = () => {
 
   const handleChangePassword = async () => {
     try {
-      const response = await mockApiChangePassword(oldPassword, newPassword);
-      setMessage(response);
+      const response = await fetch(`${API_BASE_URL}/changepw`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ oldPassword, newPassword }),
+      });
+      const data = await response.json();
+      setMessage(data.message);
       setOldPassword('');
       setNewPassword('');
     } catch (error) {
-      setMessage(error);
+      console.error('Error changing password:', error);
+      setMessage('Failed to change password');
     }
   };
 
   const handleUpdateStepGoal = async () => {
     if (typeof newStepGoal === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/current_steps', {
+        const response = await fetch(`${API_BASE_URL}/step_goal`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -180,7 +192,7 @@ const SettingsPage: React.FC = () => {
     <div className="settings-main-page">
       <div className="settings-header">
         <button className="back-button" onClick={() => navigate('/')}>
-            <ArrowLeft size={24} />
+          <ArrowLeft size={24} />
         </button>
         <h2 className="mulish-bold">Administrative Settings</h2>
       </div>
@@ -317,7 +329,7 @@ const SettingsPage: React.FC = () => {
       <div className="settings-onpage">
         <h2 className="mulish-bold">Change Step Goal</h2>
         <p className="mulish-regular">Current Step Goal: {stepGoal}</p>
-        <p className="mulish-regular">Enter New Goal:</p>
+        <p className="mulish-regular">Enter New Step Goal:</p>
         <input
           type="number"
           value={newStepGoal}
@@ -326,7 +338,7 @@ const SettingsPage: React.FC = () => {
         />
         <br />
         <button className="change-option mulish-regular" onClick={handleUpdateStepGoal}>
-          Update Goal
+          Update Step Goal
         </button>
         {message && <p className="message">{message}</p>}
       </div>
@@ -334,14 +346,14 @@ const SettingsPage: React.FC = () => {
   );
 
   const renderDeleteParticipant = () => (
-  <div className="settings-content">
-    {renderSubPageHeader("", () => setActiveTab('main'))}
-    <div className="settings-onpage flex align-items-center justify-center min-h-[calc(100vh-100px)]">
-    <h2 className="mulish-bold">Delete Participant</h2>
-      <DeleteParticipant />
+    <div className="settings-content">
+      {renderSubPageHeader("", () => setActiveTab('main'))}
+      <div className="settings-onpage flex align-items-center justify-center min-h-[calc(100vh-100px)]">
+        <h2 className="mulish-bold">Delete Participant</h2>
+        <DeleteParticipant />
+      </div>
     </div>
-  </div>
-);
+  );
 
   const renderLegal = () => (
     <div className="settings-content">

@@ -3,11 +3,10 @@
 import React, { useEffect, useState } from 'react'
 import './StepGoalDisplay.css'
 
-const API_BASE_URL = 'http://localhost:5000'
 
 const fetchCurrentSteps = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/current_steps`)
+    const response = await fetch(`http://localhost:5000/current_steps`)
     if (!response.ok) {
       throw new Error('Failed to fetch current steps')
     }
@@ -22,7 +21,7 @@ const fetchCurrentSteps = async () => {
 
 const fetchStepGoal = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/step_goal`)
+    const response = await fetch(`http://localhost:5000/step_goal`)
     if (!response.ok) {
       throw new Error('Failed to fetch step goal')
     }
@@ -31,13 +30,13 @@ const fetchStepGoal = async () => {
     return parseInt(data.step_goal, 10)
   } catch (error) {
     console.error('Error fetching step goal:', error)
-    return 10000 // Default step goal
+    return 0
   }
 }
 
 export default function StepGoalDisplay() {
   const [currentSteps, setCurrentSteps] = useState(0)
-  const [goalSteps, setGoalSteps] = useState(0)
+  const [goalSteps, setGoalSteps] = useState(10000)
 
   useEffect(() => {
     const fetchData = async () => {
