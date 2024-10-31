@@ -31,6 +31,12 @@
     color: #3B3B3B;
 }
 
+@media screen and (max-width: 768px) {
+    .header {
+        font-size: 30px;
+    }
+}
+
 .username, .password {
     width: 24vw !important;
     margin-top: 1vh !important;
@@ -40,6 +46,12 @@
     border-radius: 20px !important;
     border-color: #d9d9d9 !important;
     border-style: solid !important;
+}
+
+@media screen and (max-width: 768px) {
+    .username, .password {
+        font-size: 13px;
+    }
 }
 
 .button {
