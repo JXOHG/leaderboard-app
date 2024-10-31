@@ -70,6 +70,8 @@ const Login: React.FC = () => {
 
   // Handles what happens on successful login
   const successfulLogin = () => {
+    sessionStorage.setItem('USER_STATUS', 'Admin')
+
     // Redirect to /submit after form submission
     navigate('/submit');
   }

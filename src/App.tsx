@@ -7,6 +7,7 @@ import Settings from './pages/Settings'; // Import the settings page
 import Footer from './components/Footer';
 import './App.css';
 import Header from './components/Header';
+import ProtectedRoute from './ProtectedRoute';
 
 const App: React.FC = () => {
   return (
@@ -14,9 +15,9 @@ const App: React.FC = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/submit" element={<Submit />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/login" element={<Login />} /> {/* Define settings route */}
+        <Route path="/submit" element={<ProtectedRoute> <Submit /> </ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute> <Settings /> </ProtectedRoute>} />
+        <Route path="/login" element={<ProtectedRoute> <Login /> </ProtectedRoute>} /> {/* Define settings route */}
       </Routes>
       <Footer />
     </Router>
