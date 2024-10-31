@@ -14,6 +14,7 @@ export default function CSVUploadEntry() {
   const [uploadStatus, setUploadStatus] = useState<string>('')
   const [csvData, setCsvData] = useState<CSVData[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const API_BASE_URL = import.meta.env.VITE_API_URL
 
   useEffect(() => {
     const storedData = localStorage.getItem('test_csv_data')
@@ -27,7 +28,7 @@ export default function CSVUploadEntry() {
     if (file) {
       const formData = new FormData()
       formData.append('file', file)
-      fetch('http://localhost:5000/csv', {
+      fetch(`${API_BASE_URL}/csv`, {
         method: "POST",
         body: formData,
       })

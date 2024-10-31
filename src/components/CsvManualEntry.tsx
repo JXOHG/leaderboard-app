@@ -15,6 +15,7 @@ export default function ManualCSVEntry() {
   const [data, setData] = useState<RowData[]>([])
   const [newRow, setNewRow] = useState<Omit<RowData, 'id' | 'rank'>>({ name: '', steps: 0, averageSteps: 0 })
   const [editingId, setEditingId] = useState<number | null>(null)
+  const API_BASE_URL = import.meta.env.VITE_API_URL
 
   useEffect(() => {
     updateRanksAndSort()
@@ -67,7 +68,7 @@ export default function ManualCSVEntry() {
     const csvData = Papa.unparse(data)
     
     try {
-      const response = await fetch('http://localhost:5000/manual', {
+      const response = await fetch(`${API_BASE_URL}/manual`, {
         method: 'POST',
         body: csvData,
       })
