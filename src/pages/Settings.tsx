@@ -20,10 +20,11 @@ const SettingsPage: React.FC = () => {
   const [newCurrentValue, setNewCurrentValue] = useState<number | string>('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   const fetchGoal = async () => {
     try {
-      const response = await fetch('http://localhost:5000/goal');
+      const response = await fetch(`${API_BASE_URL}/goal`);
       const data = await response.json();
       if (response.ok) {
         setGoal(data.goal);
@@ -38,7 +39,7 @@ const SettingsPage: React.FC = () => {
 
   const fetchCurrentValue = async () => {
     try {
-      const response = await fetch('http://localhost:5000/current_value');
+      const response = await fetch(`${API_BASE_URL}/current_value`);
       const data = await response.json();
       if (response.ok) {
         setCurrentValue(data.current_value);
@@ -53,7 +54,7 @@ const SettingsPage: React.FC = () => {
 
   const fetchStepGoal = async () => {
     try {
-      const response = await fetch('http://localhost:5000/step_goal');
+      const response = await fetch(`${API_BASE_URL}/step_goal`);
       const data = await response.json();
       if (response.ok) {
         setStepGoal(data.step_goal);
@@ -75,7 +76,7 @@ const SettingsPage: React.FC = () => {
   const handleUpdateGoal = async () => {
     if (typeof newGoal === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/goal', {
+        const response = await fetch(`${API_BASE_URL}/goal`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -103,7 +104,7 @@ const SettingsPage: React.FC = () => {
   const handleUpdateCurrentValue = async () => {
     if (typeof newCurrentValue === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/current_value', {
+        const response = await fetch(`${API_BASE_URL}/current_value`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -164,7 +165,7 @@ const SettingsPage: React.FC = () => {
   const handleUpdateStepGoal = async () => {
     if (typeof newStepGoal === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/step_goal', {
+        const response = await fetch(`${API_BASE_URL}/step_goal`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

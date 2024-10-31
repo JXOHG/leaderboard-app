@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 export default function DeleteParticipant() {
   const [participantName, setParticipantName] = useState('')
   const [message, setMessage] = useState('')
-
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const handleDeleteParticipant = async () => {
     if (!participantName.trim()) {
       setMessage('Please enter a participant name.')
@@ -12,7 +12,7 @@ export default function DeleteParticipant() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/manual', {
+      const response = await fetch(`${API_BASE_URL}/manual`, {
         method: 'POST',
         headers: {
           'Content-Type': 'text/csv',

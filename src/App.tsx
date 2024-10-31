@@ -9,6 +9,9 @@ import './App.css';
 import Header from './components/Header';
 import ProtectedRoute from './ProtectedRoute';
 
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const App: React.FC = () => {
   return (
     <Router>

@@ -18,12 +18,12 @@ const Dashboard: React.FC = () => {
   const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
   const csvFilePath = '/main.csv';
-
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchUserSteps = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users');
+        const response = await fetch(`${API_BASE_URL}/users`);
         const data: UserSteps[] = await response.json();
         setOtherUsersSteps(data);
       } catch (error) {
