@@ -17,8 +17,8 @@ const Dashboard: React.FC = () => {
   const [currentSteps, setCurrentSteps] = useState(10000);
   const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
-  const csvFilePath = '/main.csv';
   const API_BASE_URL = import.meta.env.VITE_API_URL;
+  const csvFilePath = `${API_BASE_URL}/csv`; // Update to the correct path
 
   useEffect(() => {
     const fetchUserSteps = async () => {
