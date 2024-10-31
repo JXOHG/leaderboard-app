@@ -2,6 +2,7 @@ import tsi from "../assets/image/tsi.png";
 import uwem from "../assets/image/uwem.png";
 import uwo from "../assets/image/western.png";
 import "./Footer.css";
+import { Link } from 'react-router-dom';
 
 interface FooterProps {
   className?: string;
@@ -47,11 +48,11 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         </h4>
         <div className="hyperlinks">
           <span>
-            <a className="link" href="http://localhost:5173/">Home</a>
+            <Link className="link" to="/">Home</Link>
           </span>
           <span>
-            <a className="link"href="http://localhost:5173/login">Admin Login</a>
-          </span>
+        <Link className="link" to="/login">Admin Login</Link>
+</span>
           <span>
             <a className="link" href="https://unitedwayem.ca/event/td-stairclimb-2024/">TD StairClimb</a>
           </span>
