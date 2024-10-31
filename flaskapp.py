@@ -6,6 +6,10 @@ import os
 from flask_cors import CORS
 from io import StringIO
 import json
+@app.route('/')
+def index():
+    return jsonify({"message": "Welcome to the Flask app!"})
+
 
 app = Flask(__name__)
 CORS(app)
