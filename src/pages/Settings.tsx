@@ -53,10 +53,10 @@ const SettingsPage: React.FC = () => {
 
   const fetchStepGoal = async () => {
     try {
-      const response = await fetch('http://localhost:5000/current_steps');
+      const response = await fetch('http://localhost:5000/step_goal');
       const data = await response.json();
       if (response.ok) {
-        setStepGoal(data.current_steps);
+        setStepGoal(data.step_goal);
       } else {
         setMessage(data.message || 'Failed to fetch step goal');
       }
@@ -164,7 +164,7 @@ const SettingsPage: React.FC = () => {
   const handleUpdateStepGoal = async () => {
     if (typeof newStepGoal === 'number') {
       try {
-        const response = await fetch('http://localhost:5000/current_steps', {
+        const response = await fetch('http://localhost:5000/step_goal', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
