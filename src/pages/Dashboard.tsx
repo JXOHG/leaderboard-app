@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
   const [currentSteps, setCurrentSteps] = useState(10000);
   const [currentGoals, setCurrentGoals] = useState(15000);
   const [otherUsersSteps, setOtherUsersSteps] = useState<UserSteps[]>([]);
-  const csvFilePath = '../main.csv';
+  const csvFilePath = '/main.csv';
 
 
   useEffect(() => {
