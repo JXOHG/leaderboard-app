@@ -47,10 +47,10 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         </h4>
         <div className="hyperlinks">
           <span>
-            <a className="link" href="/#">Home</a>
+            <a className="link" href="http://localhost:5173/">Home</a>
           </span>
           <span>
-            <a className="link"href="/#/login">Admin Login</a>
+            <a className="link"href="http://localhost:5173/login">Admin Login</a>
           </span>
           <span>
             <a className="link" href="https://unitedwayem.ca/event/td-stairclimb-2024/">TD StairClimb</a>
