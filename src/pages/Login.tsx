@@ -11,6 +11,8 @@ interface LoginFormState {
 
 
 const Login: React.FC = () => {
+  const API_BASE_URL = 'http://localhost:5000'
+
   const [form, setForm] = useState<LoginFormState>({
     username: '',
     password: '',
@@ -32,26 +34,44 @@ const Login: React.FC = () => {
       ...form,
       [name]: value, // Updates the correct field based on input's name
     });
+    setError('')
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent the default form submit behavior
-
-    // Basic validation: Check if both fields are filled
-    if (form.username === '' || form.password === '') {
-      setError('Please enter both username and password.');
-      return;
-    }
-
+  const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
+    if (e) e.preventDefault(); // Prevent the default form submit behavior
     setError(''); // Clear any existing errors
 
     // Here you would typically send the form data to the back-end for authentication
-    console.log('Form submitted!', form);
+    try {
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: form.username,
+          password: form.password
+        })
+      })
+      if (!response.ok) {
+        setError("Incorrect username or password combination.")
+        return
+      } else {
+        successfulLogin()
+        return
+      }
+    } catch (error) {
+      setError("Error logging in. Please try again later.")
+      console.error('Error logging in:', error)
+    }
+  };
 
+  // Handles what happens on successful login
+  const successfulLogin = () => {
     // Redirect to /submit after form submission
     navigate('/submit');
-  };
+  }
 
   return (
     <div className="body">
@@ -83,7 +103,7 @@ const Login: React.FC = () => {
             </div>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <div>
-              <LoginButton disabled={disabled}/>
+              <LoginButton disabled={disabled} onClick={handleSubmit} />
             </div>
           </form>
         </div>
