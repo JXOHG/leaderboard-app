@@ -17,7 +17,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           <a href="https://unitedwayem.ca/" target="_blank" rel="noopener noreferrer">
             <img
               className="social-logo"
-              style={{ width: "150px", height: "130px" }}
+              // style={{ width: "130px", height: "130px" }}
               src={uwem}
               alt="UWEM Logo"
             />
@@ -26,7 +26,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           <a href="https://uwotsi.com" target="_blank" rel="noopener noreferrer">
             <img
               className="social-logo"
-              style={{ width: "130px", height: "130px" }}
+              // style={{ width: "130px", height: "130px" }}
               src={tsi}
               alt="TSI Logo"
             />
@@ -35,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           <a href="https://www.uwo.ca/" target="_blank" rel="noopener noreferrer">
             <img
               className="social-logo"
-              style={{ width: "130px", height: "130px" }}
+              // style={{ width: "130px", height: "130px" }}
               src={uwo}
               alt="UWO Logo"
             />
