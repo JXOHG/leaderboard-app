@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react'
 import Papa from 'papaparse'
 
@@ -90,8 +88,8 @@ export default function ManualCSVEntry() {
         <tbody>
           {data.map((row) => (
             <tr key={row.id}>
-              <td className="border border-gray-300 p-2">{row.rank}</td>
-              <td className="border border-gray-300 p-2">
+              <td className="border border-gray-300 p-2 text-white">{row.rank}</td>
+              <td className="border border-gray-300 p-2 text-white">
                 {editingId === row.id ? (
                   <input
                     type="text"
@@ -104,7 +102,7 @@ export default function ManualCSVEntry() {
                   row.name
                 )}
               </td>
-              <td className="border border-gray-300 p-2">
+              <td className="border border-gray-300 p-2 text-white">
                 {editingId === row.id ? (
                   <input
                     type="number"
@@ -117,7 +115,7 @@ export default function ManualCSVEntry() {
                   row.steps
                 )}
               </td>
-              <td className="border border-gray-300 p-2">
+              <td className="border border-gray-300 p-2 text-white">
                 {editingId === row.id ? (
                   <input
                     type="number"
@@ -130,7 +128,7 @@ export default function ManualCSVEntry() {
                   row.averageSteps
                 )}
               </td>
-              <td className="border border-gray-300 p-2">
+              <td className="border border-gray-300 p-2 text-white">
                 {editingId === row.id ? (
                   <button 
                     onClick={() => handleUpdateRow(row.id)} 
@@ -141,14 +139,14 @@ export default function ManualCSVEntry() {
                 ) : (
                   <button 
                     onClick={() => handleEditRow(row.id)} 
-                    className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                    className="px-2 py-1 rounded mr-2"
                   >
                     Edit
                   </button>
                 )}
                 <button 
                   onClick={() => handleDeleteRow(row.id)} 
-                  className="bg-red-500 text-white px-2 py-1 rounded"
+                  className="px-2 py-1 rounded"
                 >
                   Delete
                 </button>
