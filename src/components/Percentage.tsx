@@ -7,16 +7,18 @@ interface CircularProgressProps {
   strokeWidth?: number;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_URL
+
 // Mock API function to fetch the amount raised
 const mockApiFetchAmountRaised = async () => {
-  const response = await fetch('http://localhost:5000/current_value');
+  const response = await fetch(`${API_BASE_URL}/current_value`);
   const data = await response.json();
   console.log('Fetched amount raised:', data.current_value); // Log the value
   return parseInt(data.current_value, 10)
 };
 
 const fetchGoalFromFile = async () => {
-  const response = await fetch('http://localhost:5000/goal');
+  const response = await fetch(`${API_BASE_URL}/goal`);
   const data = await response.json(); 
   console.log('Fetched goal:', data.goal); // Log the goal
   return parseInt(data.goal, 10);

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginButton from '../components/LoginButton'
 import { useNavigate } from 'react-router-dom';
 
+
 interface LoginFormState {
     username: string;
     password: string;
@@ -11,7 +12,7 @@ interface LoginFormState {
 
 
 const Login: React.FC = () => {
-  const API_BASE_URL = 'http://localhost:5000'
+  const API_BASE_URL = import.meta.env.VITE_API_URL
 
   const [form, setForm] = useState<LoginFormState>({
     username: '',
