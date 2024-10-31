@@ -31,22 +31,15 @@
     color: #3B3B3B;
 }
 
-.password {
-    width: 24vw;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    padding-left: 1vw;
-    height: 5vh;
-    border-radius: 20px;
-}
-
-.username {
-    width: 24vw;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    padding-left: 1vw;
-    height: 5vh;
-    border-radius: 20px;
+.username, .password {
+    width: 24vw !important;
+    margin-top: 1vh !important;
+    margin-bottom: 1vh !important;
+    padding-left: 1vw !important;
+    height: 5vh !important;
+    border-radius: 20px !important;
+    border-color: #d9d9d9 !important;
+    border-style: solid !important;
 }
 
 .button {

@@ -16,6 +16,9 @@ const Login: React.FC = () => {
     password: '',
   });
 
+  // Handles state of button
+  const disabled = form.username === '' || form.password === ''
+
   // State to handle form errors
   const [error, setError] = useState<string>('');
 
@@ -58,9 +61,9 @@ const Login: React.FC = () => {
           <form onSubmit={handleSubmit}>
             <div>
               <input
-                type="username"
+                type="text"
                 name="username"
-                placeholder=' Username'
+                placeholder='Username'
                 value={form.username}
                 onChange={handleChange}
                 required
@@ -71,7 +74,7 @@ const Login: React.FC = () => {
               <input
                 type="password"
                 name="password"
-                placeholder=' Password'
+                placeholder='Password'
                 value={form.password}
                 onChange={handleChange}
                 required
@@ -80,7 +83,7 @@ const Login: React.FC = () => {
             </div>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <div>
-              <LoginButton/>
+              <LoginButton disabled={disabled}/>
             </div>
           </form>
         </div>
