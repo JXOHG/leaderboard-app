@@ -32,8 +32,14 @@ def combine_and_replace_csv():
     
     combined_df = combined_df.sort_values(by="Total Steps", axis=0, ascending=False)
     
+    # Delete anyone with negative number steps
+    combined_df['Total Steps'] = combined_df['Total Steps'].astype('int')
+    combined_df = combined_df[combined_df['Total Steps'] >= 0]
+
+    
     # Record the total amount of steps into a current_steps.txt file
     total_steps = combined_df['Total Steps'].sum()
+    combined_df['Total Steps'] = combined_df['Total Steps'].astype('str')
     with open('public/current_steps.txt', 'w') as f:
         f.write(str(total_steps))
         
@@ -200,8 +206,20 @@ def curSteps():
                 current_steps = f.read().strip()
                 return jsonify({"current_steps": int(current_steps)}), 200
         else:
-            return jsonify({"steps": 0}), 200  # Default goal if file doesn't exist
+            return jsonify({"steps": 0}), 200  # Default steps if file doesn't exist
 
+STEP_GOAL_FILE = 'public/step_goal.txt'
+
+# New route to get and set the step goal
+@app.route("/step_goal", methods=['GET', 'POST'])
+def stepGoal():
+    if request.method == 'GET':
+        # Read the current step goal from the file if it exists
+        if os.path.isfile(STEP_GOAL_FILE):
+            with open(STEP_GOAL_FILE, 'r') as f:
+                step_goal = f.read().strip()
+                return jsonify({"step_goal": int(step_goal)}), 200
+    
     if request.method == 'POST':
             new_step_goal = request.json.get('step_goal')
             if new_step_goal is not None:

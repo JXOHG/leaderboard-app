@@ -34,21 +34,37 @@ const SettingsPage: React.FC = () => {
       }
     };
 
-    const fetchCurrentValue = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/current_value');
-        const data = await response.json();
-        if (response.ok) {
-          setCurrentValue(data.current_value); // Set the current value
-        } else {
-          setMessage(data.message);
-        }
-      } catch (error) {
-        console.error('Error fetching current value:', error);
-        setMessage('Failed to fetch current value');
+  const fetchCurrentValue = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/current_value');
+      const data = await response.json();
+      if (response.ok) {
+        setCurrentValue(data.current_value);
+      } else {
+        setMessage(data.message);
       }
-    };
-    useEffect(() => {
+    } catch (error) {
+      console.error('Error fetching current value:', error);
+      setMessage('Failed to fetch current value');
+    }
+  };
+
+  const fetchStepGoal = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/step_goal');
+      const data = await response.json();
+      if (response.ok) {
+        setStepGoal(data.step_goal);
+      } else {
+        setMessage(data.message || 'Failed to fetch step goal');
+      }
+    } catch (error) {
+      console.error('Error fetching step goal:', error);
+      setMessage('Failed to fetch step goal');
+    }
+  };
+
+  useEffect(() => {
     fetchGoal();
     fetchCurrentValue(); // Fetch current value on mount
   }, []);
@@ -117,12 +133,71 @@ const handleUpdateCurrentValue = async () => {
       setMessage(response);
       setOldPassword('');
       setNewPassword('');
-    } catch (error) {
-      setMessage(error);
+    } catch (error: unknown) {
+      // Handle the error correctly
+      if (error instanceof Error) {
+        setMessage(error.message); // Set message to the error message
+      } else {
+        setMessage('An unknown error occurred.'); // Fallback for unknown errors
+      }
     }
   };
 
+  //Mock Password
+  const mockApiChangePassword = (oldPassword: string, newPassword: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      // Simulate a delay to mimic an API call
+      setTimeout(() => {
+        // Simple validation for demonstration
+        if (oldPassword && newPassword) {
+          // Simulate success response
+          resolve('Password changed successfully!');
+        } else {
+          // Simulate error response
+          reject(new Error('Invalid password input. Please try again.'));
+        }
+      }, 1000); // 1 second delay
+    });
+  };
 
+
+  const handleUpdateStepGoal = async () => {
+    if (typeof newStepGoal === 'number') {
+      try {
+        const response = await fetch('http://localhost:5000/step_goal', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ step_goal: newStepGoal }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setMessage(data.message);
+          await fetchStepGoal();
+          setNewStepGoal('');
+        } else {
+          setMessage(data.message || 'Failed to update step goal');
+        }
+      } catch (error) {
+        console.error('Error updating step goal:', error);
+        setMessage('Failed to update step goal');
+      }
+    } else {
+      setMessage('Please enter a valid number for the step goal.');
+    }
+  };
+
+  const renderSubPageHeader = (title: string, onBack: () => void) => (
+    <div className="settings-header">
+      <button className="back-button" onClick={onBack}>
+        <ArrowLeft size={24} />
+      </button>
+      <h2 className="mulish-bold">{title}</h2>
+    </div>
+  );
 
   const renderMainPage = () => (
     <div className="settings-main-page">
