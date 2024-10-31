@@ -271,5 +271,4 @@ def current_value():
                 f.write(str(new_value))
             return jsonify({"message": "Current value updated successfully."}), 200
         return jsonify({"message": "Invalid value."}), 400
-if __name__ == '__main__':
-    app.run(debug=True)
+
