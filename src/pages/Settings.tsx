@@ -130,13 +130,36 @@ const SettingsPage: React.FC = () => {
   const handleChangePassword = async () => {
     try {
       const response = await mockApiChangePassword(oldPassword, newPassword);
-      setMessage(response);
+      setMessage(response); // Correctly typed response
       setOldPassword('');
       setNewPassword('');
-    } catch (error) {
-      setMessage(error);
+    } catch (error: unknown) {
+      // Handle the error correctly
+      if (error instanceof Error) {
+        setMessage(error.message); // Set message to the error message
+      } else {
+        setMessage('An unknown error occurred.'); // Fallback for unknown errors
+      }
     }
   };
+
+  //Mock Password
+  const mockApiChangePassword = (oldPassword: string, newPassword: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      // Simulate a delay to mimic an API call
+      setTimeout(() => {
+        // Simple validation for demonstration
+        if (oldPassword && newPassword) {
+          // Simulate success response
+          resolve('Password changed successfully!');
+        } else {
+          // Simulate error response
+          reject(new Error('Invalid password input. Please try again.'));
+        }
+      }, 1000); // 1 second delay
+    });
+  };
+
 
   const handleUpdateStepGoal = async () => {
     if (typeof newStepGoal === 'number') {
@@ -332,6 +355,7 @@ const SettingsPage: React.FC = () => {
       </div>
     </div>
   );
+
 
   const renderDeleteParticipant = () => (
   <div className="settings-content">
