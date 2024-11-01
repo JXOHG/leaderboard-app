@@ -107,8 +107,8 @@ export default function Leaderboard({ csvFilePath }: LeaderboardProps) {
                 className={`leaderboard-item ${rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : ''}`}
               >
                 <span className="leaderboard-name mulish-bold">{user.name}</span>
-                <span className="leaderboard-steps mulish-bold">{user.steps.toLocaleString()} steps</span>
-                <span className="leaderboard-distance mulish-bold">{user.distance.toFixed(2)} steps</span>
+                <span className="leaderboard-steps mulish-bold">{user.steps.toLocaleString()} </span>
+                <span className="leaderboard-distance mulish-bold">{user.distance.toFixed(2)} </span>
                 <span className="leaderboard-rank mulish-bold">{rank}</span>
               </div>
             );
