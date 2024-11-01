@@ -73,7 +73,7 @@ const Login: React.FC = () => {
     sessionStorage.setItem('USER_STATUS', 'Admin')
 
     // Redirect to /submit after form submission
-    navigate('/submit');
+    navigate('/Settings');
   }
 
   return (
