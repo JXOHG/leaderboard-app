@@ -5,7 +5,8 @@ import './Settings.css';
 import LegalDisclaimer from '../components/LegalDisclaimer';
 import Percentage from '../components/Percentage';
 import triangle from "../assets/image/triangle2.png";
-import Button from "../components/Button";
+import SubmitStepsButton from "../components/Button";
+import Button from 'react-bootstrap/Button';
 import DeleteParticipant from './DeleteParticipant';
 
 const SettingsPage: React.FC = () => {
@@ -223,9 +224,9 @@ const SettingsPage: React.FC = () => {
           <img src={triangle} className="triangle" alt="triangle" />
         </button>
         <div className="submit-button">
-          <div className="submit-button"><Button/></div>
+          <div className="submit-button"><SubmitStepsButton/></div>
           <div className="submit-button">
-            <button className="mulish-bold delete-participant-button" onClick={() => setActiveTab('deleteParticipant')}>Delete Participant</button>
+            <Button onClick={() => setActiveTab('deleteParticipant')} variant="secondary" size="lg" style={{ width: "24vw", backgroundColor: "#d9d9d9", color: "#54585A", fontWeight:"500", borderRadius: "18px", border: "#bbb", filter: "drop-shadow(0px 4px 4px rgba(0,0,0,0.25)", marginTop:"2vh"}}>Delete Participant</Button>
           </div>
         </div>
       </div>

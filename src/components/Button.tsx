@@ -3,7 +3,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-function SizesExample() {
+function SubmitStepsButton() {
   const navigate = useNavigate(); // Create a navigate function
 
   // Handle click event
@@ -23,4 +23,4 @@ function SizesExample() {
   );
 }
 
-export default SizesExample;
+export default SubmitStepsButton;
