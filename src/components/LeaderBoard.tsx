@@ -7,6 +7,7 @@ interface User {
   name: string;
   steps: number;
   distance: number; // This will represent Avg Daily Steps now
+  rank?: number;
 }
 
 interface LeaderboardProps {
@@ -89,17 +90,29 @@ export default function Leaderboard({ csvFilePath }: LeaderboardProps) {
 
       <div className="leaderboard-container" style={{ maxHeight: 'calc(80vh - 150px)', overflowY: 'auto' }}>
         {sortedUsers.length > 0 ? (
-          sortedUsers.map((user, index) => (
-            <div 
-              key={user.id} 
-              className={`leaderboard-item ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}`}
-            >
-              <span className="leaderboard-name mulish-bold">{user.name}</span>
-              <span className="leaderboard-steps mulish-bold">{user.steps.toLocaleString()} steps</span>
-              <span className="leaderboard-distance mulish-bold">{user.distance.toFixed(2)} steps</span> {/* Changed to steps */}
-              <span className="leaderboard-rank mulish-bold">{index + 1}</span>
-            </div>
-          ))
+          sortedUsers.map((user, index, array) => {
+            // Determine rank based on steps
+            let rank = 1;
+            if (index > 0 && user.steps === array[index - 1].steps) {
+              rank = (array[index - 1] as User).rank || 1;
+            } else {
+              rank = index + 1;
+            }
+            
+            user.rank = rank; 
+
+            return (
+              <div 
+                key={user.id} 
+                className={`leaderboard-item ${rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : ''}`}
+              >
+                <span className="leaderboard-name mulish-bold">{user.name}</span>
+                <span className="leaderboard-steps mulish-bold">{user.steps.toLocaleString()} steps</span>
+                <span className="leaderboard-distance mulish-bold">{user.distance.toFixed(2)} steps</span>
+                <span className="leaderboard-rank mulish-bold">{rank}</span>
+              </div>
+            );
+          })
         ) : (
           <div>No users available</div>
         )}
