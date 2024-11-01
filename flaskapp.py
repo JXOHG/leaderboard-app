@@ -170,22 +170,24 @@ def login():
 def changepw():
     if request.method == 'POST':
         #get dictionary of {username:password}
-        users = load_users()
-        
-        userpass = request.data.decode('utf-8')
-        userpass = userpass.split()
-        
-        uname = userpass[0]
-        pw = userpass[1]
-        
-        #hash password here
-        hashed_pw = generate_password_hash(pw)
-        
         try:
-            save_users(uname, hashed_pw)    
-        except:    
-            return jsonify({"message": "Failed to load users"}), 400
-        return jsonify({"message": "Password updated!"}), 200
+            users = load_users()
+        except:
+            return jsonify({"message": "Failed to load user data"}), 400
+        uname = request.json["username"]
+        pw_old = request.json["oldPassword"]
+        pw_new = request.json["newPassword"]
+        
+        if uname in users and check_password_hash(users[uname], pw_old):
+            try:
+                hashed_pw = generate_password_hash(pw_new)
+                save_users(uname, hashed_pw)    
+            except:    
+                return jsonify({"message": "Failed to write pas"}), 400
+            
+            return jsonify({"message": "Password updated!"}), 200
+        else:
+            return jsonify({"message": 'Incorrect username or password combo. Please try again.'}), 400
         
 """       df = pd.read_csv(csvStr, sep=',', header = None)
       print(df) """

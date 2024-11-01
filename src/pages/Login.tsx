@@ -71,6 +71,7 @@ const Login: React.FC = () => {
   // Handles what happens on successful login
   const successfulLogin = () => {
     sessionStorage.setItem('USER_STATUS', 'Admin')
+    sessionStorage.setItem('USERNAME', form.username)
 
     // Redirect to /submit after form submission
     navigate('/Settings');

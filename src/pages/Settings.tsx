@@ -129,39 +129,35 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  const handleChangePassword = async () => {
+  const changePasswordDisabled = oldPassword === '' || newPassword == ''
+  const handleChangePassword = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     try {
-      const response = await mockApiChangePassword(oldPassword, newPassword);
-      setMessage(response); // Correctly typed response
+      const response = await fetch(`${API_BASE_URL}/changepw`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: sessionStorage.getItem('USERNAME'),
+          oldPassword: oldPassword,
+          newPassword: newPassword
+        })
+      })
+
+      if (!response.ok) {
+        setMessage("Incorrect password. Please try again.")
+      } else {
+        setMessage("Password successfully changed!")
+      }
+
       setOldPassword('');
       setNewPassword('');
-    } catch (error: unknown) {
+    } catch (error) {
       // Handle the error correctly
-      if (error instanceof Error) {
-        setMessage(error.message); // Set message to the error message
-      } else {
-        setMessage('An unknown error occurred.'); // Fallback for unknown errors
-      }
+      console.log(error)
     }
   };
-
-  //Mock Password
-  const mockApiChangePassword = (oldPassword: string, newPassword: string): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      // Simulate a delay to mimic an API call
-      setTimeout(() => {
-        // Simple validation for demonstration
-        if (oldPassword && newPassword) {
-          // Simulate success response
-          resolve('Password changed successfully!');
-        } else {
-          // Simulate error response
-          reject(new Error('Invalid password input. Please try again.'));
-        }
-      }, 1000); // 1 second delay
-    });
-  };
-
 
   const handleUpdateStepGoal = async () => {
     if (typeof newStepGoal === 'number') {
@@ -267,7 +263,9 @@ const SettingsPage: React.FC = () => {
           onChange={(e) => setNewPassword(e.target.value)}
           className="w-full p-1 border rounded"
         />
-        <button className="change-option mulish-regular" onClick={handleChangePassword}>
+        <button className="change-option mulish-regular" 
+          type="submit" onClick={handleChangePassword}
+        >
           Change Password
         </button>
         {message && <p className="message">{message}</p>}
