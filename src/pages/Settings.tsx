@@ -208,7 +208,7 @@ const SettingsPage: React.FC = () => {
 
       <div>
         <button className="settings-option mulish-regular" onClick={() => setActiveTab('siteInfo')}>
-          Website Info      
+          Admin Settings      
           <img src={triangle} className="triangle" alt="triangle" />
         </button>
         <button className="settings-option mulish-regular" onClick={() => setActiveTab('goal')}>
@@ -233,7 +233,7 @@ const SettingsPage: React.FC = () => {
     <div className="settings-content">
       {renderSubPageHeader("", () => setActiveTab('main'))}
       <div className="settings-onpage">
-        <h2 className="mulish-bold">Website Info</h2>
+        <h2 className="mulish-bold">Admin Settings</h2>
         <div className="change-button-rectangle">
           <button className='change-option mulish-regular' onClick={() => setActiveTab("changeSitePass")}>
             Change Password
